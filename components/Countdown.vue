@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 const MILLISECONDS_SECOND = 1000;
 const MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND;
 const MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE;
@@ -70,6 +70,8 @@ export default {
 
     data() {
         return {
+            requestId: null,
+
             /**
                  * It is counting down.
                  * @type {boolean}

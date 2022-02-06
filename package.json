@@ -10,6 +10,14 @@
         "start": "nuxt start",
         "generate": "nuxt generate"
     },
+    "keywords": [
+        "station",
+        "ui",
+        "frontend",
+        "management",
+        "auth",
+        "api"
+    ],
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@nuxt/types": "^2.14.5",

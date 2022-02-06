@@ -4,7 +4,7 @@
   For the full copyright and license information,
   view the LICENSE file that was distributed with this source code.
   -->
-<script>
+<script lang="ts">
 export default {
     props: {
         total: {
@@ -42,7 +42,6 @@ export default {
 
             for (let i = this.currentPage - 2; i < (this.currentPage + 2); i++) {
                 if (i <= 0 || i > this.totalPages) continue;
-
                 pages.push(i);
             }
 
@@ -59,6 +58,7 @@ export default {
                 limit: this.limit,
             };
 
+            // eslint-disable-next-line no-promise-executor-return
             const result = new Promise(((resolve, reject) => this.$emit('to', data, resolve, reject)));
             result.then(() => {
                 this.busy = false;

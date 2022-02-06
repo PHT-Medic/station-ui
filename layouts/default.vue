@@ -4,10 +4,10 @@
   For the full copyright and license information,
   view the LICENSE file that was distributed with this source code.
   -->
-<script>
-import pageHeader from './header';
-import pageSidebar from './sidebar';
-import pageFooter from './footer';
+<script lang="ts">
+import pageHeader from './header.vue';
+import pageSidebar from './sidebar.vue';
+import pageFooter from './footer.vue';
 
 export default {
     name: 'App',

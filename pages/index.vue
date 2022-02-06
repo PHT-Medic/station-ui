@@ -5,7 +5,7 @@
   - view the LICENSE file that was distributed with this source code.
   -->
 
-<script>
+<script lang="ts">
 import { LayoutKey, LayoutNavigationID } from '../config/layout/contants';
 
 export default {

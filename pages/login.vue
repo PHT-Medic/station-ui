@@ -4,10 +4,10 @@
   For the full copyright and license information,
   view the LICENSE file that was distributed with this source code.
   -->
-<script>
+<script lang="ts">
 import { maxLength, minLength, required } from 'vuelidate/lib/validators';
 import { LayoutKey, LayoutNavigationID } from '../config/layout/contants';
-import CTScan from '../components/svg/CTScan';
+import CTScan from '../components/svg/CTScan.vue';
 
 export default {
     components: { CTScan },
@@ -49,22 +49,7 @@ export default {
         },
     },
     computed: {
-        providerQuery() {
-            return {
-                include: {
-                    realm: true,
-                },
-                filter: {
-                    realm_id: {
-                        operator: '!',
-                        value: 'master',
-                    },
-                },
-                sort: {
-                    created_at: 'DESC',
-                },
-            };
-        },
+
     },
     methods: {
         async submit() {

@@ -4,8 +4,8 @@
   For the full copyright and license information,
   view the LICENSE file that was distributed with this source code.
   -->
-<script>
-import Countdown from '../components/Countdown';
+<script lang="ts">
+import Countdown from '../components/Countdown.vue';
 
 export default {
     components: { Countdown },
