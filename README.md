@@ -24,9 +24,9 @@ npm install
 ## Configuration
 The following settings need to be added to the environment file `.env` in the root directory.
 ```
-RESOURCE_API_URL=http://localhost:8080
+STATION_API_URL=http://localhost:8080
 AUTH_API_URL=http://localhost:3010
-CENTRAL_API_URL=http://localhost:3002
+API_URL=http://localhost:3002
 ```
 
 ## Usage

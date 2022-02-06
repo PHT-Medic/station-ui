@@ -8,16 +8,16 @@
 const config = {
     publicRuntimeConfig() {
         return {
-            resourceApiUrl: process.env.RESOURCE_API_URL,
+            stationApiUrl: process.env.STATION_API_URL,
             authApiUrl: process.env.AUTH_API_URL,
-            centralApiUrl: process.env.REALTIME_URL ||
+            apiUrl: process.env.API_URL ||
                 'https://pht-medic.medizin.uni-tuebingen.de.de/',
         };
     },
     env: {
-        resourceApiUrl: process.env.RESOURCE_API_URL,
+        stationApiUrl: process.env.STATION_API_URL,
         authApiUrl: process.env.AUTH_API_URL,
-        centralApiUrl: process.env.REALTIME_URL ||
+        apiUrl: process.env.API_URL ||
             'https://pht-medic.medizin.uni-tuebingen.de.de/',
     },
     telemetry: false,
@@ -44,15 +44,34 @@ const config = {
     ** Global CSS
     */
     css: [
-        'vue-form-wizard/dist/vue-form-wizard.min.css',
         '@fortawesome/fontawesome-free/css/all.css',
         'bootstrap/dist/css/bootstrap.min.css',
-        'bootstrap-vue/dist/bootstrap-vue.css'
+        'bootstrap-vue/dist/bootstrap-vue.css',
+
+        '@/assets/css/vue-layout-navigation.css',
+        '@/assets/css/root.css',
+        '@/assets/css/core/header.css',
+        '@/assets/css/core/navbar.css',
+        '@/assets/css/core/body.css',
+        '@/assets/css/core/sidebar.css',
+        '@/assets/css/core/footer.css',
+        '@/assets/css/card.css',
+        '@/assets/css/colors.css',
+        '@/assets/css/form.css',
+
+        '@/assets/css/bootstrap-override.css',
     ],
     /*
     ** Plugins to load before mounting the App
     */
     plugins: [
+        '@/plugins/api',
+        '@/plugins/store',
+        '@/plugins/auth',
+        '@/plugins/layout',
+        '@/plugins/vue',
+        '@/plugins/vuelidate',
+        '@/plugins/vueTimeAgo',
 
     ],
     /*
@@ -80,7 +99,7 @@ const config = {
 
     router: {
         // base: '/',
-        middleware: [],
+        middleware: ['auth', 'layout'],
     },
 
     build: {
