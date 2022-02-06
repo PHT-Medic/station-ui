@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+
+        "declaration": true,
+        "declarationMap": true,
+
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
+        "noEmitOnError": true,
+
+        "skipLibCheck": true,
+
+        "esModuleInterop": true,
+
+        "moduleResolution": "Node",
+        "module": "CommonJS",
+        "target": "ESNext",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        "types": [
+            "@types/node",
+            "@nuxt/types",
+            "vue-router/types"
+        ]
+    },
+    "exclude": ["node_modules"],
+    "include": ["**/*"]
+}
+
