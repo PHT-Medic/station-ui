@@ -9,7 +9,6 @@
 import { LayoutKey, LayoutNavigationID } from '../config/layout/contants';
 
 export default {
-    components: { },
     meta: {
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
         [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.DEFAULT,

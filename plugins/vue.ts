@@ -10,7 +10,10 @@ import Vue from 'vue';
 // @ts-ignore
 import Gravatar from 'vue-gravatar';
 
+import Pagination from '../components/Pagination.vue';
+
 Vue.component('VGravatar', Gravatar);
+Vue.component('Pagination', Pagination);
 
 Vue.filter('str_length_limit', (value, size) => {
     if (!value) return '';
