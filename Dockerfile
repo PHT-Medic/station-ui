@@ -9,7 +9,6 @@ COPY . .
 RUN rm -rf ./node-modules
 
 RUN npm ci
-RUN npm run bootstrap
 RUN npm run build
 
 RUN touch /.env
