@@ -21,16 +21,8 @@
             "ESNext",
             "DOM"
         ],
-        "typeRoots": [
-            "./node_modules/@types"
-        ],
-        "types": [
-            "@types/node",
-            "@nuxt/types",
-            "vue-router/types"
-        ]
+        "strict": false,
     },
     "exclude": ["node_modules"],
-    "include": ["**/*"]
 }
 

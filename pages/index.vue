@@ -6,14 +6,15 @@
   -->
 
 <script lang="ts">
+import Vue from 'vue';
 import { LayoutKey, LayoutNavigationID } from '../config/layout/contants';
 
-export default {
+export default Vue.extend({
     meta: {
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
         [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.DEFAULT,
     },
-};
+});
 </script>
 <template>
     <div>

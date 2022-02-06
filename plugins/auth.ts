@@ -11,7 +11,7 @@ import AuthModule from '../config/auth';
 
 export default (context: Context, inject: Inject) => {
     const auth = new AuthModule(context, {
-        tokenHost: context.$config.apiUrl,
+        tokenHost: context.$config.authApiUrl,
         tokenPath: 'token',
         userInfoPath: 'token',
     });

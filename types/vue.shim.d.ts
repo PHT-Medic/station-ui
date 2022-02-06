@@ -7,6 +7,8 @@
 
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/ui-common';
 import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains';
+import { HTTPClient as StationHTTPClient } from '../config/http/client';
+import AuthModule from '../config/auth';
 
 declare module '*.vue' {
     import Vue from 'vue';
@@ -18,7 +20,22 @@ declare module 'vue/types/vue' {
     // Global properties can be declared
     // on the `VueConstructor` interface
     interface VueConstructor {
+        $api: CentralHTTPClient,
         $authApi: AuthHTTPClient,
-        $centralApi: CentralHTTPClient
+        $stationApi: StationHTTPClient,
+
+        $auth: AuthModule,
+
+        $store: Store<any>,
+    }
+
+    interface Vue {
+        $api: CentralHTTPClient,
+        $authApi: AuthHTTPClient,
+        $stationApi: StationHTTPClient,
+
+        $auth: AuthModule,
+
+        $store: Store<any>,
     }
 }

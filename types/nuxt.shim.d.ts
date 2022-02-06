@@ -8,11 +8,14 @@
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/ui-common';
 import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains/dist/http/client/module';
 import AuthModule from '../config/auth';
+import { HTTPClient as StationHTTPClient } from '../config/http/client';
 
 declare module '@nuxt/types' {
     interface Context {
         $auth: AuthModule,
+
         $api: CentralHTTPClient,
         $authApi: AuthHTTPClient
+        $stationApi: StationHTTPClient
     }
 }

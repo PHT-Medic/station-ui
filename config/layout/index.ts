@@ -37,10 +37,12 @@ export const LayoutSideDefaultNavigation : NavigationComponentConfig[] = [
             {
                 name: 'Central',
                 type: 'link',
+                icon: 'fa fa-umbrella',
             },
             {
                 name: 'Local',
                 type: 'link',
+                icon: 'fab fa-pagelines',
             },
         ],
     },
