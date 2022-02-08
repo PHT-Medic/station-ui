@@ -14,7 +14,7 @@ BASE_DIR=/usr/src/project
 cd "${BASE_DIR}"
 
 case "${1}" in
-    auth-server) PACKAGE=auth-server;;
+    server) PACKAGE=server;;
     app) PACKAGE=app;;
     cli) PACKAGE=cli;;
     *) echo "Unknown package: ${1}";;
@@ -24,15 +24,15 @@ shift
 
 if [[ -z "${PACKAGE}" ]]; then
     printf 'Usage:\n'
-    printf '  auth-server <command>\n    Start or run the auth server in dev mode.\n'
+    printf '  server <command>\n    Start or run the server in dev mode.\n'
     printf '  app <command>\n    Start or run the app in dev mode.\n'
     printf '  cli <command>\n    Run a CLI command.\n'
     exit 0
 fi
 
 case "${PACKAGE}" in
-    auth-server)
-        exec npm run "$1" --workspace=packages/auth-server
+    server)
+        exec npm run "$1" --workspace=packages/server
         ;;
     app)
         export NUXT_HOST=0.0.0.0
@@ -40,7 +40,7 @@ case "${PACKAGE}" in
         exec npm run "$1" --workspace=packages/app
         ;;
     cli)
-        exec npm run cli --workspace=packages/auth-server -- "$@"
+        exec npm run cli --workspace=packages/server -- "$@"
         ;;
 esac
 

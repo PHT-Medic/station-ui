@@ -12,7 +12,7 @@ RUN npm ci
 RUN npm run bootstrap
 RUN npm run build
 
-RUN touch packages/auth-server/.env
+RUN touch packages/server/.env
 RUN touch packages/app/.env
 
 COPY ./entrypoint.sh ./entrypoint.sh

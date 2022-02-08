@@ -26,7 +26,7 @@
         "prepublishOnly": "npm run build",
         "lint": "eslint --ext .ts,.vue,.js ./packages/",
         "lint:fix": "npm run lint -- --fix",
-        "frontend": "npm run dev --workspace=packages/app",
-        "auth-server": "npm run start --workspace=packages/auth-server"
+        "app": "npm run dev --workspace=packages/app",
+        "server": "npm run start --workspace=packages/server"
     }
 }
