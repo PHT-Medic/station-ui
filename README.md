@@ -7,33 +7,16 @@ This repository contains all packages of the station ui of the Personal Health T
 
 **Table of Contents**
 
-- [Installation](#installation)
 - [Configuration](#configuration)
 - [Packages](#packages)
 - [Usage](#usage)
-
-## Installation & Build
-
-```shell
-git clone https://github.com/PHT-Medic/station-ui
-cd station-ui
-```
-
-To start a package (frontend, backend), `nodejs` must be installed on the host machine.
-Nodejs is also required to install all dependencies, with the following command.
-
-```shell
-$ npm i
-```
-
-Build all packages.
-
-```shell
-$ npm run build
-```
+  - [Docker](#docker)
+  - [Local Machine](#local-machine)
 
 ## Configuration
 Read the `Readme.md` in each package directory and configure each package individually.
+
+## Packages
 
 ### @personalhealthtrain/station-ui-app 🍭
 
@@ -44,11 +27,50 @@ This repository contains the frontend application.
 This repository contains the backend application with REST API, aggregators, components and many more.
 
 ## Usage
-Start the app (frontend) & server (backend) in a single terminal window (or as background process) with the following command:
+
+### Docker
+
 ```shell
-$ npm run server
+$ docker pull ghcr.io/pht-medic/station-ui:latest
+```
+
+Setup backend server (db, rsa key-pair, ...):
+
+```shell
+$ docker run \
+  --env ROBOT_SECRET=start123 \
+  ghcr.io/pht-medic/station-ui:latest \
+  server setup
+```
+
+To start the frontend application & backend server with docker, run the following command:
+
+```shell
+$ docker run \
+  --env AUTH_API_URL=http://127.0.0.1:3010/ \
+  ghcr.io/pht-medic/station-ui:latest \
+  app start
 ```
 
 ```shell
-$ npm run app
+$ docker run \
+  ghcr.io/pht-medic/station-ui:latest \
+  server start
+```
+
+### Local Machine
+
+Setup backend server:
+
+```shell
+$ npm run setup --workspace=packages/server
+```
+
+To start the frontend application & backend server locally, run the following command:
+```shell
+$ npm run dev --workspace=packages/server
+```
+
+```shell
+$ npm run dev --workspace=packages/app
 ```
