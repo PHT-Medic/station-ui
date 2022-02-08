@@ -1,49 +1,54 @@
-# Station UI 🍭
+# Station UI 🏥
 
 [![main](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml)
 [![Build image](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml)
 
-This repository contains the station ui application of the Personal Health Train.
+This repository contains all packages of the station ui of the Personal Health Train.
 
 **Table of Contents**
 
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [Packages](#packages)
 - [Usage](#usage)
-    - [Production](#production)
-    - [Development](#development)
 
-## Installation
+## Installation & Build
 
 ```shell
 git clone https://github.com/PHT-Medic/station-ui
 cd station-ui
-npm install
+```
+
+To start a package (frontend, backend), `nodejs` must be installed on the host machine.
+Nodejs is also required to install all dependencies, with the following command.
+
+```shell
+$ npm i
+```
+
+Build all packages.
+
+```shell
+$ npm run build
 ```
 
 ## Configuration
-The following settings need to be added to the environment file `.env` in the root directory.
-```
-STATION_API_URL=http://localhost:8080
-AUTH_API_URL=http://localhost:3010
-API_URL=http://localhost:3002
-```
+Read the `Readme.md` in each package directory and configure each package individually.
+
+### @personalhealthtrain/station-ui-app 🍭
+
+This repository contains the frontend application.
+
+### @personalhealthtrain/station-ui-server 🌠
+
+This repository contains the backend application with REST API, aggregators, components and many more.
 
 ## Usage
-
-### Production
-
-``` bash
-# build application for production 🛠
-npm run build
-
-# run application ⚔
-npm run start
+Start the app (frontend) & server (backend) in a single terminal window (or as background process) with the following command:
+```shell
+$ npm run server
 ```
 
-### Development
-
-``` bash
-# serve application on the fly 🔥
-npm run dev
-````
+```shell
+$ npm run app
+```
