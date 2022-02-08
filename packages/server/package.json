@@ -6,7 +6,7 @@
         "url": "https://tada5hi.net"
     },
     "license": "MIT",
-    "version": "1.0.0-alpha.0",
+    "version": "0.0.3",
     "description": "This project contains the station auth service.",
     "scripts": {
         "start": "auth-server start",
