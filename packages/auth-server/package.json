@@ -1,0 +1,20 @@
+{
+    "name": "@personalhealthtrain/station-ui-auth",
+    "author": {
+        "name": "Peter Placzek",
+        "email": "tadashi@animesu.net",
+        "url": "https://tada5hi.net"
+    },
+    "license": "MIT",
+    "version": "1.0.0-alpha.0",
+    "description": "This project contains the station auth service.",
+    "scripts": {
+        "start": "auth-server start",
+        "reset": "auth-server reset",
+        "setup": "auth-server setup",
+        "upgrade": "auth-server upgrade"
+    },
+    "dependencies": {
+        "@typescript-auth/server": "^2.0.0-alpha.34"
+    }
+}

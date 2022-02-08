@@ -1,28 +1,7 @@
 {
+    "extends": "./tsconfig.build.json",
     "compilerOptions": {
-        "sourceMap": true,
-
-        "declaration": true,
-        "declarationMap": true,
-
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-
-        "noEmitOnError": true,
-
-        "skipLibCheck": true,
-
-        "esModuleInterop": true,
-
-        "moduleResolution": "Node",
-        "module": "CommonJS",
-        "target": "ESNext",
-        "lib": [
-            "ESNext",
-            "DOM"
-        ],
-        "strict": false,
-    },
-    "exclude": ["node_modules"],
+        "baseUrl": ".",
+        "noEmit": true
+    }
 }
-
