@@ -1,5 +1,6 @@
 {
     "name": "@personalhealthtrain/station-ui-server",
+    "private": true,
     "author": {
         "name": "Peter Placzek",
         "email": "tadashi@animesu.net",
@@ -16,5 +17,8 @@
     },
     "dependencies": {
         "@typescript-auth/server": "^2.0.0-alpha.35"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
