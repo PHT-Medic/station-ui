@@ -7,13 +7,18 @@
 
 import { Client, Config } from '@trapi/client';
 import { TrainAPI } from '../../../domains/train';
+import { TrainConfigAPI } from '../../../domains/train-config';
 
 export class HTTPClient extends Client {
     protected train : TrainAPI;
+
+    protected trainConfig: TrainConfigAPI;
 
     constructor(config: Config) {
         super(config);
 
         this.train = new TrainAPI(this.driver);
+
+        this.trainConfig = new TrainConfigAPI(this.driver);
     }
 }

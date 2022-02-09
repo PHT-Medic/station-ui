@@ -7,7 +7,7 @@
 
 import { ClientDriverInstance } from '@trapi/client';
 import { nullifyEmptyObjectProperties } from '@typescript-auth/domains';
-import { Train } from './type';
+import { Train, TrainCreateContext, TrainExecutionConfig } from './type';
 
 export class TrainAPI {
     protected client: ClientDriverInstance;
@@ -16,8 +16,47 @@ export class TrainAPI {
         this.client = client;
     }
 
-    async create(data: Partial<Train>) {
-        const response = await this.client.post('trains', nullifyEmptyObjectProperties(data));
+    async create(data: TrainCreateContext) : Promise<Train> {
+        const response = await this.client.post('trains/docker', nullifyEmptyObjectProperties(data));
+
+        return response.data;
+    }
+
+    async getMany() : Promise<Train[]> {
+        const response = await this.client.get('trains/docker');
+
+        return response.data;
+    }
+
+    async getOne(id: Train['train_id']) : Promise<Train[]> {
+        const response = await this.client.get(`trains/docker/${id}`);
+
+        return response.data;
+    }
+
+    async getExecution(id: Train['train_id']) : Promise<Train[]> {
+        const response = await this.client.get(`trains/docker/${id}/executions`);
+
+        return response.data;
+    }
+
+    async update(id: Train['train_id'], data: Partial<Train>) : Promise<Train> {
+        const { config_id: configId, ...train } = data;
+        if (configId) {
+            const response = await this.client.post(`trains/docker/${id}/config/${configId}`);
+
+            return response.data;
+        }
+
+        // todo:  ... handler for other properties required!
+
+        console.warn(`The train properties ${Object.keys(train).join(',')} could not be processed.`);
+
+        return data as Train;
+    }
+
+    async run(id: Train['train_id'], data: TrainExecutionConfig) : Promise<Train> {
+        const response = await this.client.post(`trains/docker/${id}/run`, nullifyEmptyObjectProperties(data));
 
         return response.data;
     }
