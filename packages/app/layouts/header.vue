@@ -22,7 +22,7 @@ export default {
                 return vm.user.realm.name;
             }
 
-            return vm.user.realm_id.at(0).toUpperCase() + vm.user.realm_id.slice(1);
+            return vm.user.realm_id[0].toUpperCase() + vm.user.realm_id.slice(1);
         },
     },
 };
