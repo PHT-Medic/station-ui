@@ -5,12 +5,7 @@
         "lib": [
             "ESNext",
             "DOM"
-        ],
-        "paths": {
-            "@personalhealthtrain/ui-common": [
-                "./packages/common/src"
-            ]
-        }
+        ]
     },
     "exclude": ["node_modules"],
     "include": ["**/*"]

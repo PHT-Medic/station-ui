@@ -24,7 +24,7 @@ export class TrainConfigAPI {
     }
 
     async getMany() : Promise<Train[]> {
-        const response = await this.client.get('trains/docker/config');
+        const response = await this.client.get('trains/docker/configs/all');
 
         return response.data;
     }
