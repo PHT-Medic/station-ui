@@ -26,3 +26,6 @@ export type TrainConfig = {
 
 export type TrainConfigCreate = Pick<TrainConfig, 'name'> &
 Partial<Pick<TrainConfig, 'airflow_config' | 'cpu_requirements' | 'gpu_requirements' | 'auto_execute'>>;
+
+export type TrainConfigMinimal = Pick<TrainConfig, 'name'> &
+Partial<Pick<TrainConfig, 'airflow_config' | 'gpu_requirements' | 'cpu_requirements' | 'auto_execute' | 'created_at' | 'updated_at'>>;

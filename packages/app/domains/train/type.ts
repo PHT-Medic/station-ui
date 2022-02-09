@@ -7,7 +7,7 @@
 
 import { Train as CentralTrain, Proposal } from '@personalhealthtrain/ui-common';
 import { TrainAirflowConfig } from '../airflow';
-import { TrainConfigCreate } from '../train-config';
+import { TrainConfigCreate, TrainConfigMinimal } from '../train-config';
 
 export type TrainState = {
     num_executions: number,
@@ -34,13 +34,12 @@ export type Train = {
     is_active: boolean,
     train_id: CentralTrain['id'],
     config_id: number,
-    config: Record<string, any>, // todo: better type here
+    config: TrainConfigMinimal,
     state: TrainState,
     executions: TrainExecution[]
 };
 
-export type TrainCreateContext = {
-    train_id: CentralTrain['id'],
-    proposal_id?: Proposal['id'],
-    config?: Partial<TrainConfigCreate>
+export type TrainCreate = Pick<Train, 'train_id'> &
+Partial<Pick<Train, 'proposal_id'>> & {
+    config?: TrainConfigCreate
 };

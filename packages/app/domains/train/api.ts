@@ -7,7 +7,7 @@
 
 import { ClientDriverInstance } from '@trapi/client';
 import { nullifyEmptyObjectProperties } from '@typescript-auth/domains';
-import { Train, TrainCreateContext, TrainExecutionConfig } from './type';
+import { Train, TrainCreate, TrainExecutionConfig } from './type';
 
 export class TrainAPI {
     protected client: ClientDriverInstance;
@@ -16,7 +16,7 @@ export class TrainAPI {
         this.client = client;
     }
 
-    async create(data: TrainCreateContext) : Promise<Train> {
+    async create(data: TrainCreate) : Promise<Train> {
         const response = await this.client.post('trains/docker', nullifyEmptyObjectProperties(data));
 
         return response.data;
