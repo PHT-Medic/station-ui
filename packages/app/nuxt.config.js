@@ -9,16 +9,18 @@ const config = {
     publicRuntimeConfig() {
         return {
             stationApiUrl: process.env.STATION_API_URL,
-            authApiUrl: process.env.AUTH_API_URL,
+            authApiUrl: process.env.AUTH_API_URL ||
+                'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
             apiUrl: process.env.API_URL ||
-                'https://pht-medic.medizin.uni-tuebingen.de.de/',
+                'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
         };
     },
     env: {
         stationApiUrl: process.env.STATION_API_URL,
-        authApiUrl: process.env.AUTH_API_URL,
+        authApiUrl: process.env.AUTH_API_URL ||
+            'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
         apiUrl: process.env.API_URL ||
-            'https://pht-medic.medizin.uni-tuebingen.de.de/',
+            'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
     },
     telemetry: false,
     ssr: true,
@@ -95,7 +97,18 @@ const config = {
         'bootstrap-vue/nuxt',
         // Doc: https://github.com/nuxt-community/dotenv-module
         '@nuxtjs/dotenv',
+
+        '@nuxtjs/proxy',
     ],
+
+    proxy: {
+        '/auth/api': {
+            target: process.env.AUTH_API_URL,
+            pathRewrite: {
+                '^/auth/api': '',
+            },
+        },
+    },
 
     router: {
         // base: '/',

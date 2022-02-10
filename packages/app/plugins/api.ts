@@ -21,12 +21,16 @@ export default (ctx: Context, inject : Inject) => {
             throw error;
         }
 
+        console.log(error);
+
         throw new Error('A network error occurred.');
     };
 
+    // ----------------------------------------------------------
+
     const config : Config = {
         driver: {
-            baseURL: process.env.API_URL || ctx.$config.apiUrl,
+            baseURL: ctx.$config.apiUrl || process.env.API_URL,
             withCredentials: true,
         },
     };
@@ -40,7 +44,8 @@ export default (ctx: Context, inject : Inject) => {
     // ----------------------------------------------------------
 
     const authConfig : Config = { ...config };
-    authConfig.driver.baseURL = process.env.AUTH_API_URL || ctx.$config.authApiUrl;
+
+    authConfig.driver.baseURL = `${process.server ? process.env.AUTH_API_URL : '/auth/api'}`;
 
     const authAPI = new AuthHTTPClient(authConfig);
     authAPI.mountResponseInterceptor((r) => r, interceptor);

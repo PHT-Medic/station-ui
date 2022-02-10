@@ -16,11 +16,11 @@ import {
     OAuth2TokenSubKind,
     PermissionItem, Robot, TokenVerificationPayload, User, buildAbilityMetaFromName,
 } from '@typescript-auth/domains';
-import { Config, createClient } from '@trapi/client';
+import { Config, createClient, useClient } from '@trapi/client';
 import { AuthBrowserStorageKey } from './constants';
 
 export type AuthModuleOptions = {
-    tokenHost: string,
+    tokenHost?: string,
     tokenPath: string,
     userInfoPath: string
 };
@@ -45,35 +45,12 @@ class AuthModule {
     constructor(ctx: Context, options: AuthModuleOptions) {
         this.ctx = ctx;
 
-        const httpClient : Config = {
-            driver: {
-                httpsAgent: new https.Agent({
-                    rejectUnauthorized: false,
-                }),
-            },
-        };
-
-        if (
-            process.server
-        ) {
-            httpClient.driver.proxy = false;
-        }
-
         this.client = new HTTPOAuth2Client({
             token_host: options.tokenHost,
             token_path: options.tokenPath,
             user_info_path: options.userInfoPath,
             client_id: 'user-interface',
-        }, httpClient);
-
-        this.client.httpClient.mountResponseInterceptor((r) => r, ((error) => {
-            if (typeof error?.response?.data?.message === 'string') {
-                error.message = error.response.data.message;
-                throw error;
-            }
-
-            throw new Error('A network error occurred.');
-        }));
+        }, useClient('auth'));
 
         this.abilityManager = new AbilityManager([]);
 
@@ -255,7 +232,7 @@ class AuthModule {
     // --------------------------------------------------------------------
 
     public setRequestToken(token: string) {
-        this.ctx.$api.setAuthorizationHeader({
+        this.ctx.$stationApi.setAuthorizationHeader({
             type: 'Bearer',
             token,
         });
@@ -266,8 +243,6 @@ class AuthModule {
         });
 
         const interceptor = (error: any) => {
-            if (typeof this.ctx === 'undefined') return;
-
             if (
                 error &&
                 error.response &&
@@ -275,7 +250,7 @@ class AuthModule {
             ) {
                 // Refresh the access accessToken
                 try {
-                    this.ctx.store.dispatch('auth/triggerRefreshToken')
+                    return this.ctx.store.dispatch('auth/triggerRefreshToken')
                         .then(() => createClient().request({
                             method: error.config.method,
                             url: error.config.url,
@@ -283,15 +258,13 @@ class AuthModule {
                         }));
                 } catch (e) {
                     this.ctx.redirect('/logout');
-
-                    throw error;
                 }
-
-                throw error;
             }
+
+            return Promise.reject(error);
         };
 
-        this.responseInterceptorId = this.ctx.$api
+        this.responseInterceptorId = this.ctx.$stationApi
             .mountResponseInterceptor((data) => data, interceptor);
 
         this.authResponseInterceptorId = this.ctx.$authApi
@@ -300,7 +273,7 @@ class AuthModule {
 
     public unsetRequestToken = () => {
         if (this.responseInterceptorId) {
-            this.ctx.$api.unmountRequestInterceptor(this.responseInterceptorId);
+            this.ctx.$stationApi.unmountRequestInterceptor(this.responseInterceptorId);
             this.responseInterceptorId = undefined;
         }
 
@@ -309,7 +282,7 @@ class AuthModule {
             this.authResponseInterceptorId = undefined;
         }
 
-        this.ctx.$api.unsetAuthorizationHeader();
+        this.ctx.$stationApi.unsetAuthorizationHeader();
         this.ctx.$authApi.unsetAuthorizationHeader();
     };
 
