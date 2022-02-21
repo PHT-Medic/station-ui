@@ -7,10 +7,10 @@
 
 import { Context } from '@nuxt/types';
 import {
-    layoutMiddleware as layoutNavigationMiddleware,
-} from 'vue-layout-navigation';
+    middleware,
+} from '@vue-layout/navigation';
 import { LayoutKey } from '../config/layout/contants';
 
-export default async function layoutMiddleware({ store, route } : Context) {
-    await layoutNavigationMiddleware({ store, route, metaKey: LayoutKey.NAVIGATION_ID });
+export default async function layoutMiddleware({ route } : Context) {
+    await middleware({ route, metaKey: LayoutKey.NAVIGATION_ID });
 }

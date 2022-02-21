@@ -6,26 +6,25 @@
  */
 
 import {
-    NavigationComponentConfig,
-    NavigationComponentTier,
-    NavigationProviderContext,
-    NavigationProviderInterface,
-    applyAuthRestrictionForNavigationComponents,
-} from 'vue-layout-navigation';
+    Component,
+    ComponentsActive,
+    ProviderInterface,
+    applyRestrictionForComponents,
+} from '@vue-layout/navigation';
 import { Context } from '@nuxt/types';
 import { LayoutSideAdminNavigation, LayoutSideDefaultNavigation, LayoutTopNavigation } from './index';
 import { LayoutKey } from './contants';
 
-export class NavigationProvider implements NavigationProviderInterface {
+export class NavigationProvider implements ProviderInterface {
     protected ctx: Context;
 
     // -------------------------
 
-    protected primaryItems : NavigationComponentConfig[] = LayoutTopNavigation;
+    protected primaryItems : Component[] = LayoutTopNavigation;
 
-    protected secondaryDefaultItems : NavigationComponentConfig[] = LayoutSideDefaultNavigation;
+    protected secondaryDefaultItems : Component[] = LayoutSideDefaultNavigation;
 
-    protected secondaryAdminItems : NavigationComponentConfig[] = LayoutSideAdminNavigation;
+    protected secondaryAdminItems : Component[] = LayoutSideAdminNavigation;
 
     // -------------------------
 
@@ -35,37 +34,21 @@ export class NavigationProvider implements NavigationProviderInterface {
 
     // ---------------------------
 
-    async getComponent(tier: NavigationComponentTier, id: string, context: NavigationProviderContext): Promise<NavigationComponentConfig | undefined> {
-        const components = await this.getComponents(tier, context);
-        if (components.length === 0) {
-            return undefined;
-        }
-
-        const index = components.findIndex((component) => component.id === id);
-        if (index === -1) {
-            return undefined;
-        }
-
-        return components[index];
-    }
-
-    async getComponents(tier: NavigationComponentTier, context: NavigationProviderContext): Promise<NavigationComponentConfig[]> {
+    async getComponents(tier: number, context: ComponentsActive): Promise<Component[]> {
         if (!await this.hasTier(tier)) {
             return [];
         }
 
-        let items : NavigationComponentConfig[] = [];
+        let items : Component[] = [];
 
         switch (tier) {
             case 0:
                 items = this.primaryItems;
                 break;
-            case 1:
-                const id = context.components.length >= 1 ?
-                    context.components[0].id ?? 'default' :
-                    'default';
+            case 1: {
+                const component : Component = context[0] || { id: 'default' };
 
-                switch (id) {
+                switch (component.id) {
                     case 'default':
                         items = this.secondaryDefaultItems;
                         break;
@@ -75,11 +58,11 @@ export class NavigationProvider implements NavigationProviderInterface {
                 }
 
                 break;
+            }
         }
 
-        return applyAuthRestrictionForNavigationComponents(items, {
-            loggedIn: this.ctx.store.getters['auth/loggedIn'],
-            auth: this.ctx.$auth,
+        return applyRestrictionForComponents(items, {
+            module: this.ctx.$auth,
             layoutKey: {
                 requiredAbilities: LayoutKey.REQUIRED_ABILITIES,
                 requiredPermissions: LayoutKey.REQUIRED_PERMISSIONS,
@@ -89,17 +72,13 @@ export class NavigationProvider implements NavigationProviderInterface {
         });
     }
 
-    async hasTier(tier: NavigationComponentTier): Promise<boolean> {
+    async hasTier(tier: number): Promise<boolean> {
         return [0, 1].indexOf(tier) !== -1;
     }
 
-    async getContextForUrl(url: string): Promise<NavigationProviderContext | undefined> {
-        const context : NavigationProviderContext = {
-            components: [],
-        };
-
-        const sortFunc = (a: NavigationComponentConfig, b: NavigationComponentConfig) => (b.url?.length ?? 0) - (a.url?.length ?? 0);
-        const filterFunc = (item: NavigationComponentConfig) => !!item.url && (url.startsWith(item.url) || url === item.url);
+    async getComponentsActive(url: string): Promise<ComponentsActive | undefined> {
+        const sortFunc = (a: Component, b: Component) => (b.url?.length ?? 0) - (a.url?.length ?? 0);
+        const filterFunc = (item: Component) => !!item.url && (url.startsWith(item.url) || url === item.url);
 
         // ------------------------
 
@@ -114,34 +93,34 @@ export class NavigationProvider implements NavigationProviderInterface {
             secondaryDefaultItems.length === 0 &&
             secondaryAdminItems.length === 0
         ) {
-            return context;
+            return {};
         }
 
         const isAdminItem = secondaryAdminItems.length > 0;
-        const secondaryItem : NavigationComponentConfig = isAdminItem ? secondaryAdminItems[0] : secondaryDefaultItems[0];
+        const secondaryItem : Component = isAdminItem ? secondaryAdminItems[0] : secondaryDefaultItems[0];
 
         const primaryItem = this.primaryItems.filter((item) => !!item?.id && item.id === (isAdminItem ? 'admin' : 'default')).pop();
 
         if (typeof primaryItem === 'undefined') {
-            return context;
+            return {};
         }
 
-        context.components.push(primaryItem);
-        context.components.push(secondaryItem);
-
-        return context;
+        return {
+            0: primaryItem,
+            1: secondaryItem,
+        };
     }
 
     // ----------------------------------------------------
 
-    private flattenNestedComponents(components: NavigationComponentConfig[]) : NavigationComponentConfig[] {
+    private flattenNestedComponents(components: Component[]) : Component[] {
         const output = [...components];
 
-        components.map((component) => {
-            if (component.components) {
-                output.push(...this.flattenNestedComponents(component.components));
+        for (let i = 0; i < components.length; i++) {
+            if (components[i].components) {
+                output.push(...this.flattenNestedComponents(components[i].components));
             }
-        });
+        }
 
         return output;
     }

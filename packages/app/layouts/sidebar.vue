@@ -50,6 +50,7 @@ export default {
                     class="text-muted"
                 >
                     <countdown
+                        v-if="tokenExpiresIn"
                         :time="tokenExpiresIn"
                     >
                         <template slot-scope="props">

@@ -6,7 +6,6 @@
  */
 
 import { Context } from '@nuxt/types';
-import https from 'https';
 import {
     AbilityManager,
     AbilityMeta,
@@ -16,7 +15,7 @@ import {
     OAuth2TokenSubKind,
     PermissionItem, Robot, TokenVerificationPayload, User, buildAbilityMetaFromName,
 } from '@typescript-auth/domains';
-import { Config, createClient, useClient } from '@trapi/client';
+import { createClient, useClient } from '@trapi/client';
 import { AuthBrowserStorageKey } from './constants';
 
 export type AuthModuleOptions = {
@@ -173,6 +172,10 @@ class AuthModule {
     }
 
     // --------------------------------------------------------------------
+
+    isLoggedIn() : boolean {
+        return this.ctx.store.getters['auth/loggedIn'];
+    }
 
     public async resolveMe() : Promise<User | Robot | undefined> {
         if (typeof this.identifyPromise !== 'undefined') {

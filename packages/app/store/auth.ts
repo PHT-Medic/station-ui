@@ -7,6 +7,7 @@
 
 import Vue from 'vue';
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
+import { build } from '@vue-layout/navigation';
 
 import {
     OAuth2TokenKind, OAuth2TokenSubKind, PermissionItem, Robot, User,
@@ -204,7 +205,7 @@ export const actions : ActionTree<AuthState, RootState> = {
             dispatch('triggerSetToken', { kind: OAuth2TokenKind.REFRESH, token: token.refresh_token });
 
             await dispatch('triggerRefreshMe');
-            await dispatch('layout/initNavigation', undefined, { root: true });
+            await build();
         } catch (e) {
             await dispatch('triggerUnsetToken', OAuth2TokenKind.ACCESS);
             await dispatch('triggerUnsetToken', OAuth2TokenKind.REFRESH);
@@ -270,7 +271,7 @@ export const actions : ActionTree<AuthState, RootState> = {
 
         await dispatch('triggerSetLoginRequired', false);
 
-        await dispatch('layout/initNavigation', undefined, { root: true });
+        await build();
     },
 
     // --------------------------------------------------------------------

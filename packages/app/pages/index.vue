@@ -7,17 +7,26 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { UserList, setHTTPClient } from '@typescript-auth/vue';
 import { LayoutKey, LayoutNavigationID } from '../config/layout/contants';
 
 export default Vue.extend({
+    components: {
+        UserList,
+    },
     meta: {
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
         [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.DEFAULT,
+    },
+    created() {
+        setHTTPClient(this.$authApi);
     },
 });
 </script>
 <template>
     <div>
         <h5>Placeholder 🔥</h5>
+
+        <user-list />
     </div>
 </template>

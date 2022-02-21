@@ -5,10 +5,10 @@
  * view the LICENSE file that was distributed with this source code.
  */
 
-import { NavigationComponentConfig } from 'vue-layout-navigation';
+import { Component } from '@vue-layout/navigation';
 import { LayoutKey, LayoutNavigationID } from './contants';
 
-export const LayoutTopNavigation : NavigationComponentConfig[] = [
+export const LayoutTopNavigation : Component[] = [
     {
         id: LayoutNavigationID.DEFAULT,
         name: 'Home',
@@ -16,7 +16,7 @@ export const LayoutTopNavigation : NavigationComponentConfig[] = [
     },
 ];
 
-export const LayoutSideDefaultNavigation : NavigationComponentConfig[] = [
+export const LayoutSideDefaultNavigation : Component[] = [
     {
         name: 'Info',
         type: 'link',
@@ -59,6 +59,6 @@ export const LayoutSideDefaultNavigation : NavigationComponentConfig[] = [
     },
 ];
 
-export const LayoutSideAdminNavigation : NavigationComponentConfig[] = [
+export const LayoutSideAdminNavigation : Component[] = [
 
 ];
