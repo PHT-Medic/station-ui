@@ -11,7 +11,8 @@ import {
 import { Context } from '@nuxt/types';
 import { Inject } from '@nuxt/types/app';
 import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains';
-import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/ui-common';
+import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
+import { setHTTPClient } from '@typescript-auth/vue';
 import { HTTPClient } from '../config/http/client';
 
 export default (ctx: Context, inject : Inject) => {
@@ -20,8 +21,6 @@ export default (ctx: Context, inject : Inject) => {
             error.message = error.response.data.message;
             throw error;
         }
-
-        console.log(error);
 
         throw new Error('A network error occurred.');
     };
@@ -50,6 +49,7 @@ export default (ctx: Context, inject : Inject) => {
     const authAPI = new AuthHTTPClient(authConfig);
     authAPI.mountResponseInterceptor((r) => r, interceptor);
 
+    setHTTPClient(authAPI);
     setClient(authAPI, 'auth');
     inject('authApi', authAPI);
 

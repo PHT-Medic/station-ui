@@ -5,7 +5,7 @@
  * view the LICENSE file that was distributed with this source code.
  */
 
-import { Train as CentralTrain, Proposal } from '@personalhealthtrain/ui-common';
+import { Train as CentralTrain, Proposal } from '@personalhealthtrain/central-common';
 import { TrainAirflowConfig } from '../airflow';
 import { TrainConfigCreate, TrainConfigMinimal } from '../train-config';
 

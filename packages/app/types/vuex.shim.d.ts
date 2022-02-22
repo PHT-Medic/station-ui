@@ -6,7 +6,7 @@
  */
 
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/ui-common';
-import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains/dist/http/client/module';
+import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains';
 import AuthModule from '../config/auth';
 import { HTTPClient as StationHTTPClient } from '../config/http/client';
 
