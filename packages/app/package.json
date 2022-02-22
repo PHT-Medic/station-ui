@@ -27,7 +27,7 @@
         "@nuxtjs/proxy": "^2.1.0",
         "@personalhealthtrain/ui-common": "^1.1.0-alpha.13",
         "@tada5hi/eslint-config-vue-typescript": "^0.0.25",
-        "@trapi/client": "^2.0.4",
+        "@trapi/client": "^2.0.5",
         "@types/moment": "^2.13.0",
         "@types/vuelidate": "^0.7.13",
         "@typescript-auth/domains": "^0.0.24",
