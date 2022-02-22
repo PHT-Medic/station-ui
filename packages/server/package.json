@@ -16,7 +16,7 @@
         "upgrade": "auth-server upgrade"
     },
     "dependencies": {
-        "@typescript-auth/server": "^2.0.0-alpha.37"
+        "@typescript-auth/server": "^2.0.0-alpha.38"
     },
     "publishConfig": {
         "access": "public"
