@@ -1,4 +1,4 @@
-# Station UI 🏥
+# Station 🏥
 
 [![main](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml)
 [![Build image](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml)
@@ -18,13 +18,13 @@ Read the `Readme.md` in each package directory and configure each package indivi
 
 ## Packages
 
-### @personalhealthtrain/station-ui-app 🍭
+### @personalhealthtrain/station-ui 🍭
 
 This repository contains the frontend application.
 
-### @personalhealthtrain/station-ui-server 🌠
+### @personalhealthtrain/station-server 🌠
 
-This repository contains the backend application with REST API, aggregators, components and many more.
+This package contains the authentication- & authorization-server for the station.
 
 ## Usage
 

@@ -1,5 +1,5 @@
 {
-    "name": "@personalhealthtrain/station-ui",
+    "name": "@personalhealthtrain/station",
     "private": true,
     "author": {
         "name": "Peter Placzek",
@@ -8,7 +8,7 @@
     },
     "license": "MIT",
     "version": "1.0.0",
-    "description": "This package contains all packages of the Station UI.",
+    "description": "This package contains some packages of the Station.",
     "workspaces": [
         "packages/*"
     ],
@@ -22,8 +22,7 @@
         "clean": "lerna run clean",
         "build": "lerna run build",
         "test": "lerna run test",
-        "pub": "lerna publish",
-        "prepublishOnly": "npm run build",
+        "pub": "npm run build && lerna publish",
         "lint": "eslint --ext .ts,.vue,.js ./packages/",
         "lint:fix": "npm run lint -- --fix",
         "app": "npm run dev --workspace=packages/app",
