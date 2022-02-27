@@ -7,6 +7,7 @@
 
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
 import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains';
+import { Ilingo } from 'ilingo';
 import { HTTPClient as StationHTTPClient } from '../config/http/client';
 import AuthModule from '../config/auth';
 
@@ -25,6 +26,7 @@ declare module 'vue/types/vue' {
         $stationApi: StationHTTPClient,
 
         $auth: AuthModule,
+        $ilingo: Ilingo,
 
         $store: Store<any>,
     }
@@ -35,6 +37,7 @@ declare module 'vue/types/vue' {
         $stationApi: StationHTTPClient,
 
         $auth: AuthModule,
+        $ilingo: Ilingo,
 
         $store: Store<any>,
     }

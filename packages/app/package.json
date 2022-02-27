@@ -37,6 +37,7 @@
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.18.1",
         "browser-storage-adapter": "^0.0.3",
+        "ilingo": "^2.0.0",
         "moment": "^2.29.1",
         "nuxt": "^2.15.7",
         "typescript": "^4.5.5",
