@@ -50,7 +50,7 @@ export default {
         };
     },
     methods: {
-        handleUpdated(item) {
+        handleSelected(item) {
             const keys = Object.keys(item);
             for (let i = 0; i < keys.length; i++) {
                 this.entity[keys[i]] = item[keys[i]];

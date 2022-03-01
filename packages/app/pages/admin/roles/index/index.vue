@@ -6,7 +6,6 @@
   -->
 <script>
 import { PermissionID } from '@personalhealthtrain/central-common';
-import { useHTTPClient } from '@typescript-auth/vue';
 import { LayoutKey, LayoutNavigationID } from '../../../../config/layout/contants';
 
 export default {

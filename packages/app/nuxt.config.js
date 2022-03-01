@@ -109,6 +109,12 @@ const config = {
                 '^/auth/api': '',
             },
         },
+        '/station/api': {
+            target: process.env.STATION_API_URL,
+            pathRewrite: {
+                '^/station/api': '',
+            },
+        },
     },
 
     router: {

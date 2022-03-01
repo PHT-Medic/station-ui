@@ -46,6 +46,7 @@ export const LayoutSideDefaultNavigation : Component[] = [
                 name: 'Central',
                 type: 'link',
                 icon: 'fa fa-umbrella',
+                url: '/trains',
             },
             {
                 name: 'Local',
@@ -53,6 +54,13 @@ export const LayoutSideDefaultNavigation : Component[] = [
                 icon: 'fab fa-pagelines',
             },
         ],
+    },
+    {
+        name: 'Configurations',
+        type: 'link',
+        url: '/configurations',
+        icon: 'fa-solid fa-box',
+        [LayoutKey.REQUIRED_LOGGED_IN]: true,
     },
     {
         name: 'Others',

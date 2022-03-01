@@ -6,9 +6,8 @@
  */
 
 import { ClientDriverInstance } from '@trapi/client';
-import { nullifyEmptyObjectProperties } from '@typescript-auth/domains';
 import { Train } from '../train';
-import { TrainConfigCreate } from './type';
+import { Configuration } from './type';
 
 export class TrainConfigAPI {
     protected client: ClientDriverInstance;
@@ -17,21 +16,13 @@ export class TrainConfigAPI {
         this.client = client;
     }
 
-    async create(data: TrainConfigCreate) : Promise<Train> {
-        const response = await this.client.post('trains/docker/config', nullifyEmptyObjectProperties(data));
-
-        return response.data;
+    async create(trainId: Train['train_id'], configId: Configuration['id']) : Promise<any> {
+        await this.client.post(`trains/docker/${trainId}/config/${configId}`);
+        // todo: return value should describe relation
     }
 
-    async getMany() : Promise<Train[]> {
-        const response = await this.client.get('trains/docker/configs/all');
+    async delete(trainId: Train['train_id'], configId: Configuration['id']) : Promise<any> {
+        // not implemented yet....
 
-        return response.data;
-    }
-
-    async getOne(id: Train['train_id']) : Promise<Train[]> {
-        const response = await this.client.get(`trains/docker/config/${id}`);
-
-        return response.data;
     }
 }

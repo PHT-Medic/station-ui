@@ -13,7 +13,7 @@ export default {
         },
     },
     methods: {
-        handleUpdated(e) {
+        handleSelected(e) {
             this.$emit('updated', e);
         },
     },

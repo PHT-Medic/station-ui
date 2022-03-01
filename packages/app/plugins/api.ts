@@ -56,7 +56,7 @@ export default (ctx: Context, inject : Inject) => {
     // ----------------------------------------------------------
 
     const stationConfig : Config = { ...config };
-    stationConfig.driver.baseURL = process.env.STATION_API_URL || ctx.$config.stationApiUrl;
+    authConfig.driver.baseURL = `${process.server ? process.env.STATION_API_URL : '/station/api'}`;
 
     const stationApi = new HTTPClient(stationConfig);
 

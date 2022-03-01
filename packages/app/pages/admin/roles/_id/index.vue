@@ -17,7 +17,7 @@ export default {
         [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.ADMIN,
     },
     methods: {
-        handleUpdated(item) {
+        handleSelected(item) {
             this.$emit('updated', item);
         },
     },
