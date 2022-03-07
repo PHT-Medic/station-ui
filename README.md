@@ -68,7 +68,7 @@ $ npm run setup --workspace=packages/server
 
 To start the frontend application & backend server locally, run the following command:
 ```shell
-$ npm run dev --workspace=packages/server
+$ npm run start --workspace=packages/server
 ```
 
 ```shell

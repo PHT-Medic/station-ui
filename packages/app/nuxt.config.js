@@ -75,7 +75,6 @@ const config = {
         '@/plugins/vue',
         '@/plugins/vuelidate',
         '@/plugins/vueTimeAgo',
-
     ],
     /*
     ** Nuxt.js dev-modules
