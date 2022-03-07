@@ -41,7 +41,7 @@
         "moment": "^2.29.1",
         "nuxt": "^2.15.7",
         "typescript": "^4.5.5",
-        "vue": "^2.6.14",
+        "vue": "^3.2.31",
         "vue-gravatar": "^1.4.1",
         "vue-timeago": "^5.1.2",
         "vuelidate": "^0.7.7",
