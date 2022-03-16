@@ -22,7 +22,7 @@ export enum LayoutNavigationID {
     DEFAULT = 'default',
 }
 
-export const LayoutTopNavigation : Component[] = [
+export const LayoutTopNavigation: Component[] = [
     {
         id: LayoutNavigationID.DEFAULT,
         name: 'Home',
@@ -37,7 +37,7 @@ export const LayoutTopNavigation : Component[] = [
     },
 ];
 
-export const LayoutSideDefaultNavigation : Component[] = [
+export const LayoutSideDefaultNavigation: Component[] = [
     {
         name: 'Info',
         type: 'link',
@@ -51,9 +51,7 @@ export const LayoutSideDefaultNavigation : Component[] = [
         type: 'link',
         icon: 'fas fa-train',
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
-        requirePermissions: [
-
-        ],
+        requirePermissions: [],
         components: [
             {
                 name: 'Central',
@@ -69,12 +67,62 @@ export const LayoutSideDefaultNavigation : Component[] = [
         ],
     },
     {
+        name: 'Data',
+        type: 'link',
+        icon: 'fa-solid fa-database',
+        [LayoutKey.REQUIRED_LOGGED_IN]: true,
+        components: [
+            {
+                name: 'FHIR',
+                type: 'link',
+                url: '/data/fhir',
+                icon: 'fas fa-fire',
+            },
+            {
+                name: 'Volume',
+                type: 'link',
+                url: '/data/volume',
+                icon: 'fas fa-images',
+            },
+            {
+                name: 'Tabular',
+                type: 'link',
+                url: '/data/tabular',
+                icon: 'fas fa-table',
+            },
+        ],
+
+    },
+    {
         name: 'Configurations',
         type: 'link',
         url: '/configurations',
         icon: 'fa-solid fa-box',
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
     },
+    {
+        name: 'Services',
+        type: 'link',
+        url: '/services',
+        icon: 'fa-solid fa-server',
+        [LayoutKey.REQUIRED_LOGGED_IN]: true,
+        components: [
+            {
+                name: 'Airflow',
+                type: 'link',
+                url: '/services/airflow',
+                icon: 'fas fa-wind',
+            },
+            {
+                name: 'Minio',
+                type: 'link',
+                url: '/services/minio',
+                icon: 'fas fa-database',
+            },
+
+        ],
+    },
+
     {
         name: 'Others',
         type: 'separator',
@@ -88,7 +136,7 @@ export const LayoutSideDefaultNavigation : Component[] = [
     },
 ];
 
-export const LayoutSideAdminNavigation : Component[] = [
+export const LayoutSideAdminNavigation: Component[] = [
     {
         name: 'Auth',
         type: 'link',
@@ -157,7 +205,6 @@ export const LayoutSideAdminNavigation : Component[] = [
         icon: 'fas fa-globe',
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
         [LayoutKey.REQUIRED_PERMISSIONS]: [],
-        components: [
-        ],
+        components: [],
     },
 ];

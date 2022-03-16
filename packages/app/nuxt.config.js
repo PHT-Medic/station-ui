@@ -13,6 +13,10 @@ const config = {
                 'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
             apiUrl: process.env.API_URL ||
                 'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
+            airflowUrl: process.env.AIRFLOW_URL ||
+                'http://airflow:8080',
+            minioUrl: process.env.MINIO_URL ||
+                'http://minio:9000',
         };
     },
     env: {
@@ -21,6 +25,10 @@ const config = {
             'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
         apiUrl: process.env.API_URL ||
             'https://pht-medic.medizin.uni-tuebingen.de.de/api/',
+        airflowUrl: process.env.AIRFLOW_URL ||
+            'http://airflow:8080',
+        minioUrl: process.env.MINIO_URL ||
+            'http://minio:9000',
     },
     telemetry: false,
     ssr: true,

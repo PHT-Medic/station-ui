@@ -126,7 +126,7 @@ export default Vue.extend({
             class="form-group"
             :class="{ 'form-group-error': $v.form.train_id.$error }"
         >
-            <label>Proposal ID</label>
+            <label>Train ID</label>
             <input
                 v-model="$v.form.train_id.$model"
                 type="text"

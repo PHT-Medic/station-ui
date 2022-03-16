@@ -383,11 +383,8 @@ export default Vue.extend({
                                 <option value="rw">
                                     rw
                                 </option>
-                                <option value="r">
-                                    r
-                                </option>
-                                <option value="w">
-                                    w
+                                <option value="ro">
+                                    ro
                                 </option>
                             </select>
                         </div>

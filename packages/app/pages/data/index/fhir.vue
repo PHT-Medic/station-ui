@@ -1,17 +1,6 @@
-<!--
-  Copyright (c) 2021-2021.
-  Author Peter Placzek (tada5hi)
-  For the full copyright and license information,
-  view the LICENSE file that was distributed with this source code.
-  -->
-<script lang="ts">
-import { LayoutKey, LayoutNavigationID } from '../../config/layout/contants';
-
+<script>
 export default {
-    meta: {
-        [LayoutKey.REQUIRED_LOGGED_IN]: true,
-        [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.DEFAULT,
-    },
+    name: 'Fhir',
     data() {
         return {
             sidebar: {
@@ -19,13 +8,13 @@ export default {
                 items: [
                     {
                         name: 'Create',
-                        urlSuffix: '/add',
-                        icon: 'fa fa-plus',
+                        urlSuffix: '/fhir/add',
+                        icon: 'fas fa-plus',
                     },
                     {
                         name: 'Overview',
-                        urlSuffix: '',
-                        icon: 'fa fa-bars',
+                        urlSuffix: '/fhir/overview',
+                        icon: 'fas fa-bars',
                     },
                 ],
             },
@@ -33,10 +22,11 @@ export default {
     },
 };
 </script>
+
 <template>
     <div>
         <h1 class="title no-border mb-3">
-            🚊 Train(s) <span class="sub-title">Manage trains</span>
+            🔥 FHIR <span class="sub-title">Manage connected FHIR servers</span>
         </h1>
         <div class="content-wrapper">
             <div class="content-sidebar flex-column">
@@ -48,7 +38,7 @@ export default {
                         v-for="(item,key) in sidebar.items"
                         :key="key"
                         :disabled="item.active"
-                        :to="'/trains' + item.urlSuffix"
+                        :to="'/data' + item.urlSuffix"
                         exact
                         exact-active-class="active"
                     >
@@ -63,3 +53,7 @@ export default {
         </div>
     </div>
 </template>
+
+<style scoped>
+
+</style>
