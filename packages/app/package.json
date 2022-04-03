@@ -33,7 +33,7 @@
         "@typescript-auth/domains": "^0.0.28",
         "@typescript-auth/vue": "^0.1.2",
         "@typescript-error/core": "^1.1.2",
-        "@vue-layout/navigation": "^1.0.4",
+        "@vue-layout/navigation": "^1.0.10",
         "bootstrap": "^4.5.3",
         "bootstrap-vue": "^2.18.1",
         "browser-storage-adapter": "^0.0.3",
