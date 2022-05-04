@@ -7,7 +7,7 @@
         "url": "https://tada5hi.net"
     },
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "This package contains some packages of the Station.",
     "workspaces": [
         "packages/*"
