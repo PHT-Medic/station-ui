@@ -10,9 +10,9 @@ import {
 } from '@trapi/client';
 import { Context } from '@nuxt/types';
 import { Inject } from '@nuxt/types/app';
-import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains';
+import { HTTPClient as AuthHTTPClient } from '@authelion/common';
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
-import { setHTTPClient } from '@typescript-auth/vue';
+import { setHTTPClient } from '@authelion/vue';
 import { HTTPClient } from '../config/http/client';
 
 export default (ctx: Context, inject : Inject) => {

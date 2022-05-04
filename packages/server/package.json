@@ -16,7 +16,7 @@
         "upgrade": "auth-server upgrade"
     },
     "dependencies": {
-        "@typescript-auth/server": "^2.0.7"
+        "@authelion/api": "^0.1.1"
     },
     "publishConfig": {
         "access": "public"

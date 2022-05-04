@@ -6,7 +6,7 @@
  */
 
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
-import { HTTPClient as AuthHTTPClient } from '@typescript-auth/domains';
+import { HTTPClient as AuthHTTPClient } from '@authelion/common';
 import AuthModule from '../config/auth';
 import { HTTPClient as StationHTTPClient } from '../config/http/client';
 

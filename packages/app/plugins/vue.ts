@@ -4,7 +4,7 @@
  * For the full copyright and license information,
  * view the LICENSE file that was distributed with this source code.
  */
-import AuthVue from '@typescript-auth/vue';
+import AuthVue from '@authelion/vue';
 import Vue from 'vue';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

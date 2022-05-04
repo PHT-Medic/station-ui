@@ -6,7 +6,7 @@
  */
 
 import { ClientDriverInstance } from '@trapi/client';
-import { nullifyEmptyObjectProperties } from '@typescript-auth/domains';
+import { nullifyEmptyObjectProperties } from '@authelion/common';
 import {
     Train, TrainCreate, TrainExecution, TrainExecutionConfig,
 } from './type';
