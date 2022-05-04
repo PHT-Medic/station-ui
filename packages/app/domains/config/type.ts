@@ -18,7 +18,7 @@ export type Configuration = {
     auto_execute: boolean,
 
     created_at: Date | string,
-    updated_at: Date | string,
+    updated_at?: Date | string,
 
     // todo: remove trains property, this will be bloated over time!
     trains: any[]

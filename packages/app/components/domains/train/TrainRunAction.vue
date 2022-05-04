@@ -44,7 +44,8 @@
     </div>
 </template>
 <script lang="ts">
-import TrainConfigList from '../trrain-config/TrainConfigList.vue';
+import { TrainExecutionConfig } from '../../../domains/train';
+import TrainConfigList from '../train-config/TrainConfigList.vue';
 
 export default {
     components: { TrainConfigList },
@@ -65,14 +66,17 @@ export default {
             this.$refs.modal.show();
         },
         async run() {
+            console.log('run', this.configId);
             if (this.busy) return;
 
             this.busy = true;
 
             try {
-                const train = await this.$stationApi.train.run(this.train.id, this.task);
+                const train = await this.$stationApi.train.run(this.trainId, { config_id: this.configId });
+                console.log('train', train);
                 this.$emit('done', train);
             } catch (e) {
+                console.log('error', e);
                 this.$emit('failed', e);
             }
 

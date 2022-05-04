@@ -23,8 +23,6 @@ export default Vue.extend({
             busy: false,
             form: {
                 name: '',
-                repository: '',
-                tag: '',
                 auto_execute: false,
                 environmentVariables: [],
                 volumes: [],
@@ -46,12 +44,6 @@ export default Vue.extend({
         return {
             form: {
                 name: {
-                    required,
-                },
-                repository: {
-                    required,
-                },
-                tag: {
                     required,
                 },
                 auto_execute: {
@@ -191,50 +183,6 @@ export default Vue.extend({
                 </div>
 
                 <hr>
-
-                <div
-                    class="form-group"
-                    :class="{ 'form-group-error': $v.form.repository.$error }"
-                >
-                    <label>Repository</label>
-                    <input
-                        v-model="$v.form.repository.$model"
-                        type="text"
-                        name="name"
-                        class="form-control"
-                        placeholder="..."
-                    >
-
-                    <div
-                        v-if="!$v.form.repository.required"
-                        class="form-group-hint group-required"
-                    >
-                        Please enter a repository.
-                    </div>
-                </div>
-
-                <hr>
-
-                <div
-                    class="form-group"
-                    :class="{ 'form-group-error': $v.form.tag.$error }"
-                >
-                    <label>Tag</label>
-                    <input
-                        v-model="$v.form.tag.$model"
-                        type="text"
-                        name="name"
-                        class="form-control"
-                        placeholder="..."
-                    >
-
-                    <div
-                        v-if="!$v.form.tag.required"
-                        class="form-group-hint group-required"
-                    >
-                        Please enter a tag.
-                    </div>
-                </div>
             </div>
             <div class="col">
                 <h6><i class="fa fa-bars" /> Environments</h6>

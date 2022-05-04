@@ -30,6 +30,9 @@ export default {
             });
     },
     methods: {
+        init() {
+            this.busy = false;
+        },
         async add(configId: Configuration['id']) {
             if (this.busy) return;
 
@@ -50,6 +53,7 @@ export default {
             this.busy = false;
         },
         handleSelected(e) {
+            console.log(e.target.value);
             this.$emit('selected', e.target.value);
         },
     },

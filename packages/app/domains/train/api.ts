@@ -58,8 +58,8 @@ export class TrainAPI {
     }
 
     async run(id: Train['train_id'], data: TrainExecutionConfig) : Promise<Train> {
+        console.log('run', data);
         const response = await this.client.post(`trains/docker/${id}/run`, nullifyEmptyObjectProperties(data));
-
         return response.data;
     }
 
