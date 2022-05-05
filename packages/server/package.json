@@ -10,10 +10,10 @@
     "version": "0.0.4",
     "description": "This project contains the station auth service.",
     "scripts": {
-        "start": "auth-server start",
-        "reset": "auth-server reset",
-        "setup": "auth-server setup",
-        "upgrade": "auth-server upgrade"
+        "start": "authelion start",
+        "reset": "authelion reset",
+        "setup": "authelion setup",
+        "upgrade": "authelion upgrade"
     },
     "dependencies": {
         "@authelion/api": "^0.1.1"
