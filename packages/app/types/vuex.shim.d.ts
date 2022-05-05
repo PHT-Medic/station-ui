@@ -7,6 +7,7 @@
 
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/ui-common';
 import { HTTPClient as AuthHTTPClient } from '@authelion/common';
+import { Adapter } from 'browser-storage-adapter';
 import AuthModule from '../config/auth';
 import { HTTPClient as StationHTTPClient } from '../config/http/client';
 
@@ -16,6 +17,9 @@ declare module 'vuex/types/index' {
         $authApi: AuthHTTPClient,
         $stationApi: StationHTTPClient,
 
-        $auth: AuthModule
+        $auth: AuthModule,
+
+        $warehouse: Adapter,
+        $authWarehouse: Adapter
     }
 }

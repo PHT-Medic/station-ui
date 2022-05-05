@@ -8,6 +8,7 @@
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
 import { HTTPClient as AuthHTTPClient } from '@authelion/common';
 import { Ilingo } from 'ilingo';
+import { Adapter } from 'browser-storage-adapter';
 import { HTTPClient as StationHTTPClient } from '../config/http/client';
 import AuthModule from '../config/auth';
 
@@ -29,6 +30,9 @@ declare module 'vue/types/vue' {
         $ilingo: Ilingo,
 
         $store: Store<any>,
+
+        $warehouse: Adapter,
+        $authWarehouse: Adapter
     }
 
     interface Vue {
@@ -40,5 +44,8 @@ declare module 'vue/types/vue' {
         $ilingo: Ilingo,
 
         $store: Store<any>,
+
+        $warehouse: Adapter,
+        $authWarehouse: Adapter
     }
 }
