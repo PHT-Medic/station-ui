@@ -56,13 +56,14 @@ export const LayoutSideDefaultNavigation: Component[] = [
             {
                 name: 'Central',
                 type: 'link',
-                icon: 'fa fa-umbrella',
+                icon: 'fas fa-network-wired',
                 url: '/trains',
             },
             {
                 name: 'Local',
                 type: 'link',
-                icon: 'fab fa-pagelines',
+                icon: 'fas fa-hard-drive',
+                url: '/local-trains'
             },
         ],
     },
@@ -100,29 +101,6 @@ export const LayoutSideDefaultNavigation: Component[] = [
         icon: 'fa-solid fa-box',
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
     },
-    {
-        name: 'Services',
-        type: 'link',
-        url: '/services',
-        icon: 'fa-solid fa-server',
-        [LayoutKey.REQUIRED_LOGGED_IN]: true,
-        components: [
-            {
-                name: 'Airflow',
-                type: 'link',
-                url: '/services/airflow',
-                icon: 'fas fa-wind',
-            },
-            {
-                name: 'Minio',
-                type: 'link',
-                url: '/services/minio',
-                icon: 'fas fa-database',
-            },
-
-        ],
-    },
-
     {
         name: 'Others',
         type: 'separator',
@@ -206,5 +184,27 @@ export const LayoutSideAdminNavigation: Component[] = [
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
         [LayoutKey.REQUIRED_PERMISSIONS]: [],
         components: [],
+    },
+    {
+        name: 'Services',
+        type: 'link',
+        url: '/services',
+        icon: 'fa-solid fa-server',
+        [LayoutKey.REQUIRED_LOGGED_IN]: true,
+        components: [
+            {
+                name: 'Airflow',
+                type: 'link',
+                url: '/services/airflow',
+                icon: 'fas fa-wind',
+            },
+            {
+                name: 'Minio',
+                type: 'link',
+                url: '/services/minio',
+                icon: 'fas fa-database',
+            },
+
+        ],
     },
 ];

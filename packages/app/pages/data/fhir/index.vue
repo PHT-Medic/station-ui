@@ -7,15 +7,16 @@ export default {
                 hide: false,
                 items: [
                     {
-                        name: 'Create',
-                        urlSuffix: '/fhir/add',
-                        icon: 'fas fa-plus',
-                    },
-                    {
                         name: 'Overview',
-                        urlSuffix: '/fhir/overview',
+                        urlSuffix: '',
                         icon: 'fas fa-bars',
                     },
+                    {
+                        name: 'Create',
+                        urlSuffix: '/add',
+                        icon: 'fas fa-plus',
+                    },
+
                 ],
             },
         };
@@ -38,7 +39,7 @@ export default {
                         v-for="(item,key) in sidebar.items"
                         :key="key"
                         :disabled="item.active"
-                        :to="'/data' + item.urlSuffix"
+                        :to="'/data/fhir' + item.urlSuffix"
                         exact
                         exact-active-class="active"
                     >
