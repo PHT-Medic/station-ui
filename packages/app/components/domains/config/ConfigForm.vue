@@ -8,7 +8,6 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 import { required } from 'vuelidate/lib/validators';
-import { TrainCreate } from '../../../domains/train';
 import { Configuration } from '../../../domains/config';
 
 export default Vue.extend({
