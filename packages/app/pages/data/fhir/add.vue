@@ -1,7 +1,6 @@
 <template>
     <div class="container">
-        <h2>Add FHir server</h2>
-        Hello
+        <h2>Add FHIR server</h2>
         <ServerAddForm />
     </div>
 </template>

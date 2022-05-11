@@ -9,6 +9,7 @@ import { Client, Config } from '@trapi/client';
 import { TrainAPI } from '../../../domains/train';
 import { ConfigurationAPI } from '../../../domains/config';
 import { TrainConfigAPI } from '../../../domains/train-config';
+import { FhirAPI } from '../../../domains/fhir/api';
 
 export class HTTPClient extends Client {
     public configuration: ConfigurationAPI;
@@ -16,6 +17,8 @@ export class HTTPClient extends Client {
     public train : TrainAPI;
 
     public trainConfig : TrainConfigAPI;
+
+    public fhir : FhirAPI;
 
     constructor(config: Config) {
         super(config);
@@ -25,5 +28,7 @@ export class HTTPClient extends Client {
         this.train = new TrainAPI(this.driver);
 
         this.trainConfig = new TrainConfigAPI(this.driver);
+
+        this.fhir = new FhirAPI(this.driver);
     }
 }

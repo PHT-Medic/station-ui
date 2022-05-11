@@ -1,5 +1,12 @@
+export enum AuthMethods {
+    None = 'None',
+    Basic = 'Basic',
+    Bearer = 'Bearer',
+    OIDC = 'OIDC',
+}
+
 export type FHIRServer = {
-    api_url: string;
+    api_address: string;
     name?: string;
     password?: string;
     username?: string;
@@ -8,4 +15,5 @@ export type FHIRServer = {
     oidc_client_id?: string;
     oidc_client_secret?: string;
     type?: string;
+    proposal_id?: string;
 };
