@@ -63,7 +63,7 @@ export const LayoutSideDefaultNavigation: Component[] = [
                 name: 'Local',
                 type: 'link',
                 icon: 'fas fa-hard-drive',
-                url: '/local-trains'
+                url: '/local-trains',
             },
         ],
     },
@@ -74,19 +74,25 @@ export const LayoutSideDefaultNavigation: Component[] = [
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
         components: [
             {
+                name: 'Datasets',
+                type: 'link',
+                icon: 'fas fa-box-archive',
+                url: '/data/datasets',
+            },
+            {
                 name: 'FHIR',
                 type: 'link',
                 url: '/data/fhir',
                 icon: 'fas fa-fire',
             },
             {
-                name: 'Volume',
+                name: 'Unstructured',
                 type: 'link',
                 url: '/data/volume',
                 icon: 'fas fa-images',
             },
             {
-                name: 'Tabular',
+                name: 'Structured',
                 type: 'link',
                 url: '/data/tabular',
                 icon: 'fas fa-table',
