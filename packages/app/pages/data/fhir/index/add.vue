@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h2>Add FHIR server</h2>
         <ServerAddForm />
     </div>
@@ -7,7 +7,7 @@
 
 <script lang="ts">
 
-import ServerAddForm from '../../../components/domains/data/fhir/ServerAddForm.vue';
+import ServerAddForm from '../../../../components/domains/data/fhir/ServerAddForm.vue';
 
 export default {
     name: 'Add',

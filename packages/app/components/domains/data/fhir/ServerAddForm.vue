@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import { required, url, alphaNum } from 'vuelidate/lib/validators';
+import { alphaNum, required, url } from 'vuelidate/lib/validators';
 import { AuthMethods, FHIRServer } from '../../../../domains/fhir';
 
 function validateBasicAuth(value, siblings) {
@@ -170,6 +170,7 @@ export default Vue.extend({
                 >
                     Please enter a server name.
                 </div>
+                <hr>
                 <div
                     class="form-group"
                     :class="{ 'form-group-error': $v.server.api_address.$error }"
@@ -189,6 +190,7 @@ export default Vue.extend({
                 >
                     Enter the base endpoint of your servers REST API.
                 </div>
+                <hr>
                 <div
                     class="form-group"
                 >
