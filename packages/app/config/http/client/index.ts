@@ -10,6 +10,7 @@ import { TrainAPI } from '../../../domains/train';
 import { ConfigurationAPI } from '../../../domains/config';
 import { TrainConfigAPI } from '../../../domains/train-config';
 import { FhirAPI } from '../../../domains/fhir/api';
+import { DatasetAPI } from '../../../domains/datasets/api';
 
 export class HTTPClient extends Client {
     public configuration: ConfigurationAPI;
@@ -19,6 +20,8 @@ export class HTTPClient extends Client {
     public trainConfig : TrainConfigAPI;
 
     public fhir : FhirAPI;
+
+    public datasets: DatasetAPI;
 
     constructor(config: Config) {
         super(config);
@@ -30,5 +33,7 @@ export class HTTPClient extends Client {
         this.trainConfig = new TrainConfigAPI(this.driver);
 
         this.fhir = new FhirAPI(this.driver);
+
+        this.datasets = new DatasetAPI(this.driver);
     }
 }
