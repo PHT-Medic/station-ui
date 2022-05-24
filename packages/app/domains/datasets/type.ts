@@ -1,10 +1,7 @@
 export enum DataType {
-    IMAGE = 1,
-    GENOME = 2,
-    FHIR = 3,
-    CSV = 4,
-    STRUCTURED = 5,
-    UNSTRUCTURED = 6,
+    FHIR = 'FHIR',
+    STRUCTURED = 'Structured',
+    UNSTRUCTURED = 'Unstructured',
 }
 
 export enum StorageType {

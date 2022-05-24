@@ -1,12 +1,15 @@
 <script>
+import DatasetAddForm from '../../../../components/domains/data/dataset/DatasetAddForm';
+
 export default {
     name: 'Add',
+    components: { DatasetAddForm },
 };
 </script>
 
 <template>
     <div>
-        <h1>Add Dataset</h1>
+        <DatasetAddForm />
     </div>
 </template>
 
