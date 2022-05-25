@@ -2,6 +2,7 @@ export enum DataType {
     FHIR = 'FHIR',
     STRUCTURED = 'Structured',
     UNSTRUCTURED = 'Unstructured',
+    HYBRID = 'Hybrid',
 }
 
 export enum StorageType {

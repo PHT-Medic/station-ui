@@ -7,8 +7,8 @@
 <template>
     <span>
         <slot
-            :classSuffix="classSuffix"
-            :statusText="statusText"
+            :class-suffix="classSuffix"
+            :status-text="statusText"
         >
             <span :class="'text-'+classSuffix">{{ statusText }}</span>
         </slot>
@@ -25,6 +25,7 @@ export default {
         },
     },
     computed: {
+        // todo adapt to local/central status
         statusText() {
             switch (this.status) {
                 case TrainRunStatus.STARTING:

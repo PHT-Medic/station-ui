@@ -90,6 +90,30 @@ export default Vue.extend({
                         </h6>
                     </slot>
                 </div>
+                <div>
+                    <button
+                        type="button"
+                        class="btn btn-xs btn-link"
+                    >
+                        Active
+                    </button>
+                </div>
+                <div>
+                    <button
+                        type="button"
+                        class="btn btn-xs btn-link"
+                    >
+                        Available
+                    </button>
+                </div>
+                <div>
+                    <button
+                        type="button"
+                        class="btn btn-xs btn-link"
+                    >
+                        Finished
+                    </button>
+                </div>
                 <div class="ml-auto">
                     <slot
                         name="header-actions"
