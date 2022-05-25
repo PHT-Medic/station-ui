@@ -9,9 +9,10 @@
 import Vue from 'vue';
 import TrainName from './TrainName.vue';
 import TrainRunAction from './TrainRunAction.vue';
+import TrainListItem from './TrainListItem.vue';
 
 export default Vue.extend({
-    components: { TrainRunAction, TrainName },
+    components: { TrainRunAction, TrainName, TrainListItem },
     props: {
         withHeader: {
             type: Boolean,
@@ -90,29 +91,31 @@ export default Vue.extend({
                         </h6>
                     </slot>
                 </div>
-                <div>
-                    <button
-                        type="button"
-                        class="btn btn-xs btn-link"
-                    >
-                        Active
-                    </button>
-                </div>
-                <div>
-                    <button
-                        type="button"
-                        class="btn btn-xs btn-link"
-                    >
-                        Available
-                    </button>
-                </div>
-                <div>
-                    <button
-                        type="button"
-                        class="btn btn-xs btn-link"
-                    >
-                        Finished
-                    </button>
+                <div class="d-flex flex-row flex-fill align-items-md-center">
+                    <div class="mb-auto">
+                        <button
+                            type="button"
+                            class="btn btn-xs btn-link"
+                        >
+                            Active
+                        </button>
+                    </div>
+                    <div class="mb-auto">
+                        <button
+                            type="button"
+                            class="btn btn-xs btn-link"
+                        >
+                            Available
+                        </button>
+                    </div>
+                    <div class="mb-auto">
+                        <button
+                            type="button"
+                            class="btn btn-xs btn-link"
+                        >
+                            Finished
+                        </button>
+                    </div>
                 </div>
                 <div class="ml-auto">
                     <slot
@@ -147,56 +150,7 @@ export default Vue.extend({
                     :key="key"
                     class="c-list-item mb-2 flex-column"
                 >
-                    <div class="d-flex flex-row">
-                        <div class="c-list-icon">
-                            <i class="fa fa-train" />
-                        </div>
-                        <slot name="item-name">
-                            <span class="mb-0">
-                                <nuxt-link :to="'/trains/'+item.train_id">
-                                    <train-name
-                                        :train-id="item.train_id"
-                                        :train-name="item.name"
-                                    />
-                                </nuxt-link>
-
-                            </span>
-                        </slot>
-
-                        <div class="ml-auto">
-                            <slot
-                                name="item-actions"
-                                :item="item"
-                            >
-                                <div class="d-flex flex-row">
-                                    <div class="mr-1">
-                                        <train-run-action :train-id="item.train_id" />
-                                    </div>
-                                    <div>
-                                        <button
-                                            type="button"
-                                            class="btn btn-xs btn-danger"
-                                            @click.prevent="drop(item.train_id)"
-                                        >
-                                            <i class="fas fa-trash" />
-                                        </button>
-                                    </div>
-                                    <slot
-                                        name="item-actions-extra"
-                                        :busy="busy"
-                                        :item-busy="itemBusy"
-                                        :item="item"
-                                    />
-                                </div>
-                            </slot>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-row">
-                        <div />
-                        <div class="ml-auto">
-                            <timeago :datetime="item.created_at" />
-                        </div>
-                    </div>
+                    <TrainListItem :train="item" />
                 </div>
             </div>
         </slot>
