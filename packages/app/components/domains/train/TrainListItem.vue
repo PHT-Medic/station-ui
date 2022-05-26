@@ -67,19 +67,17 @@ export default {
             </div>
         </div>
         <div>
-            <div class="container">
-                <div class="row">
-                    <div>
-                        {{ train.is_active }}
-                    </div>
-                    <div>
-                        {{ train.proposal_id }}
+            <div class="d-flex flex-row">
+                <div class="container">
+                    <div class="row">
+                        <div class="mr-1">
+                            {{ train.is_active }}
+                        </div>
+                        <div class="mr-1">
+                            {{ train.proposal_id }}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="d-flex flex-row">
-                <div />
                 <div class="ml-auto">
                     <timeago :datetime="train.created_at" />
                 </div>

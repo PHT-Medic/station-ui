@@ -12,13 +12,15 @@ import { ConfigurationCreate, ConfigurationMinimal } from '../config';
 export type TrainState = {
     num_executions: number,
     status: string,
-    last_execution: Date | string
+    last_execution: Date | string,
+    central_status: string,
 };
 
 export type TrainExecution = {
     start: Date | string,
     end: Date | string,
-    airflow_dag_run: string
+    airflow_dag_run: string,
+    config: number
 };
 
 export type TrainExecutionConfig = {
@@ -37,6 +39,9 @@ export type Train = {
     config: ConfigurationMinimal,
     state: TrainState,
     executions: TrainExecution[]
+    type: string,
+    num_participants: number,
+    image_name: string,
 };
 
 export type TrainCreate = Pick<Train, 'train_id'> &

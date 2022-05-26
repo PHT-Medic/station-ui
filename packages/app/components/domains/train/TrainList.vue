@@ -7,12 +7,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import TrainName from './TrainName.vue';
-import TrainRunAction from './TrainRunAction.vue';
 import TrainListItem from './TrainListItem.vue';
 
 export default Vue.extend({
-    components: { TrainRunAction, TrainName, TrainListItem },
+    components: { TrainListItem },
     props: {
         withHeader: {
             type: Boolean,
@@ -91,7 +89,7 @@ export default Vue.extend({
                         </h6>
                     </slot>
                 </div>
-                <div class="d-flex flex-row flex-fill align-items-md-center">
+                <div class="d-flex flex-row flex-fill justify-content-center">
                     <div class="mb-auto">
                         <button
                             type="button"

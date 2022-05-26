@@ -19,6 +19,12 @@ export default {
             default: undefined,
         },
     },
+    data() {
+        return {
+            busy: false,
+            configId: null,
+        };
+    },
     methods: {
         handleUpdated(train) {
             this.$emit('updated', train);
@@ -26,6 +32,24 @@ export default {
         handleFailed(e) {
             this.$emit('failed', e);
         },
+        async run() {
+            console.log('run', this.configId);
+            if (this.busy) return;
+
+            this.busy = true;
+
+            try {
+                const train = await this.$stationApi.train.run(this.train.train_id, { config_id: this.configId });
+                console.log('train', train);
+                this.$emit('done', train);
+            } catch (e) {
+                console.log('error', e);
+                this.$emit('failed', e);
+            }
+
+            this.busy = false;
+        },
+
     },
 };
 </script>
@@ -41,7 +65,20 @@ export default {
                 />
             </div>
             <div class="col">
-                <train-executions :train-id="entity.train_id" />
+                <div>
+                    <h6><i class="fas fa-play" /> Run</h6>
+                    <div class="form-group">
+                        <label for="config_id">Config ID</label>
+                        <input
+                            id="config_id"
+                            v-model="configId"
+                            type="text"
+                            class="form-control"
+                        >
+                    </div>
+
+                    <train-executions :train-id="entity.train_id" />
+                </div>
             </div>
         </div>
     </div>
