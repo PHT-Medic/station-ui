@@ -1,14 +1,14 @@
 export enum DataType {
-    FHIR = 'FHIR',
-    STRUCTURED = 'Structured',
-    UNSTRUCTURED = 'Unstructured',
-    HYBRID = 'Hybrid',
+    FHIR = 'fhir',
+    STRUCTURED = 'structured',
+    UNSTRUCTURED = 'unstructured',
+    HYBRID = 'hybrid',
 }
 
 export enum StorageType {
-    LOCAL = 1,
-    MINIO = 2,
-    DB = 3,
+    LOCAL = 'local',
+    MINIO = 'minio',
+    DB = 'db',
 }
 
 export type Dataset = {

@@ -7,12 +7,14 @@
 <script lang="ts">
 
 import { PropType } from 'vue';
+import { required } from 'vuelidate/lib/validators';
 import TrainForm from '../../../components/domains/train/TrainForm.vue';
 import { Train } from '../../../domains/train';
 import TrainExecutions from '../../../components/domains/train/TrainExecutions.vue';
+import ConfigList from '../../../components/domains/config/ConfigList.vue';
 
 export default {
-    components: { TrainExecutions, TrainForm },
+    components: { TrainExecutions, TrainForm, ConfigList },
     props: {
         entity: {
             type: Object as PropType<Train>,
@@ -22,7 +24,19 @@ export default {
     data() {
         return {
             busy: false,
-            configId: null,
+            form: {
+                config_id: '',
+                dataset_id: '',
+            },
+        };
+    },
+    validations() {
+        return {
+            form: {
+                config_id: {
+                    required,
+                },
+            },
         };
     },
     methods: {
@@ -76,8 +90,36 @@ export default {
                             class="form-control"
                         >
                     </div>
+                    <div class="form-group">
+                        <label>Configuration</label>
+                        <config-list :with-header="false">
+                            <template #items="{items}">
+                                <select
+                                    v-model="$v.form.config_id.$model"
+                                    class="form-control"
+                                >
+                                    <option value="">
+                                        -- Please select --
+                                    </option>
+                                    <option
+                                        v-for="(item,key) in items"
+                                        :key="key"
+                                        :value="item.id"
+                                    >
+                                        {{ item.name }}
+                                    </option>
+                                </select>
+                            </template>
+                        </config-list>
+                        <div
+                            v-if="!$v.form.config_id.required"
+                            class="form-group-hint group-required"
+                        >
+                            Please select a config id.
+                        </div>
 
-                    <train-executions :train-id="entity.train_id" />
+                        <train-executions :train-id="entity.train_id" />
+                    </div>
                 </div>
             </div>
         </div>
