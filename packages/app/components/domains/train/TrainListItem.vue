@@ -41,7 +41,7 @@ export default {
             <div class="ml-auto">
                 <slot
                     name="item-actions"
-                    :item="item"
+                    :item="train"
                 >
                     <div class="d-flex flex-row">
                         <div class="mr-1">

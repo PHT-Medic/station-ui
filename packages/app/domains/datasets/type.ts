@@ -12,7 +12,7 @@ export enum StorageType {
 }
 
 export type Dataset = {
-    id?: number;
+    id?: number | string;
     name: string;
     data_type: DataType;
     storage_type: StorageType;

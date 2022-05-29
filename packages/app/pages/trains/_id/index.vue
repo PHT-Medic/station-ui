@@ -12,9 +12,10 @@ import TrainForm from '../../../components/domains/train/TrainForm.vue';
 import { Train } from '../../../domains/train';
 import TrainExecutions from '../../../components/domains/train/TrainExecutions.vue';
 import ConfigList from '../../../components/domains/config/ConfigList.vue';
+import DatasetList from '../../../components/domains/data/dataset/DatasetList.vue';
 
 export default {
-    components: { TrainExecutions, TrainForm, ConfigList },
+    components: { TrainExecutions, TrainForm, ConfigList, DatasetList },
     props: {
         entity: {
             type: Object as PropType<Train>,
@@ -80,47 +81,63 @@ export default {
             </div>
             <div class="col">
                 <div>
-                    <h6><i class="fas fa-play" /> Run</h6>
-                    <div class="form-group">
-                        <label for="config_id">Config ID</label>
-                        <input
-                            id="config_id"
-                            v-model="configId"
-                            type="text"
-                            class="form-control"
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label>Configuration</label>
-                        <config-list :with-header="false">
-                            <template #items="{items}">
-                                <select
-                                    v-model="$v.form.config_id.$model"
-                                    class="form-control"
-                                >
-                                    <option value="">
-                                        -- Please select --
-                                    </option>
-                                    <option
-                                        v-for="(item,key) in items"
-                                        :key="key"
-                                        :value="item.id"
+                    <div>
+                        <h6><i class="fas fa-play" /> Run</h6>
+                        <div class="form-group">
+                            <label>Configuration</label>
+                            <config-list :with-header="false">
+                                <template #items="{items}">
+                                    <select
+                                        v-model="$v.form.config_id.$model"
+                                        class="form-control"
                                     >
-                                        {{ item.name }}
-                                    </option>
-                                </select>
-                            </template>
-                        </config-list>
-                        <div
-                            v-if="!$v.form.config_id.required"
-                            class="form-group-hint group-required"
-                        >
-                            Please select a config id.
+                                        <option value="">
+                                            -- Please select --
+                                        </option>
+                                        <option
+                                            v-for="(item,key) in items"
+                                            :key="key"
+                                            :value="item.id"
+                                        >
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+                                </template>
+                            </config-list>
+                            <div
+                                v-if="!$v.form.config_id.required"
+                                class="form-group-hint group-required"
+                            >
+                                Please select a config id.
+                            </div>
                         </div>
-
-                        <train-executions :train-id="entity.train_id" />
+                        <div class="form-group">
+                            <label>Dataset</label>
+                            <dataset-list :with-header="false">
+                                <template #items="{items}">
+                                    <select
+                                        v-model="$v.form.config_id.$model"
+                                        class="form-control"
+                                    >
+                                        <option value="">
+                                            -- Please select --
+                                        </option>
+                                        <option
+                                            v-for="(item,key) in items"
+                                            :key="key"
+                                            :value="item.id"
+                                        >
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+                                </template>
+                            </dataset-list>
+                        </div>
                     </div>
+                    <hr>
+                    <train-executions :train-id="entity.train_id" />
                 </div>
+
             </div>
         </div>
     </div>
