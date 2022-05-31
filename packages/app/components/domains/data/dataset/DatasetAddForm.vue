@@ -1,8 +1,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import { alphaNum, required, url } from 'vuelidate/lib/validators';
-import { DataType, Dataset, StorageType } from '../../../../domains/datasets/type';
-import { AuthMethods } from '../../../../domains/fhir';
+import { required } from 'vuelidate/lib/validators';
+import { DataType, Dataset } from '../../../../domains/datasets/type';
 
 export default Vue.extend({
     name: 'DatasetAddForm',
@@ -19,7 +18,9 @@ export default Vue.extend({
                 name: '',
                 data_type: '',
                 proposal_id: '',
-                storage_type: StorageType.MINIO,
+                storage_type: null,
+                access_path: '',
+                fhir_server: null,
             },
         };
     },
@@ -28,9 +29,9 @@ export default Vue.extend({
             return typeof this.entity !== 'undefined';
         },
         dataTypes() {
-            return Object.keys(DataType).map((key) => ({
-                value: key,
-                text: DataType[key],
+            return Object.keys(DataType).map((key, index) => ({
+                value: Object.values(DataType)[index],
+                text: key,
             }));
         },
     },
@@ -58,6 +59,7 @@ export default Vue.extend({
                 let response;
 
                 const data = { ...this.form };
+                console.log(data);
                 if (this.isEditing) {
                     response = await this.$stationApi.datasets.update(this.entity.id, data);
                     this.$emit('updated', response);

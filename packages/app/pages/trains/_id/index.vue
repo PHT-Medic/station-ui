@@ -8,14 +8,15 @@
 
 import { PropType } from 'vue';
 import { required } from 'vuelidate/lib/validators';
-import TrainForm from '../../../components/domains/train/TrainForm.vue';
 import { Train } from '../../../domains/train';
 import TrainExecutions from '../../../components/domains/train/TrainExecutions.vue';
 import ConfigList from '../../../components/domains/config/ConfigList.vue';
 import DatasetList from '../../../components/domains/data/dataset/DatasetList.vue';
 
 export default {
-    components: { TrainExecutions, TrainForm, ConfigList, DatasetList },
+    components: {
+        TrainExecutions, ConfigList, DatasetList,
+    },
     props: {
         entity: {
             type: Object as PropType<Train>,
@@ -64,7 +65,6 @@ export default {
 
             this.busy = false;
         },
-
     },
 };
 </script>
@@ -73,11 +73,25 @@ export default {
     <div>
         <div class="row">
             <div class="col">
-                <h6><i class="fa fa-bars" /> General</h6>
-                <train-form
-                    :entity="entity"
-                    @updated="handleUpdated"
-                />
+                <h6><i class="fa fa-bars" /> General Info </h6>
+                <div class="row ml-3 d-flex align-items-center">
+                    <i class="fa fa-circle-info" />
+                    <p class="font-weight-bold ml-1">
+                        ID:
+                    </p>
+                    <p class="ml-1">
+                        {{ entity.train_id }}
+                    </p>
+                </div>
+                <div class="row ml-3 d-flex align-items-center">
+                    <i class="fa fa-circle-info" />
+                    <p class="font-weight-bold ml-1">
+                        Proposal:
+                    </p>
+                    <p class="ml-1">
+                        {{ entity.proposal_id }}
+                    </p>
+                </div>
             </div>
             <div class="col">
                 <div>
@@ -116,7 +130,7 @@ export default {
                             <dataset-list :with-header="false">
                                 <template #items="{items}">
                                     <select
-                                        v-model="$v.form.config_id.$model"
+                                        v-model="form.dataset_id"
                                         class="form-control"
                                     >
                                         <option value="">
@@ -133,11 +147,20 @@ export default {
                                 </template>
                             </dataset-list>
                         </div>
+                        <div class="form-group">
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-xs"
+                                :disabled="$v.form.$invalid || busy"
+                                @click.prevent="run"
+                            >
+                                <i class="fas fa-play" /> Start
+                            </button>
+                        </div>
                     </div>
                     <hr>
                     <train-executions :train-id="entity.train_id" />
                 </div>
-
             </div>
         </div>
     </div>

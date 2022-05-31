@@ -36,7 +36,7 @@ const config = {
     ** Headers of the page
     */
     head: {
-        title: 'PHT - User Interface (UI)',
+        title: 'PHT - Station (UI)',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
