@@ -18,7 +18,7 @@ export default Vue.extend({
                 name: '',
                 data_type: '',
                 proposal_id: '',
-                storage_type: null,
+                storage_type: 'minio',
                 access_path: '',
                 fhir_server: null,
             },

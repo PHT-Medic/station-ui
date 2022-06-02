@@ -12,9 +12,11 @@ import { Train } from '../../../domains/train';
 import TrainExecutions from '../../../components/domains/train/TrainExecutions.vue';
 import ConfigList from '../../../components/domains/config/ConfigList.vue';
 import DatasetList from '../../../components/domains/data/dataset/DatasetList.vue';
+import TrainInfo from "../../../components/domains/train/TrainInfo.vue";
 
 export default {
     components: {
+        TrainInfo,
         TrainExecutions, ConfigList, DatasetList,
     },
     props: {
@@ -73,25 +75,9 @@ export default {
     <div>
         <div class="row">
             <div class="col">
-                <h6><i class="fa fa-bars" /> General Info </h6>
-                <div class="row ml-3 d-flex align-items-center">
-                    <i class="fa fa-circle-info" />
-                    <p class="font-weight-bold ml-1">
-                        ID:
-                    </p>
-                    <p class="ml-1">
-                        {{ entity.train_id }}
-                    </p>
-                </div>
-                <div class="row ml-3 d-flex align-items-center">
-                    <i class="fa fa-circle-info" />
-                    <p class="font-weight-bold ml-1">
-                        Proposal:
-                    </p>
-                    <p class="ml-1">
-                        {{ entity.proposal_id }}
-                    </p>
-                </div>
+                <TrainInfo
+                    :entity="entity"
+                />
             </div>
             <div class="col">
                 <div>

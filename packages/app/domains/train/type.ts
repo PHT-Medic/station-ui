@@ -32,7 +32,7 @@ export type Train = {
     name: string,
     created_at: Date | string,
     updated_at: Date | string,
-    proposal_id: Proposal['id'],
+    proposal: string,
     is_active: boolean,
     train_id: CentralTrain['id'],
     config_id: number,
@@ -45,6 +45,6 @@ export type Train = {
 };
 
 export type TrainCreate = Pick<Train, 'train_id'> &
-Partial<Pick<Train, 'proposal_id'>> & {
+Partial<Pick<Train, 'proposal'>> & {
     config?: ConfigurationCreate
 };
