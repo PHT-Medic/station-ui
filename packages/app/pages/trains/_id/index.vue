@@ -12,12 +12,14 @@ import { Train } from '../../../domains/train';
 import TrainExecutions from '../../../components/domains/train/TrainExecutions.vue';
 import ConfigList from '../../../components/domains/config/ConfigList.vue';
 import DatasetList from '../../../components/domains/data/dataset/DatasetList.vue';
-import TrainInfo from "../../../components/domains/train/TrainInfo.vue";
+import TrainInfo from '../../../components/domains/train/TrainInfo.vue';
 
 export default {
     components: {
         TrainInfo,
-        TrainExecutions, ConfigList, DatasetList,
+        TrainExecutions,
+        ConfigList,
+        DatasetList,
     },
     props: {
         entity: {

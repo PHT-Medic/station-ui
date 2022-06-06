@@ -32,4 +32,9 @@ export class DatasetAPI {
         const response = await this.client.delete(`/datasets/${id}`);
         return response.data;
     }
+
+    async uploadFiles(id: any, files: FormData): Promise<any> {
+        const response = await this.client.post(`/datasets/${id}/files`, files);
+        return response.data;
+    }
 }

@@ -123,7 +123,7 @@ export default Vue.extend({
                     </div>
                     <slot name="item-name">
                         <span class="mb-0">
-                            <nuxt-link :to="'/datasets/'+item.id">
+                            <nuxt-link :to="'/data/datasets/'+item.id">
                                 {{ item.name }}
                             </nuxt-link>
                         </span>

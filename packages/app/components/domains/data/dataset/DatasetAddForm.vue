@@ -22,6 +22,7 @@ export default Vue.extend({
                 access_path: '',
                 fhir_server: null,
             },
+            files: [],
         };
     },
     computed: {
@@ -29,10 +30,14 @@ export default Vue.extend({
             return typeof this.entity !== 'undefined';
         },
         dataTypes() {
-            return Object.keys(DataType).map((key, index) => ({
-                value: Object.values(DataType)[index],
-                text: key,
-            }));
+            return Object.keys(DataType)
+                .map((key, index) => ({
+                    value: Object.values(DataType)[index],
+                    text: key,
+                }));
+        },
+        uploadDisabled() {
+            return this.files.length === 0;
         },
     },
     created() {
@@ -62,10 +67,13 @@ export default Vue.extend({
                 console.log(data);
                 if (this.isEditing) {
                     response = await this.$stationApi.datasets.update(this.entity.id, data);
+                    this.upload(response.id);
                     this.$emit('updated', response);
                 } else {
                     delete data.id;
                     response = await this.$stationApi.datasets.create(data);
+                    console.log(response);
+                    this.upload(response.id);
                     this.$emit('created', response);
                 }
             } catch (e) {
@@ -73,6 +81,25 @@ export default Vue.extend({
             }
 
             this.busy = false;
+        },
+        addFile(file) {
+            const droppedFiles = file.dataTransfer.files;
+            if (!droppedFiles) return;
+
+            ([...droppedFiles]).forEach((f) => {
+                this.files.push(f);
+            });
+        },
+        removeFile(file) {
+            this.files = this.files.filter((f) => f !== file);
+        },
+        upload(id) {
+            const formData = new FormData();
+            this.files.forEach((f) => {
+                formData.append('files', f);
+            });
+            const response = this.$stationApi.datasets.uploadFiles(id, formData);
+            console.log(response);
         },
     },
     validations() {
@@ -155,8 +182,38 @@ export default Vue.extend({
                 </div>
             </div>
             <div class="col">
-                <div>
-                    Dataset content
+                <h5>Files</h5>
+                <div
+                    v-if="form.data_type !== 'fhir'"
+                    v-cloak
+                    id="drop-zone"
+                    class="d-flex flex-column h-50"
+                    @drop.prevent="addFile"
+                    @dragover.prevent
+                >
+                    <ul>
+                        <li
+                            v-for="file in files"
+                            :key="file.name"
+                            class="mr-auto"
+                        >
+                            {{ file.name }} ({{ file.size | kb }} kb)
+                            <button
+                                type="button"
+                                title="Remove"
+                                class="btn btn-danger btn-xs mr-auto"
+                                @click="removeFile(file)"
+                            >
+                                X
+                            </button>
+                        </li>
+                    </ul>
+                    <h5
+                        v-if="!files.length"
+                        class="align-self-center"
+                    >
+                        Drag and drop files to upload
+                    </h5>
                 </div>
             </div>
         </div>
@@ -164,5 +221,8 @@ export default Vue.extend({
 </template>
 
 <style scoped>
-
+    #drop-zone {
+        border: #4facfe dashed 2px;
+        background-color: rgba(47,176,255,0.10);
+    }
 </style>
