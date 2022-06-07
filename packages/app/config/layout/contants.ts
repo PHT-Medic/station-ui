@@ -85,18 +85,6 @@ export const LayoutSideDefaultNavigation: Component[] = [
                 url: '/data/fhir',
                 icon: 'fas fa-fire',
             },
-            {
-                name: 'Unstructured',
-                type: 'link',
-                url: '/data/volume',
-                icon: 'fas fa-images',
-            },
-            {
-                name: 'Structured',
-                type: 'link',
-                url: '/data/tabular',
-                icon: 'fas fa-table',
-            },
         ],
 
     },

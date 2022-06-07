@@ -36,9 +36,7 @@ export default Vue.extend({
             this.busy = true;
 
             try {
-                const response = await this.$stationApi.train.getMany();
-
-                this.items = response;
+                this.items = await this.$stationApi.train.getMany();
             } catch (e) {
                 if (e instanceof Error) {
                     this.$emit('failed', e);

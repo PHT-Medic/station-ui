@@ -1,5 +1,5 @@
 import { ClientDriverInstance } from '@trapi/client';
-import { Dataset } from './type';
+import { Dataset, DatasetFile } from './type';
 
 export class DatasetAPI {
     protected client: ClientDriverInstance;
@@ -35,6 +35,23 @@ export class DatasetAPI {
 
     async uploadFiles(id: any, files: FormData): Promise<any> {
         const response = await this.client.post(`/datasets/${id}/files`, files);
+        return response.data;
+    }
+
+    async getFiles(id: any): Promise<DatasetFile[]> {
+        const response = await this.client.get(`/datasets/${id}/files`);
+        return response.data;
+    }
+
+    async deleteFile(id: any, fileName: string): Promise<DatasetFile> {
+        const response = await this.client.delete(
+            `/datasets/${id}/files`,
+            {
+                params: {
+                    file_name: fileName,
+                },
+            },
+        );
         return response.data;
     }
 }

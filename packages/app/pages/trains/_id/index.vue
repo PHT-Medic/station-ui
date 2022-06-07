@@ -110,7 +110,7 @@ export default {
                                 v-if="!$v.form.config_id.required"
                                 class="form-group-hint group-required"
                             >
-                                Please select a config id.
+                                Please select a configuration for the train
                             </div>
                         </div>
                         <div class="form-group">

@@ -4,6 +4,11 @@ import DatasetAddForm from '../../../../components/domains/data/dataset/DatasetA
 export default {
     name: 'Add',
     components: { DatasetAddForm },
+    methods: {
+        handleCreated() {
+            this.$router.push('/data/datasets');
+        },
+    },
 };
 </script>
 

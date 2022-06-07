@@ -1,5 +1,5 @@
 <template>
-    <dataset-list></dataset-list>
+    <dataset-list />
 </template>
 
 <script>

@@ -14,6 +14,11 @@ export default {
     components: {
         ServerAddForm,
     },
+    methods: {
+        handleCreated() {
+            this.$router.push('/data/fhir');
+        },
+    },
 };
 </script>
 
