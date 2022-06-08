@@ -7,7 +7,7 @@ export default {
     name: 'DatasetFileList',
     props: {
         files: {
-            type: Object as PropType<DatasetFile[]>,
+            type: Array as PropType<DatasetFile[]>,
             required: true,
         },
     },

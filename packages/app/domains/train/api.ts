@@ -42,6 +42,12 @@ export class TrainAPI {
         return response.data;
     }
 
+    async sync() : Promise<Train[]> {
+        const response = await this.client.post('trains/docker/sync');
+
+        return response.data;
+    }
+
     async update(id: Train['train_id'], data: Partial<Train>) : Promise<Train> {
         const { config_id: configId, ...train } = data;
         if (configId) {

@@ -53,13 +53,19 @@ export default {
             this.$emit('failed', e);
         },
         async run() {
-            console.log('run', this.configId);
+            console.log('run', this.config_id);
             if (this.busy) return;
 
             this.busy = true;
 
             try {
-                const train = await this.$stationApi.train.run(this.train.train_id, { config_id: this.configId });
+                const train = await this.$stationApi.train.run(
+                    this.entity.train_id,
+                    {
+                        config_id: this.config_id,
+                        dataset_id: this.dataset_id,
+                    },
+                );
                 console.log('train', train);
                 this.$emit('done', train);
             } catch (e) {

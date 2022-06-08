@@ -45,11 +45,8 @@ export default {
         };
     },
     methods: {
-        handleUpdated(data) {
-            const keys = Object.keys(data);
-            for (let i = 0; i < keys.length; i++) {
-                Vue.set(this.item, keys[i], data[keys[i]]);
-            }
+        async handleUpdated(id) {
+            this.files = await this.$stationApi.datasets.getFiles(id);
         },
     },
 };

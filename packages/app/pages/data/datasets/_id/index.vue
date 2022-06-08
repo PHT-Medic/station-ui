@@ -39,6 +39,7 @@ export default {
         },
         async drop(file: DatasetFile) {
             await this.$stationApi.datasets.deleteFile(this.entity.id, file.full_path);
+            this.$emit('updated', this.entity.id);
         },
     },
 };

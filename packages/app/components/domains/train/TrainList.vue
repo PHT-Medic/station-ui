@@ -45,6 +45,22 @@ export default Vue.extend({
 
             this.busy = false;
         },
+        async refresh() {
+            if (this.itemBusy) return;
+
+            this.itemBusy = true;
+
+            try {
+                await this.$stationApi.train.sync();
+                this.items = await this.$stationApi.train.getMany();
+            } catch (e) {
+                if (e instanceof Error) {
+                    this.$emit('failed', e);
+                }
+            }
+
+            this.itemBusy = false;
+        },
 
         async drop(id) {
             if (this.itemBusy) return;
@@ -125,7 +141,7 @@ export default Vue.extend({
                                     type="button"
                                     class="btn btn-xs btn-dark"
                                     :disabled="busy"
-                                    @click.prevent="load"
+                                    @click.prevent="refresh"
                                 >
                                     <i class="fas fa-sync" /> Refresh
                                 </button>
