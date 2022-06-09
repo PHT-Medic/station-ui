@@ -14,7 +14,5 @@ export type AirflowEnvVariable = {
 
 export type TrainAirflowConfig = {
     env?: AirflowEnvVariable[],
-    volumes?: DockerVolume[],
-    repository?: string,
-    tag?: string
+    volumes?: DockerVolume[]
 };

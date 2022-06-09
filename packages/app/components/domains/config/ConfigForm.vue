@@ -99,14 +99,27 @@ export default Vue.extend({
 
                 const { config_id: configId, ...form } = this.form;
 
+                const config = {
+                    config_id: configId,
+                    name: this.form.name,
+                    auto_execute: this.form.auto_execute,
+                    airflow_config: {
+                        env: this.form.environmentVariables,
+                        volumes: this.form.volumes,
+                    },
+                    cpu_requirements: {},
+                    gpu_requirements: {},
+                };
+
                 if (this.isEditing) {
                     response = await this.$stationApi.configuration.update(this.entity.id, {
-                        ...form,
+                        ...config,
                     });
 
                     this.$emit('updated', response);
                 } else {
-                    response = await this.$stationApi.configuration.create({ ...form });
+                    delete config.config_id;
+                    response = await this.$stationApi.configuration.create({ ...config });
 
                     this.$emit('created', response);
                 }

@@ -18,6 +18,7 @@ export class ConfigurationAPI {
     }
 
     async create(data: ConfigurationCreate) : Promise<Configuration> {
+        console.log(data);
         const response = await this.client.post('trains/docker/config', nullifyEmptyObjectProperties(data));
 
         return response.data;

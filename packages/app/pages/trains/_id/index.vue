@@ -62,8 +62,8 @@ export default {
                 const train = await this.$stationApi.train.run(
                     this.entity.train_id,
                     {
-                        config_id: this.config_id,
-                        dataset_id: this.dataset_id,
+                        config_id: this.form.config_id,
+                        dataset_id: this.form.dataset_id,
                     },
                 );
                 console.log('train', train);

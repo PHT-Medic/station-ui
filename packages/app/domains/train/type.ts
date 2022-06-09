@@ -25,7 +25,8 @@ export type TrainExecution = {
 
 export type TrainExecutionConfig = {
     config_id: number | string,
-    config_json?: TrainAirflowConfig
+    config_json?: TrainAirflowConfig,
+    dataset_id?: number | string,
 };
 
 export type Train = {
