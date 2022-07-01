@@ -70,6 +70,7 @@ export class TrainAPI {
     }
 
     async getExecutions(id: Train['train_id']) : Promise<TrainExecution[]> {
+        console.log('getExecutions', id);
         const response = await this.client.get(`trains/docker/${id}/executions`);
 
         return response.data;

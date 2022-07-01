@@ -18,9 +18,10 @@ export type TrainState = {
 
 export type TrainExecution = {
     start: Date | string,
-    end: Date | string,
+    end?: Date | string,
     airflow_dag_run: string,
-    config: number
+    config: number,
+    dataset?: string,
 };
 
 export type TrainExecutionConfig = {

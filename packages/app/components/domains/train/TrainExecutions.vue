@@ -21,6 +21,10 @@ export default Vue.extend({
             items: [],
         };
     },
+    created() {
+        Promise.resolve()
+            .then(this.load);
+    },
     methods: {
         async load() {
             if (this.busy) return;
@@ -28,7 +32,7 @@ export default Vue.extend({
             this.busy = true;
 
             try {
-                this.items = await this.$stationApi.getExecutions(this.trainId);
+                this.items = await this.$stationApi.train.getExecutions(this.trainId);
             } catch (e) {
                 if (e instanceof Error) {
                     this.$emit('failed', e);
@@ -58,8 +62,11 @@ export default Vue.extend({
                         <div>
                             <timeago :datetime="item.start" />
                         </div>
-                        <div>
+                        <div v-if="item.end !== null">
                             <timeago :datetime="item.end" />
+                        </div>
+                        <div v-else>
+                            ---
                         </div>
                     </div>
                 </div>
