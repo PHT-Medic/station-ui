@@ -7,6 +7,7 @@
 
 import { ClientDriverInstance } from '@trapi/client';
 import { nullifyEmptyObjectProperties } from '@authelion/common';
+import { AirflowDagRun } from '../airflow';
 import {
     Train, TrainCreate, TrainExecution, TrainExecutionConfig,
 } from './type';
@@ -32,12 +33,6 @@ export class TrainAPI {
 
     async getOne(id: Train['train_id']) : Promise<Train[]> {
         const response = await this.client.get(`trains/docker/${id}`);
-
-        return response.data;
-    }
-
-    async getExecution(id: Train['train_id']) : Promise<Train[]> {
-        const response = await this.client.get(`trains/docker/${id}/executions`);
 
         return response.data;
     }
@@ -73,6 +68,11 @@ export class TrainAPI {
         console.log('getExecutions', id);
         const response = await this.client.get(`trains/docker/${id}/executions`);
 
+        return response.data;
+    }
+
+    async getTrainExecution(executionId: TrainExecution['airflow_dag_run']) : Promise<AirflowDagRun> {
+        const response = await this.client.get(`airflow/logs/run_pht_train/${executionId}`);
         return response.data;
     }
 }

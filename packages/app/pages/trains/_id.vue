@@ -38,6 +38,7 @@ export default {
             item: null,
             tabs: [
                 { name: 'Overview', icon: 'fas fa-bars', urlSuffix: '' },
+                { name: 'Executions', icon: 'fas fa-list-check', urlSuffix: '/executions' },
             ],
         };
     },

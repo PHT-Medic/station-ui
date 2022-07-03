@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { TrainExecution } from '../../../domains/train';
 
 export default Vue.extend({
     props: {
@@ -19,6 +20,7 @@ export default Vue.extend({
         return {
             busy: false,
             items: [],
+            selected: undefined,
         };
     },
     created() {
@@ -32,7 +34,8 @@ export default Vue.extend({
             this.busy = true;
 
             try {
-                this.items = await this.$stationApi.train.getExecutions(this.trainId);
+                const executions = await this.$stationApi.train.getExecutions(this.trainId);
+                this.items = executions.sort((a, b) => (b.start > a.start ? 1 : -1));
             } catch (e) {
                 if (e instanceof Error) {
                     this.$emit('failed', e);
@@ -40,6 +43,10 @@ export default Vue.extend({
             }
 
             this.busy = false;
+        },
+        handleClicked(key) {
+            this.$emit('selected', this.items[key]['airflow_dag_run']);
+            this.selected = key;
         },
     },
 });
@@ -53,6 +60,7 @@ export default Vue.extend({
                 v-for="(item,key) in items"
                 :key="key"
                 class="c-list-item mb-2"
+                @click="handleClicked(key)"
             >
                 <div>
                     <i class="fa fa-train" /> <span class="text-success">{{ item.airflow_dag_run }}</span>
