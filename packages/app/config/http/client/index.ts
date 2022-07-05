@@ -6,6 +6,7 @@
  */
 
 import { Client, Config } from '@trapi/client';
+import { AirflowApi } from '../../../domains/airflow';
 import { TrainAPI } from '../../../domains/train';
 import { ConfigurationAPI } from '../../../domains/config';
 import { TrainConfigAPI } from '../../../domains/train-config';
@@ -23,6 +24,8 @@ export class HTTPClient extends Client {
 
     public datasets: DatasetAPI;
 
+    public airflow: AirflowApi;
+
     constructor(config: Config) {
         super(config);
 
@@ -35,5 +38,7 @@ export class HTTPClient extends Client {
         this.fhir = new FhirAPI(this.driver);
 
         this.datasets = new DatasetAPI(this.driver);
+
+        this.airflow = new AirflowApi(this.driver);
     }
 }

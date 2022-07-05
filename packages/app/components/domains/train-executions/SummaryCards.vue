@@ -1,8 +1,5 @@
 <script lang="ts">
-
-import { Context } from '@nuxt/types';
 import { PropType } from 'vue';
-import { AirflowDagRun } from '../../../domains/airflow';
 import { TrainExecution } from '../../../domains/train';
 
 export default {
@@ -15,10 +12,6 @@ export default {
         status: {
             type: String,
             default: 'failed',
-        },
-        dagRun: {
-            type: Object as PropType<AirflowDagRun>,
-            default: null,
         },
     },
     data() {

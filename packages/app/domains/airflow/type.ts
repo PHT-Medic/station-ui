@@ -42,6 +42,11 @@ export type TaskList = {
     task_instances: Task[]
 };
 
+export type TaskLog = {
+    taskId: string,
+    logs: string
+};
+
 export type AirflowDagRun = {
     dag_id: string,
     dag_run_id: string,

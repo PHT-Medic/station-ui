@@ -1,5 +1,6 @@
 <script lang="ts">
 import { PropType } from 'vue';
+import AirflowDAGRun from '../../../components/domains/airflow/AirflowDAGRun.vue';
 import TrainExecutions from '../../../components/domains/train-executions/ExecutionList.vue';
 import SummaryCards from '../../../components/domains/train-executions/SummaryCards.vue';
 import { Train } from '../../../domains/train';
@@ -8,6 +9,7 @@ export default {
     components: {
         TrainExecutions,
         SummaryCards,
+        AirflowDAGRun,
     },
     props: {
         entity: {
@@ -76,21 +78,28 @@ export default {
                     @selected="handleSelect"
                 />
             </div>
-            <div class="col-9">
-                <div v-if="selectedExecution !== null">
+            <div
+                v-if="selectedExecution !== null"
+                class="col-9"
+            >
+                <div>
                     <summary-cards
                         :execution="selectedExecution"
                         :status="status"
                     />
                 </div>
+                <hr>
+                <airflow-d-a-g-run :entity="dagRun" />
+            </div>
+            <div
+                v-else
+                class="col-9"
+            >
                 <div
-                    v-else
                     class="alert alert-sm alert-info"
                 >
                     Select an execution to see the details.
                 </div>
-                <hr>
-                {{ JSON.stringify(dagRun) }}
             </div>
         </div>
     </div>
