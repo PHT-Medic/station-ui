@@ -13,9 +13,9 @@
         "packages/*"
     ],
     "devDependencies": {
-        "@tada5hi/eslint-config-vue-typescript": "^1.0.3",
+        "@tada5hi/eslint-config-vue-typescript": "^1.0.4",
         "eslint": "^8.16.0",
-        "lerna": "^5.0.0"
+        "lerna": "^5.1.6"
     },
     "scripts": {
         "bootstrap": "lerna bootstrap",
