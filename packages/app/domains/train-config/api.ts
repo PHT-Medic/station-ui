@@ -25,4 +25,10 @@ export class TrainConfigAPI {
         // not implemented yet....
 
     }
+
+    async get(configId: Configuration['id']) : Promise<Configuration> {
+        const response = await this.client.get(`trains/docker/config/${configId}`);
+
+        return response.data;
+    }
 }

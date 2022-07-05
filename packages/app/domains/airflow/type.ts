@@ -50,7 +50,7 @@ export type AirflowDagRun = {
     external_trigger: boolean,
     start_date: Date | string,
     end_date: Date | string,
-    task_list: TaskList,
+    tasklist: TaskList,
     logical_date: Date | string,
     conf: Record<string, any>
 };

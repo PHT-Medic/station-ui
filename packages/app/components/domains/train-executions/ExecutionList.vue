@@ -61,6 +61,7 @@ export default Vue.extend({
                 :key="key"
                 class="c-list-item mb-2"
                 @click="handleClicked(key)"
+                v-bind:class="{ 'selected': selected === key }"
             >
                 <div>
                     <i class="fa fa-train" /> <span class="text-success">{{ item.airflow_dag_run }}</span>
@@ -83,9 +84,17 @@ export default Vue.extend({
 
         <div
             v-if="!busy && items.length === 0"
-            class="alet alert-sm alert-warning"
+            class="alert alert-sm alert-warning"
         >
             There have not been any executions yet...
         </div>
     </div>
 </template>
+
+<style>
+.selected {
+    box-shadow: 0px 0px 5px 3px rgba(207,236,240,0.86);
+    -webkit-box-shadow: 0px 0px 5px 3px rgba(207,236,240,0.86);
+    -moz-box-shadow: 0px 0px 5px 3px rgba(207,236,240,0.86);
+}
+</style>
