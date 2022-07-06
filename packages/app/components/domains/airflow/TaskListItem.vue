@@ -17,9 +17,6 @@ export default {
         };
     },
     computed: {
-        logsUrl() {
-            return `/api/airflow/dags/${this.dagId}/tasks/${this.entity.task_id}/logs`;
-        },
         capName() {
             const nameArr = [];
             const split = this.entity.task_id.split('_');
@@ -30,7 +27,11 @@ export default {
         },
     },
     methods: {
-
+        handleClick() {
+            if (this.busy) return;
+            this.busy = true;
+            this.$emit('toggle', this.entity.task_id);
+        },
     },
 };
 </script>
@@ -55,9 +56,11 @@ export default {
                         <div>
                             <button
                                 type="button"
-                                class="btn btn-xs btn-info"
+                                class="btn btn-xs"
+                                style="background-color: transparent"
+                                @click.prevent="handleClick"
                             >
-                                <i class="fas fa-arrow-down" />
+                                <i class="fas fa-angle-down" />
                             </button>
                         </div>
                     </div>

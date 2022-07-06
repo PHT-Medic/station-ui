@@ -38,12 +38,12 @@ export default {
     },
     methods: {
         async getLogs(taskId) {
-            if (this.busy) return '';
+            if (this.busy) return;
             this.busy = true;
             const stored = this.logs.find((l) => l.taskId === taskId);
             if (stored !== undefined) {
                 this.busy = false;
-                return stored.logs;
+                return;
             }
             const tryNumber = this.dagRun.tasklist.task_instances
                 .filter((task) => task.task_id === taskId)[0].try_number;
@@ -56,7 +56,26 @@ export default {
             console.log(logs);
             this.logs.push({ taskId, logs } as TaskLog);
             this.busy = false;
-            return logs;
+        },
+        checkOpen(taskId) {
+            return this.open.includes(taskId);
+        },
+        async toggleOpen(taskId) {
+            if (this.checkOpen(taskId)) {
+                this.open = this.open.filter((id) => id !== taskId);
+            } else {
+                await this.getLogs(taskId);
+                this.open.push(taskId);
+            }
+        },
+        async handleToggle(taskId) {
+            console.log(taskId);
+            await this.toggleOpen(taskId);
+        },
+        getLogEntry(taskId) {
+            const stored = this.logs.find((l) => l.taskId === taskId);
+            if (stored === undefined) return 'no logs';
+            return stored.logs;
         },
     },
 };
@@ -73,7 +92,11 @@ export default {
             >
                 <task-list-item
                     :entity="item"
+                    @toggle="handleToggle"
                 />
+                <div v-if="checkOpen(item.taskId)">
+                    <pre>{{ getLogEntry(item.taskId) }}</pre>
+                </div>
             </div>
         </div>
     </div>
