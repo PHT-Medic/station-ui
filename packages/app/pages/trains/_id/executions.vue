@@ -80,7 +80,7 @@ export default {
             </div>
             <div
                 v-if="selectedExecution !== null"
-                class="col-9"
+                class="col-9 execution-info"
             >
                 <div>
                     <summary-cards
@@ -106,5 +106,8 @@ export default {
 </template>
 
 <style scoped>
-
+.execution-info {
+    padding: 1rem;
+    border-left: #7F828B 1px solid;
+}
 </style>

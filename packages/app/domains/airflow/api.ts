@@ -9,7 +9,6 @@ export class AirflowApi {
 
     async getTaskLog(dagId: string, runId: string, taskId: string, tryNumber: number): Promise<string> {
         const response = await this.client.get(`airflow/logs/${dagId}/${runId}/${taskId}/${tryNumber}`);
-        console.log(response.data);
         return response.data;
     }
 }

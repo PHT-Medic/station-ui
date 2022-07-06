@@ -47,7 +47,7 @@ export default {
             }
             const tryNumber = this.dagRun.tasklist.task_instances
                 .filter((task) => task.task_id === taskId)[0].try_number;
-            const logs = this.$stationApi.airflow.getTaskLog(
+            const logs = await this.$stationApi.airflow.getTaskLog(
                 this.dagRun.dag_id,
                 this.dagRun.dag_run_id,
                 taskId,
@@ -75,7 +75,8 @@ export default {
         getLogEntry(taskId) {
             const stored = this.logs.find((l) => l.taskId === taskId);
             if (stored === undefined) return 'no logs';
-            return stored.logs;
+            const logText = JSON.parse(JSON.stringify(stored.logs));
+            return logText.run_info;
         },
     },
 };
@@ -88,15 +89,13 @@ export default {
             <div
                 v-for="(item,key) in sortedTasks"
                 :key="key"
-                class="c-list-item mb-2"
+                class="c-list-item mb-1"
             >
                 <task-list-item
                     :entity="item"
+                    :logs="getLogEntry(item.task_id)"
                     @toggle="handleToggle"
                 />
-                <div v-if="checkOpen(item.taskId)">
-                    <pre>{{ getLogEntry(item.taskId) }}</pre>
-                </div>
             </div>
         </div>
     </div>
