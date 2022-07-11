@@ -16,7 +16,7 @@
         "upgrade": "authelion upgrade"
     },
     "dependencies": {
-        "@authelion/api": "^0.1.9"
+        "@authelion/api": "^0.1.11"
     },
     "publishConfig": {
         "access": "public"
