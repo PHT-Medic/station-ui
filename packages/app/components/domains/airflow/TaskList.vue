@@ -74,7 +74,7 @@ export default {
         },
         getLogEntry(taskId) {
             const stored = this.logs.find((l) => l.taskId === taskId);
-            if (stored === undefined) return 'no logs';
+            if (stored === undefined) return 'no logs available';
             const logText = JSON.parse(JSON.stringify(stored.logs));
             return logText.run_info;
         },
