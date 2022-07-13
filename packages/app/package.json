@@ -2,7 +2,7 @@
     "name": "@personalhealthtrain/station-ui-app",
     "private": true,
     "license": "MIT",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "This package contains the Station UI application of the PHT.",
     "scripts": {
         "dev": "nuxt",
