@@ -23,10 +23,7 @@ export default {
 <template>
     <div class="page-footer">
         <div class="copyright">
-            &copy; PHT {{ year }} &bull; UI - Design & Code by <a
-                href="https://tada5hi.net"
-                target="_blank"
-            >Peter Placzek</a>
+            &copy; PHT Medic {{ year }}
         </div>
     </div>
 </template>
