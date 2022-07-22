@@ -1,13 +1,22 @@
-<template>
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import { LocalTrain } from '../../../domains/local-trains';
 
-</template>
-
-<script>
-export default {
-    name: "LocalTrainForm"
-}
+export default Vue.extend({
+    name: 'LocalTrainForm',
+    props: {
+        train: {
+            type: Object as PropType<LocalTrain>,
+            default: undefined,
+        },
+    },
+});
 </script>
-
+<template>
+    <div>
+        Local Train Form
+    </div>
+</template>
 <style scoped>
 
 </style>

@@ -12,6 +12,7 @@ import { ConfigurationAPI } from '../../../domains/config';
 import { TrainConfigAPI } from '../../../domains/train-config';
 import { FhirAPI } from '../../../domains/fhir/api';
 import { DatasetAPI } from '../../../domains/datasets/api';
+import { LocalTrainAPI } from '../../../domains/local-trains';
 
 export class HTTPClient extends Client {
     public configuration: ConfigurationAPI;
@@ -25,6 +26,8 @@ export class HTTPClient extends Client {
     public datasets: DatasetAPI;
 
     public airflow: AirflowApi;
+
+    public localTrain: LocalTrainAPI;
 
     constructor(config: Config) {
         super(config);
@@ -40,5 +43,7 @@ export class HTTPClient extends Client {
         this.datasets = new DatasetAPI(this.driver);
 
         this.airflow = new AirflowApi(this.driver);
+
+        this.localTrain = new LocalTrainAPI(this.driver);
     }
 }
