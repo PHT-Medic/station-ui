@@ -1,6 +1,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 import { LocalTrain } from '../../../domains/local-trains';
+import MasterImageSelect from './MasterImageSelect.vue';
 
 export default Vue.extend({
     name: 'LocalTrainForm',
@@ -10,11 +11,15 @@ export default Vue.extend({
             default: undefined,
         },
     },
+    components: {
+        MasterImageSelect,
+    },
 });
 </script>
 <template>
-    <div>
-        Local Train Form
+    <div class="d-flex flex-fill flex-column">
+        <h5>Local Train Form</h5>
+        <master-image-select />
     </div>
 </template>
 <style scoped>

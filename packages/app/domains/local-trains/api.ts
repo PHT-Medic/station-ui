@@ -18,12 +18,12 @@ export class LocalTrainAPI {
         return response.data;
     }
 
-    async masterImageGetMany(skip?: number, limit?: number, sync?: boolean) : Promise<Configuration[]> {
+    async masterImageGetMany(skip?: number, limit?: number, sync?: boolean) : Promise<LocalTrainMasterImage[]> {
         if (skip === undefined) {
             skip = 0;
         }
         if (limit === undefined) {
-            limit = 20;
+            limit = 100;
         }
         if (sync === undefined) {
             sync = false;
