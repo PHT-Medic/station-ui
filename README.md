@@ -31,13 +31,13 @@ This package contains the authentication- & authorization-server for the station
 ### Docker
 
 ```shell
-$ docker pull ghcr.io/pht-medic/station-ui:latest
+docker pull ghcr.io/pht-medic/station-ui:latest
 ```
 
 Setup backend server (db, rsa key-pair, ...):
 
 ```shell
-$ docker run \
+docker run \
   --env ROBOT_SECRET=start123 \
   ghcr.io/pht-medic/station-ui:latest \
   server setup
@@ -46,14 +46,14 @@ $ docker run \
 To start the frontend application & backend server with docker, run the following command:
 
 ```shell
-$ docker run \
+docker run \
   --env AUTH_API_URL=http://127.0.0.1:3010/ \
   ghcr.io/pht-medic/station-ui:latest \
   app start
 ```
 
 ```shell
-$ docker run \
+docker run \
   ghcr.io/pht-medic/station-ui:latest \
   server start
 ```
@@ -63,14 +63,14 @@ $ docker run \
 Setup backend server:
 
 ```shell
-$ npm run setup --workspace=packages/server
+npm run setup --workspace=packages/server
 ```
 
 To start the frontend application & backend server locally, run the following command:
 ```shell
-$ npm run start --workspace=packages/server
+npm run start --workspace=packages/server
 ```
 
 ```shell
-$ npm run dev --workspace=packages/app
+npm run dev --workspace=packages/app
 ```
