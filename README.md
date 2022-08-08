@@ -1,76 +1,35 @@
-# Station 🏥
+# Station UI - App 🍭
 
 [![main](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml)
 [![Build image](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml)
 
-This repository contains all packages of the station ui of the Personal Health Train.
-
-**Table of Contents**
-
-- [Configuration](#configuration)
-- [Packages](#packages)
-- [Usage](#usage)
-  - [Docker](#docker)
-  - [Local Machine](#local-machine)
+This repository contains the station ui application of the Personal Health Train.
+It communicates with some APIs of the PHT and need therefore to be configured properly, like described
+in the following sections.
 
 ## Configuration
-Read the `Readme.md` in each package directory and configure each package individually.
-
-## Packages
-
-### @personalhealthtrain/station-ui 🍭
-
-This repository contains the frontend application.
-
-### @personalhealthtrain/station-server 🌠
-
-This package contains the authentication- & authorization-server for the station.
+The following settings need to be added to the environment file `.env` in the root directory.
+```
+STATION_API_URL=http://localhost:8080
+AUTH_API_URL=http://localhost:3010
+API_URL=http://localhost:3002
+```
 
 ## Usage
 
-### Docker
+### Production
 
-```shell
-docker pull ghcr.io/pht-medic/station-ui:latest
+``` bash
+# build application for production 🛠
+npm run build
+
+# run application ⚔
+npm run start
 ```
 
-Setup backend server (db, rsa key-pair, ...):
+### Development
 
-```shell
-docker run \
-  --env ROBOT_SECRET=start123 \
-  ghcr.io/pht-medic/station-ui:latest \
-  server setup
-```
-
-To start the frontend application & backend server with docker, run the following command:
-
-```shell
-docker run \
-  --env AUTH_API_URL=http://127.0.0.1:3010/ \
-  ghcr.io/pht-medic/station-ui:latest \
-  app start
-```
-
-```shell
-docker run \
-  ghcr.io/pht-medic/station-ui:latest \
-  server start
-```
-
-### Local Machine
-
-Setup backend server:
-
-```shell
-npm run setup --workspace=packages/server
-```
-
-To start the frontend application & backend server locally, run the following command:
-```shell
-npm run start --workspace=packages/server
-```
-
-```shell
-npm run dev --workspace=packages/app
-```
+``` bash
+# serve application on the fly 🔥
+npm run dev
+````
