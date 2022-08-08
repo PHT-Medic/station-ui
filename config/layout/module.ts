@@ -11,8 +11,12 @@ import {
     applyRestrictionForComponents, findTierComponent,
 } from '@vue-layout/navigation';
 import { Context } from '@nuxt/types';
-import { LayoutSideAdminNavigation, LayoutSideDefaultNavigation, LayoutTopNavigation } from './index';
-import { LayoutKey } from './contants';
+import {
+    LayoutKey,
+    LayoutSideAdminNavigation,
+    LayoutSideDefaultNavigation,
+    LayoutTopNavigation,
+} from './contants';
 
 export class NavigationProvider implements ProviderInterface {
     protected ctx: Context;
@@ -61,7 +65,9 @@ export class NavigationProvider implements ProviderInterface {
         }
 
         return applyRestrictionForComponents(items, {
-            module: this.ctx.$auth,
+            hasPermission: (name) => this.ctx.$auth.hasPermission(name),
+            isLoggedIn: () => this.ctx.$auth.isLoggedIn(),
+
             layoutKey: {
                 requiredAbilities: LayoutKey.REQUIRED_ABILITIES,
                 requiredPermissions: LayoutKey.REQUIRED_PERMISSIONS,
