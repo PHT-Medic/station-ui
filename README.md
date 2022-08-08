@@ -1,4 +1,4 @@
-# Station UI - App 🍭
+# Station UI 🍭
 
 [![main](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml)
 [![Build image](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml)
