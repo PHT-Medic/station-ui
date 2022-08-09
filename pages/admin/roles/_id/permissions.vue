@@ -15,6 +15,6 @@ export default {
 </script>
 <template>
     <div>
-        <role-permission-list :entity-id="entity.id" />
+        <role-permission-assignment-list :entity-id="entity.id" />
     </div>
 </template>

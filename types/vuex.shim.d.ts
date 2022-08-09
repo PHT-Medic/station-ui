@@ -5,7 +5,7 @@
  * view the LICENSE file that was distributed with this source code.
  */
 
-import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/ui-common';
+import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
 import { HTTPClient as AuthHTTPClient } from '@authelion/common';
 import { Adapter } from 'browser-storage-adapter';
 import AuthModule from '../config/auth';

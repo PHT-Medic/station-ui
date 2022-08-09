@@ -26,6 +26,6 @@ export default {
 </script>
 <template>
     <div>
-        <user-role-list :entity-id="entity.id" />
+        <user-role-assignment-list :entity-id="entity.id" />
     </div>
 </template>

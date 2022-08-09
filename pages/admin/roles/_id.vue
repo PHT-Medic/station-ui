@@ -50,7 +50,7 @@ export default {
         };
     },
     methods: {
-        handleSelected(item) {
+        handleUpdated(item) {
             const keys = Object.keys(item);
             for (let i = 0; i < keys.length; i++) {
                 this.entity[keys[i]] = item[keys[i]];
@@ -59,6 +59,12 @@ export default {
             this.$bvToast.toast('The role was successfully updated.', {
                 toaster: 'b-toaster-top-center',
                 variant: 'success',
+            });
+        },
+        async handleFailed(e) {
+            this.$bvToast.toast(e.message, {
+                toaster: 'b-toaster-top-center',
+                variant: 'warning',
             });
         },
     },
@@ -100,6 +106,7 @@ export default {
         <nuxt-child
             :entity="entity"
             @updated="handleUpdated"
+            @failed="handleFailed"
         />
     </div>
 </template>

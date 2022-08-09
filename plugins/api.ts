@@ -6,8 +6,8 @@
  */
 
 import {
-    Config, setClient,
-} from '@trapi/client';
+    Config,
+} from 'hapic';
 import { Context } from '@nuxt/types';
 import { Inject } from '@nuxt/types/app';
 import { HTTPClient as AuthHTTPClient } from '@authelion/common';
@@ -36,8 +36,6 @@ export default (ctx: Context, inject : Inject) => {
 
     const api = new CentralHTTPClient(config);
     api.mountResponseInterceptor((r) => r, interceptor);
-
-    setClient(api);
     inject('api', api);
 
     // ----------------------------------------------------------
@@ -48,9 +46,7 @@ export default (ctx: Context, inject : Inject) => {
 
     const authAPI = new AuthHTTPClient(authConfig);
     authAPI.mountResponseInterceptor((r) => r, interceptor);
-
     setHTTPClient(authAPI);
-    setClient(authAPI, 'auth');
     inject('authApi', authAPI);
 
     // ----------------------------------------------------------
@@ -59,7 +55,5 @@ export default (ctx: Context, inject : Inject) => {
     authConfig.driver.baseURL = `${process.server ? process.env.STATION_API_URL : '/station/api'}`;
 
     const stationApi = new HTTPClient(stationConfig);
-
-    setClient(stationApi, 'station');
     inject('stationApi', stationApi);
 };

@@ -6,7 +6,7 @@
   -->
 <script>
 import { PermissionID } from '@personalhealthtrain/central-common';
-import { LayoutKey, LayoutNavigationID } from '../../../config/layout/contants';
+import { LayoutKey, LayoutNavigationID } from '../../../config/layout';
 
 export default {
     meta: {
@@ -50,7 +50,7 @@ export default {
         };
     },
     methods: {
-        handleSelected(item) {
+        handleUpdated(item) {
             const keys = Object.keys(item);
             for (let i = 0; i < keys.length; i++) {
                 this.entity[keys[i]] = item[keys[i]];
@@ -68,6 +68,12 @@ export default {
             });
 
             await this.$nuxt.$router.push('/admin/users');
+        },
+        async handleFailed(e) {
+            this.$bvToast.toast(e.message, {
+                toaster: 'b-toaster-top-center',
+                variant: 'warning',
+            });
         },
     },
 };

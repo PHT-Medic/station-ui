@@ -13,6 +13,6 @@ export default {
 </script>
 <template>
     <div>
-        <role-user-list :entity-id="entity.id" />
+        <role-user-assignment-list :entity-id="entity.id" />
     </div>
 </template>

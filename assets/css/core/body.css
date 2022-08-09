@@ -60,20 +60,18 @@ Content
     background-color: #ececec;
     border: 1px solid #dedede;
 
-    /* box-shadow: 0 4px 25px 0 rgba(0,0,0,.1); */
+    box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
     transition: all .3s ease-in-out;
 
     border-radius: 4px;
 
     padding: 0.25rem 0.25rem;
     margin-bottom: 0.5rem;
-    display: flex;
-    flex-direction: row;
     vertical-align: middle;
 }
 
-.list .list-item div:first-child {
-    margin-right: 0.5rem;
+.list .list-item.active {
+    background-color: #d7d3d3;
 }
 
 .list .list-icon,
@@ -81,3 +79,15 @@ Content
     font-size: 1rem;
     padding-right: 0.5rem;
 }
+
+.list-no-more {
+    margin-top: 0.5rem;
+    color: #856404;
+    background-color: #fff3cd;
+    padding: 0.4rem 0.7rem;
+    position: relative;
+    margin-bottom: 1rem;
+    border: 1px solid #ffeeba;
+    border-radius: 0.25rem;
+}
+

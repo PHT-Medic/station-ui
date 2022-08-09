@@ -157,18 +157,6 @@ export const LayoutSideAdminNavigation: Component[] = [
                     PermissionID.ROLE_PERMISSION_DROP,
                 ],
             },
-            {
-                name: 'Permissions',
-                type: 'link',
-                url: '/admin/permissions',
-                icon: 'fas fa-key',
-                [LayoutKey.REQUIRED_LOGGED_IN]: true,
-                [LayoutKey.REQUIRED_PERMISSIONS]: [
-                    PermissionID.PERMISSION_ADD,
-                    PermissionID.PERMISSION_EDIT,
-                    PermissionID.PERMISSION_DROP,
-                ],
-            },
         ],
     },
     {

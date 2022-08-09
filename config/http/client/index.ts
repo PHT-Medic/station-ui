@@ -5,12 +5,12 @@
  * view the LICENSE file that was distributed with this source code.
  */
 
-import { Client, Config } from '@trapi/client';
+import { Client, Config } from 'hapic';
 import { AirflowApi } from '../../../domains/airflow';
 import { TrainAPI } from '../../../domains/train';
 import { ConfigurationAPI } from '../../../domains/config';
 import { TrainConfigAPI } from '../../../domains/train-config';
-import { FhirAPI } from '../../../domains/fhir/api';
+import { FhirAPI } from '../../../domains/fhir';
 import { DatasetAPI } from '../../../domains/datasets/api';
 import { LocalTrainAPI } from '../../../domains/local-trains';
 

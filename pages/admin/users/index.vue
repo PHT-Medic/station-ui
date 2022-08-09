@@ -29,7 +29,7 @@ export default {
                 hide: false,
                 items: [
                     {
-                        name: 'datasets',
+                        name: 'overview',
                         urlSuffix: '',
                         icon: 'fa fa-bars',
                     },
