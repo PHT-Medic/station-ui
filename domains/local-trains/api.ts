@@ -1,4 +1,4 @@
-import { ClientDriverInstance } from '@trapi/client';
+import { ClientDriverInstance } from 'hapic';
 import { nullifyEmptyObjectProperties } from '@authelion/common';
 import { Configuration } from '../config';
 

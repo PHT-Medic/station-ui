@@ -5,7 +5,7 @@
  * view the LICENSE file that was distributed with this source code.
  */
 
-import { ClientDriverInstance } from '@trapi/client';
+import { ClientDriverInstance } from 'hapic';
 import { nullifyEmptyObjectProperties } from '@authelion/common';
 import { Train } from '../train';
 import { Configuration, ConfigurationCreate } from './type';

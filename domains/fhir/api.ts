@@ -1,4 +1,4 @@
-import { ClientDriverInstance } from '@trapi/client';
+import { ClientDriverInstance } from 'hapic';
 import { FHIRServer } from './type';
 
 export class FhirAPI {

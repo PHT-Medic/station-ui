@@ -1,4 +1,4 @@
-import { ClientDriverInstance } from '@trapi/client';
+import { ClientDriverInstance } from 'hapic';
 
 export class AirflowApi {
     protected client: ClientDriverInstance;
