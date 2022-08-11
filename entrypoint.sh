@@ -9,39 +9,10 @@
 
 set -e
 
-BASE_DIR=/usr/src/project
+BASE_DIR=/usr/src/app
 
 cd "${BASE_DIR}"
 
-case "${1}" in
-    server) PACKAGE=server;;
-    app) PACKAGE=app;;
-    cli) PACKAGE=cli;;
-    *) echo "Unknown package: ${1}";;
-esac
-
-shift
-
-if [[ -z "${PACKAGE}" ]]; then
-    printf 'Usage:\n'
-    printf '  server <command>\n    Start or run the server in dev mode.\n'
-    printf '  app <command>\n    Start or run the app in dev mode.\n'
-    printf '  cli <command>\n    Run a CLI command.\n'
-    exit 0
-fi
-
-case "${PACKAGE}" in
-    server)
-        exec npm run "$1" --workspace=packages/server
-        ;;
-    app)
-        export NUXT_HOST=0.0.0.0
-        export NUXT_PORT=3000
-        exec npm run "$1" --workspace=packages/app
-        ;;
-    cli)
-        exec npm run cli --workspace=packages/server -- "$@"
-        ;;
-esac
+exec npm run "$@"
 
 
