@@ -1,6 +1,13 @@
 <template>
-    <div>
-        <local-train-form />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <local-train-form />
+            </div>
+            <div class="col">
+                <h2>File Upload</h2>
+            </div>
+        </div>
     </div>
 </template>
 

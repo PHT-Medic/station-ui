@@ -5,13 +5,6 @@ export enum DataType {
     HYBRID = 'hybrid',
 }
 
-export type DatasetFile = {
-    file_name: string;
-    full_path: string;
-    size: number;
-    updated_at?: Date;
-};
-
 export type Dataset = {
     id?: number | string;
     name: string;
