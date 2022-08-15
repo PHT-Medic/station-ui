@@ -1,7 +1,8 @@
 <script lang="ts">
 import { PropType } from 'vue';
-import DatasetFileList from '../../../../components/domains/data/dataset/DatasetFileList.vue';
-import { Dataset, DatasetFile } from '../../../../domains/datasets/type';
+import DatasetFileList from '../../../../components/shared/files/FileList.vue';
+import { Dataset } from '../../../../domains/datasets/type';
+import { File } from '../../../../domains/files/type';
 
 export default {
     components: {
@@ -13,7 +14,7 @@ export default {
             required: true,
         },
         files: {
-            type: Array as PropType<DatasetFile[]>,
+            type: Array as PropType<File[]>,
             required: true,
         },
 
@@ -37,7 +38,7 @@ export default {
                 this.busy = false;
             }
         },
-        async drop(file: DatasetFile) {
+        async drop(file: File) {
             await this.$stationApi.datasets.deleteFile(this.entity.id, file.full_path);
             this.$emit('updated', this.entity.id);
         },

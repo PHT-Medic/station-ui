@@ -3,7 +3,9 @@ import { nullifyEmptyObjectProperties } from '@authelion/common';
 import { Configuration } from '../config';
 import { File } from '../files/type';
 
-import { LocalTrain, LocalTrainMasterImage } from './type';
+import {
+    LocalTrain, LocalTrainCreate, LocalTrainMasterImage, LocalTrainUpdate,
+} from './type';
 
 export class LocalTrainAPI {
     protected client: ClientDriverInstance;
@@ -12,7 +14,7 @@ export class LocalTrainAPI {
         this.client = client;
     }
 
-    async create(data: LocalTrain): Promise<LocalTrain> {
+    async create(data: LocalTrainCreate): Promise<LocalTrain> {
         const response = await this.client.post('/local-trains', data);
         return response.data;
     }
@@ -52,7 +54,7 @@ export class LocalTrainAPI {
         return response.data;
     }
 
-    async update(id: LocalTrain['id'], data: LocalTrain): Promise<LocalTrain> {
+    async update(id: LocalTrain['id'], data: LocalTrainUpdate): Promise<LocalTrain> {
         const response = await this.client.put(`/local-trains/${id}`, data);
         return response.data;
     }

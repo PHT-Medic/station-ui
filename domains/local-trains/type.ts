@@ -9,6 +9,14 @@ export type LocalTrainMasterImage = {
     updated_at?: Date;
 };
 
+export enum ConfigurationState {
+    base = 'base',
+    image = 'imageConfiguration',
+    files = 'filesConfiguration',
+    data = 'datasetConfiguration',
+    finished = 'finished',
+}
+
 export type LocalTrainState = {
     id: number;
     last_execution?: Date;
@@ -29,3 +37,7 @@ export type LocalTrain = {
     master_image_id?: string;
     custom_image?: string;
 };
+
+export type LocalTrainCreate = Pick<LocalTrain, 'id'> & Partial<Pick<LocalTrain, 'name'>>;
+
+export type LocalTrainUpdate = Partial<Pick<LocalTrain, 'name' | 'entrypoint' | 'files' | 'fhir_query' | 'custom_image' | 'master_image_id'>>;

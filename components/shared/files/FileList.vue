@@ -1,13 +1,13 @@
 <script lang="ts">
 
 import { PropType } from 'vue';
-import { DatasetFile } from '../../../../domains/datasets/type';
+import { File } from '../../../domains/files/type';
 
 export default {
-    name: 'DatasetFileList',
+    name: 'FileList',
     props: {
         files: {
-            type: Array as PropType<DatasetFile[]>,
+            type: Array as PropType<File[]>,
             required: true,
         },
     },
@@ -19,10 +19,10 @@ export default {
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
         },
-        removeFile(file: DatasetFile) {
+        removeFile(file: File) {
             this.$emit('removeFile', file);
         },
-        viewFile(file: DatasetFile) {
+        viewFile(file: File) {
             this.$emit('viewFile', file);
         },
     },

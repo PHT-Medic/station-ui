@@ -1,6 +1,5 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import { LocalTrainMasterImage } from '../../../domains/local-trains';
 
 export default Vue.extend({
     data() {
@@ -9,6 +8,18 @@ export default Vue.extend({
             masterImages: [],
             selectedGroup: undefined,
             selectedImage: undefined,
+            masterImageType: 'pht',
+            customImage: '',
+            masterImageOptions: [
+                {
+                    text: 'PHT',
+                    value: 'pht',
+                },
+                {
+                    text: 'Custom',
+                    value: 'custom',
+                },
+            ],
         };
     },
 
@@ -32,6 +43,9 @@ export default Vue.extend({
                 text: item.artifact,
                 value: item.id,
             }));
+        },
+        imageSelected(): boolean {
+            return (this.selectedImage !== undefined) && (this.customImage !== '');
         },
     },
     created() {
@@ -61,21 +75,45 @@ export default Vue.extend({
             if (value.length === undefined) return '-';
             return value.replace(/(-|^)([^-]?)/g, (_, prep, letter) => (prep && ' ') + letter.toUpperCase());
         },
+        handleSelect() {
+            const imageSelect = {
+                masterImageId: this.selectedImage,
+                customImage: this.customImage,
+            };
+            console.log(imageSelect);
+            this.$emit('imageSelected', imageSelect);
+        },
     },
 });
 </script>
 <template>
-    <div class="d-flex flex-fill flex-row justify-content-around">
-        <div class="d-flex fill">
-            <div>
+    <div class="container-fluid">
+        <div class="container row">
+            <b-form-group
+                label="Select custom image or PHT master image."
+                label-for="master-image-type"
+            >
+                <b-form-radio-group
+                    id="master-image-type"
+                    v-model="masterImageType"
+                    :options="masterImageOptions"
+                    button-variant="outline-primary"
+                    size="md"
+                    name="radio-btn-outline"
+                    buttons
+                />
+            </b-form-group>
+        </div>
+        <div
+            v-if="masterImageType === 'pht'"
+            class="row"
+        >
+            <div class="col">
                 <b-form-group
                     id="label-group"
-                    label-cols-sm="4"
-                    label-cols-lg="3"
-                    content-cols-sm
-                    content-cols-lg="7"
                     label="Select master image"
                     label-for="select-group"
+                    label-size="sm"
                 >
                     <b-form-select
                         id="select-group"
@@ -84,17 +122,12 @@ export default Vue.extend({
                     />
                 </b-form-group>
             </div>
-        </div>
-        <div class="d-flex fill">
-            <div>
+            <div class="col">
                 <b-form-group
                     id="label-image"
-                    label-cols-sm="4"
-                    label-cols-lg="3"
-                    content-cols-sm
-                    content-cols-lg="7"
                     label="Select base image from group"
                     label-for="select-artifact"
+                    label-size="sm"
                 >
                     <b-form-select
                         id="select-artifact"
@@ -103,6 +136,39 @@ export default Vue.extend({
                     />
                 </b-form-group>
             </div>
+        </div>
+        <div
+            v-if="masterImageType === 'custom'"
+            class="row"
+        >
+            <div class="col">
+                <b-form-group
+                    id="label-image"
+                    label="Enter custom image"
+                    label-for="custom-image"
+                    label-size="sm"
+                >
+                    <b-form-input
+                        id="custom-image"
+                        v-model="customImage"
+                    />
+                </b-form-group>
+            </div>
+        </div>
+        <div class="container row justify-content-between">
+            <button
+                class="btn btn-primary"
+                @click="$emit('back')"
+            >
+                Back
+            </button>
+            <b-button
+                class="btn-primary"
+                :disabled="imageSelected"
+                @click="handleSelect()"
+            >
+                Next
+            </b-button>
         </div>
     </div>
 </template>
