@@ -92,8 +92,8 @@ export default Vue.extend({
 </script>
 <template>
     <div class="container-fluid">
-        <div class="container">
-            <h3 class="justify-content-center align-items-center">
+        <div class="container-fluid">
+            <h3>
                 <DockerIcon
                     width="35"
                     height="35"

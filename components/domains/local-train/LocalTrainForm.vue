@@ -24,6 +24,7 @@ export default Vue.extend({
             masterImages: [],
             formData: {},
             configurationState: 'base',
+            trainFiles: [],
         };
     },
     mounted() {
@@ -79,6 +80,11 @@ export default Vue.extend({
             }
         },
 
+        async handleUploadFiles(files) {
+            const response = await this.$stationApi.localTrain.addFiles(this.formData.id, files);
+            this.trainFiles = response.files;
+        },
+
     },
 
 });
@@ -122,6 +128,7 @@ export default Vue.extend({
         <local-train-files
             v-if="configurationState === 'filesConfiguration'"
             :train="formData"
+            @uploadFiles="handleUploadFiles"
         />
     </div>
 </template>

@@ -34,6 +34,23 @@ export default Vue.extend({
             this.files = response;
             this.busy = false;
         },
+        async uploadFiles(files) {
+            console.log('uploadFiles', files);
+            const formData = new FormData();
+
+            for (const file of files) {
+                console.log('file', file);
+                formData.append('files', file);
+            }
+            // files.forEach((f) => {
+            //     formData.append('files', f);
+            // });
+            console.log('uploadFiles', files);
+            this.busy = true;
+            const response = await this.$stationApi.localTrain.addFiles(this.train.id, formData);
+            this.files = response;
+            this.busy = false;
+        },
     },
 });
 
@@ -41,12 +58,17 @@ export default Vue.extend({
 
 <template>
     <div class="container-fluid col">
-        <file-list :files="files" />
+        <file-list
+            :files="files"
+            @uploadFiles="uploadFiles"
+        />
         <div class="container row justify-content-between mt-2">
             <button class="btn btn-primary">
                 Previous
             </button>
-            <button class="btn btn-primary">
+            <button
+                class="btn btn-primary"
+            >
                 Next
             </button>
         </div>

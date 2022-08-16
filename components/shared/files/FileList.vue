@@ -19,18 +19,7 @@ export default {
     },
     computed: {
         allFiles() {
-            const uploadFiles = this.uploadFiles.map(
-                (file) => ({
-                    file_name: file.name,
-                    size: file.size,
-                    full_path: file.name,
-                    updated_at: new Date(file.lastModified),
-                    created_at: new Date(file.lastModified),
-                }),
-            );
-            const totalFiles = this.files.concat(uploadFiles);
-            console.log('total files', totalFiles);
-            return totalFiles;
+            return this.files.concat(this.uploadFiles);
         },
     },
     methods: {
@@ -55,6 +44,16 @@ export default {
             ([...droppedFiles]).forEach((f) => {
                 this.uploadFiles.push(f);
             });
+            this.$emit('uploadFiles', droppedFiles);
+            this.uploadFiles = this.uploadFiles.map(
+                (file) => ({
+                    file_name: file.name,
+                    size: file.size,
+                    full_path: file.name,
+                    updated_at: new Date(file.lastModified),
+                    created_at: new Date(file.lastModified),
+                }),
+            );
         },
     },
 };
@@ -82,7 +81,7 @@ export default {
                 </thead>
                 <tbody>
                     <tr
-                        v-for="file in files"
+                        v-for="file in allFiles"
                         :key="file.full_path"
                     >
                         <td>{{ file.file_name }}</td>
