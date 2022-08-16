@@ -61,12 +61,11 @@ export default Vue.extend({
             <div
                 v-for="(s, index) in configurationSteps"
                 :key="s.step"
-                class="col text-center align-items-center justify-content-center"
+                class="col text-center align-items-center justify-content-center text-white border border-left border-right"
                 :class="{
                     'bg-success': index < activeStep,
                     'bg-secondary': s.value !== step,
                     'bg-primary': s.value === step,
-                    'text-white': s.value === step,
                 }"
             >
                 {{ s.text }}

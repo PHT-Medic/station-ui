@@ -2,7 +2,7 @@
 import { PropType } from 'vue';
 import DatasetFileList from '../../../../components/shared/files/FileList.vue';
 import { Dataset } from '../../../../domains/datasets/type';
-import { File } from '../../../../domains/files/type';
+import { MinioFile } from '../../../../domains/files/type';
 
 export default {
     components: {
@@ -14,7 +14,7 @@ export default {
             required: true,
         },
         files: {
-            type: Array as PropType<File[]>,
+            type: Array as PropType<MinioFile[]>,
             required: true,
         },
 
@@ -38,7 +38,7 @@ export default {
                 this.busy = false;
             }
         },
-        async drop(file: File) {
+        async drop(file: MinioFile) {
             await this.$stationApi.datasets.deleteFile(this.entity.id, file.full_path);
             this.$emit('updated', this.entity.id);
         },

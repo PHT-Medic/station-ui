@@ -1,4 +1,4 @@
-export type File = {
+export type MinioFile = {
     file_name: string;
     full_path: string;
     size: number;

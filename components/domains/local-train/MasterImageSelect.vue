@@ -1,7 +1,11 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
+import DockerIcon from '../../svg/DockerIcon.vue';
 
 export default Vue.extend({
+    components: {
+        DockerIcon,
+    },
     data() {
         return {
             busy: false,
@@ -88,6 +92,15 @@ export default Vue.extend({
 </script>
 <template>
     <div class="container-fluid">
+        <div class="container">
+            <h3 class="justify-content-center align-items-center">
+                <DockerIcon
+                    width="35"
+                    height="35"
+                />
+                <span>Configure Master Image</span>
+            </h3>
+        </div>
         <div class="container row">
             <b-form-group
                 label="Select custom image or PHT master image."

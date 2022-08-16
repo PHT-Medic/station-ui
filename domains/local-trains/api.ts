@@ -1,7 +1,7 @@
 import { ClientDriverInstance } from 'hapic';
 import { nullifyEmptyObjectProperties } from '@authelion/common';
 import { Configuration } from '../config';
-import { File } from '../files/type';
+import { MinioFile } from '../files/type';
 
 import {
     LocalTrain, LocalTrainCreate, LocalTrainMasterImage, LocalTrainUpdate,
@@ -49,7 +49,7 @@ export class LocalTrainAPI {
         return response.data;
     }
 
-    async getFiles(id: LocalTrain['id']): Promise<File[]> {
+    async getFiles(id: LocalTrain['id']): Promise<MinioFile[]> {
         const response = await this.client.get(`/local-trains/${id}/files`);
         return response.data;
     }

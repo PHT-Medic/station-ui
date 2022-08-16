@@ -3,12 +3,14 @@ import Vue, { PropType } from 'vue';
 import { ConfigurationState, LocalTrain } from '../../../domains/local-trains';
 import FormHeader from './FormHeader.vue';
 import MasterImageSelect from './MasterImageSelect.vue';
+import LocalTrainFiles from './LocalTrainFiles.vue';
 
 export default Vue.extend({
     name: 'LocalTrainForm',
     components: {
         MasterImageSelect,
         FormHeader,
+        LocalTrainFiles,
     },
     props: {
         train: {
@@ -37,7 +39,7 @@ export default Vue.extend({
                 ...response,
                 id: response.id,
             };
-            this.configurationState = 'fileConfiguration';
+            this.configurationState = 'filesConfiguration';
         },
 
         loadProps() {
@@ -61,14 +63,20 @@ export default Vue.extend({
             console.log(this.formData);
         },
         async handleNameConfigured() {
-            this.configurationState = 'imageConfiguration';
-            const response = await this.$stationApi.localTrain.create({
-                name: this.formData.name,
-            });
-            this.formData = {
-                ...response,
-                id: response.id,
-            };
+            this.busy = true;
+            if (this.formData.id) {
+                this.configurationState = 'imageConfiguration';
+            } else {
+                const response = await this.$stationApi.localTrain.create({
+                    name: this.formData.name,
+                });
+                this.formData = {
+                    ...response,
+                    id: response.id,
+                };
+                this.busy = false;
+                this.configurationState = 'imageConfiguration';
+            }
         },
 
     },
@@ -76,7 +84,7 @@ export default Vue.extend({
 });
 </script>
 <template>
-    <div class="d-flex flex-fill flex-column">
+    <div class="d-flex flex-fill flex-column min-vh-100">
         <form-header
             :step="configurationState"
             :name="formData.name"
@@ -99,7 +107,7 @@ export default Vue.extend({
             <div class="container row justify-content-end">
                 <button
                     class="btn btn-primary"
-                    :disabled="formData.name === ''"
+                    :disabled="formData.name === '' && !busy"
                     @click="handleNameConfigured"
                 >
                     Next
@@ -110,6 +118,10 @@ export default Vue.extend({
             v-if="configurationState === 'imageConfiguration'"
             @imageSelected="handleImageSelect"
             @back="configurationState = 'base'"
+        />
+        <local-train-files
+            v-if="configurationState === 'filesConfiguration'"
+            :train="formData"
         />
     </div>
 </template>

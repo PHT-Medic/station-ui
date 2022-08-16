@@ -1,6 +1,6 @@
 import { ClientDriverInstance } from 'hapic';
 import { Dataset } from './type';
-import { File } from '../files/type';
+import { MinioFile } from '../files/type';
 
 export class DatasetAPI {
     protected client: ClientDriverInstance;
@@ -39,12 +39,12 @@ export class DatasetAPI {
         return response.data;
     }
 
-    async getFiles(id: any): Promise<File[]> {
+    async getFiles(id: any): Promise<MinioFile[]> {
         const response = await this.client.get(`/datasets/${id}/files`);
         return response.data;
     }
 
-    async deleteFile(id: any, fileName: string): Promise<File[]> {
+    async deleteFile(id: any, fileName: string): Promise<MinioFile[]> {
         const response = await this.client.delete(
             `/datasets/${id}/files`,
             {

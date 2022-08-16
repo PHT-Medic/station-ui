@@ -13,6 +13,9 @@ BASE_DIR=/usr/src/app
 
 cd "${BASE_DIR}"
 
+export NUXT_HOST=0.0.0.0
+export NUXT_PORT=3000
+
 exec npm run "$@"
 
 

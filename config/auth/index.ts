@@ -26,20 +26,20 @@ class AuthModule {
 
     protected refreshTokenJob: undefined | ReturnType<typeof setTimeout>;
 
-    protected responseInterceptorId : number | undefined;
+    protected responseInterceptorId: number | undefined;
 
-    protected authResponseInterceptorId : number | undefined;
+    protected authResponseInterceptorId: number | undefined;
 
     protected abilityManager!: AbilityManager;
 
-    protected resolvePromise : Promise<void>;
+    protected resolvePromise: Promise<void>;
 
     // --------------------------------------------------------------------
 
     constructor(ctx: Context, options: ClientOptions) {
         this.ctx = ctx;
 
-        const config : Config = {
+        const config: Config = {
             driver: {
                 httpsAgent: new https.Agent({
                     rejectUnauthorized: false,
@@ -140,7 +140,7 @@ class AuthModule {
                 }
                 case 'auth/setTokenExpireDate': {
                     // eslint-disable-next-line no-case-declarations
-                    const { kind, date } : {kind: OAuth2TokenKind, date: Date} = mutation.payload;
+                    const { kind, date }: { kind: OAuth2TokenKind, date: Date } = mutation.payload;
                     if (kind !== OAuth2TokenKind.ACCESS) {
                         return;
                     }
@@ -190,11 +190,11 @@ class AuthModule {
 
     // --------------------------------------------------------------------
 
-    isLoggedIn() : boolean {
+    isLoggedIn(): boolean {
         return this.ctx.store.getters['auth/loggedIn'];
     }
 
-    public async resolve() : Promise<void> {
+    public async resolve(): Promise<void> {
         if (typeof this.resolvePromise !== 'undefined') {
             return this.resolvePromise;
         }
@@ -253,7 +253,7 @@ class AuthModule {
 
     // --------------------------------------------------------------------
 
-    public has(name: string) : boolean {
+    public has(name: string): boolean {
         return this.abilityManager.has(name);
     }
 
@@ -328,7 +328,7 @@ class AuthModule {
      * @param username
      * @param password
      */
-    public async getTokenWithPassword(username: string, password: string) : Promise<OAuth2TokenGrantResponse> {
+    public async getTokenWithPassword(username: string, password: string): Promise<OAuth2TokenGrantResponse> {
         const data = await this.client.token.createWithPasswordGrant({
             username,
             password,
@@ -344,16 +344,22 @@ class AuthModule {
      *
      * @param token
      */
-    public async getTokenWithRefreshToken(token: string) : Promise<OAuth2TokenGrantResponse> {
+    public async getTokenWithRefreshToken(token: string): Promise<OAuth2TokenGrantResponse> {
         const data = await this.client.token.createWithRefreshToken({
             refresh_token: token,
         });
 
         this.setRequestToken(data.access_token);
 
-        await this.ctx.store.dispatch('auth/triggerSetTokenExpireDate', { kind: OAuth2TokenKind.ACCESS, date: new Date(Date.now() + data.expires_in * 1000) });
+        await this.ctx.store.dispatch('auth/triggerSetTokenExpireDate', {
+            kind: OAuth2TokenKind.ACCESS,
+            date: new Date(Date.now() + data.expires_in * 1000),
+        });
         await this.ctx.store.dispatch('auth/triggerSetToken', { kind: OAuth2TokenKind.ACCESS, token: data.access_token });
-        await this.ctx.store.dispatch('auth/triggerSetToken', { kind: OAuth2TokenKind.REFRESH, token: data.refresh_token });
+        await this.ctx.store.dispatch('auth/triggerSetToken', {
+            kind: OAuth2TokenKind.REFRESH,
+            token: data.refresh_token,
+        });
 
         await this.ctx.store.dispatch('auth/triggerRefreshMe');
 
