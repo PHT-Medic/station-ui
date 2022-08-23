@@ -40,7 +40,7 @@
         "bootstrap-vue": "^2.18.1",
         "browser-storage-adapter": "^1.0.1",
         "hapic": "^0.0.2",
-        "ilingo": "^2.0.2",
+        "ilingo": "^2.0.4",
         "moment": "^2.29.4",
         "nuxt": "^2.15.7",
         "np": "^7.6.2",
