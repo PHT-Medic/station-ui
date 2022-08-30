@@ -87,7 +87,8 @@ export default {
                         <td>{{ file.file_name }}</td>
                         <td>{{ formatBytes(file.size) }}</td>
                         <td>
-                            <timeago :datetime="file.updated_at" />
+<!--                            <timeago :datetime="file.updated_at" />-->
+                            {{ file.updated_at }}
                         </td>
                         <td>
                             <button

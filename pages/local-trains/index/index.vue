@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <h5> Placeholder 🔥 LocalTrain List</h5>
-    </div>
+    <local-train-list></local-train-list>
 </template>
 
 <script>
+import LocalTrainList from '~~/components/domains/local-train/LocalTrainList';
+
 export default {
-    name: 'Index',
+    components: { LocalTrainList },
 };
 </script>
 
