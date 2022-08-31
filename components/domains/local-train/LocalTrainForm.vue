@@ -4,6 +4,7 @@ import { ConfigurationState, LocalTrain } from '../../../domains/local-trains';
 import FormHeader from './FormHeader.vue';
 import MasterImageSelect from './MasterImageSelect.vue';
 import LocalTrainFiles from './LocalTrainFiles.vue';
+import LocalTrainRunConfig from './LocalTrainRunConfig.vue';
 
 export default Vue.extend({
     name: 'LocalTrainForm',
@@ -11,6 +12,7 @@ export default Vue.extend({
         MasterImageSelect,
         FormHeader,
         LocalTrainFiles,
+        LocalTrainRunConfig,
     },
     props: {
         train: {
@@ -52,6 +54,7 @@ export default Vue.extend({
                     master_image_id: null,
                     custom_image: '',
                     files: [],
+                    entrypoint: '',
                 };
                 this.state = 'base';
             } else {
@@ -83,6 +86,17 @@ export default Vue.extend({
         async handleUploadFiles(files) {
             const response = await this.$stationApi.localTrain.addFiles(this.formData.id, files);
             this.trainFiles = response.files;
+        },
+
+        async handleFilesConfigured(entrypoint) {
+            this.busy = true;
+            this.configurationState = 'runConfiguration';
+            this.formData.entrypoint = entrypoint;
+            const response = await this.$stationApi.localTrain.update(this.formData.id, { ...this.formData });
+            this.formData = {
+                ...response,
+                id: response.id,
+            };
         },
 
     },
@@ -129,7 +143,14 @@ export default Vue.extend({
             v-if="configurationState === 'filesConfiguration'"
             :train="formData"
             @uploadFiles="handleUploadFiles"
+            @filesConfigured="handleFilesConfigured"
         />
+        <local-train-run-config
+            v-if="configurationState === 'runConfiguration'"
+            :train="formData"
+            @back="configurationState = 'filesConfiguration'"
+        >
+        </local-train-run-config>
     </div>
 </template>
 <style scoped>

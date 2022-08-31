@@ -54,6 +54,20 @@ export class LocalTrainAPI {
         return response.data;
     }
 
+    async deleteFile(id: LocalTrain['id'], filename: string): Promise<any> {
+        const response = await this.client.delete(`/local-trains/${id}/files/${filename}`);
+        return response.data;
+    }
+
+    async deleteFiles(id: LocalTrain['id'], files: string[]): Promise<any> {
+        const response = await this.client.delete(`/local-trains/${id}/files`, {
+            data: {
+                files,
+            },
+        });
+        return response.data;
+    }
+
     async update(id: LocalTrain['id'], data: LocalTrainUpdate): Promise<LocalTrain> {
         const response = await this.client.put(`/local-trains/${id}`, data);
         return response.data;

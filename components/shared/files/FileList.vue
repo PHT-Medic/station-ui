@@ -87,24 +87,26 @@ export default {
                         <td>{{ file.file_name }}</td>
                         <td>{{ formatBytes(file.size) }}</td>
                         <td>
-<!--                            <timeago :datetime="file.updated_at" />-->
+                            <!--                            <timeago :datetime="file.updated_at" />-->
                             {{ file.updated_at }}
                         </td>
                         <td>
-                            <button
-                                type="button"
-                                class="btn btn-xs btn-primary"
-                                @click.prevent="viewFile(file)"
-                            >
-                                <i class="fas fa-eye" />
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-xs btn-danger"
-                                @click.prevent="removeFile(file)"
-                            >
-                                <i class="fas fa-trash" />
-                            </button>
+                            <slot :file="file">
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-primary"
+                                    @click.prevent="viewFile(file)"
+                                >
+                                    <i class="fas fa-eye" />
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-danger"
+                                    @click.prevent="removeFile(file)"
+                                >
+                                    <i class="fas fa-trash" />
+                                </button>
+                            </slot>
                         </td>
                     </tr>
                 </tbody>

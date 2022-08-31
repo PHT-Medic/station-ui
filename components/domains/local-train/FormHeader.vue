@@ -27,14 +27,9 @@ export default Vue.extend({
                     step: 2,
                 },
                 {
-                    text: 'Data',
-                    value: ConfigurationState.data.valueOf(),
+                    text: 'Run Configuration',
+                    value: ConfigurationState.run.valueOf(),
                     step: 3,
-                },
-                {
-                    text: 'Finished',
-                    value: ConfigurationState.finished.valueOf(),
-                    step: 4,
                 },
 
             ],

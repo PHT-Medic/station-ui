@@ -18,6 +18,7 @@ export default Vue.extend({
         return {
             busy: false,
             files: [],
+            entrypoint: '',
         };
     },
     mounted() {
@@ -37,7 +38,6 @@ export default Vue.extend({
         async uploadFiles(files) {
             console.log('uploadFiles', files);
             const formData = new FormData();
-
             for (const file of files) {
                 console.log('file', file);
                 formData.append('files', file);
@@ -48,8 +48,28 @@ export default Vue.extend({
             console.log('uploadFiles', files);
             this.busy = true;
             const response = await this.$stationApi.localTrain.addFiles(this.train.id, formData);
+            console.log('uploadFiles response', response);
             this.files = response;
             this.busy = false;
+        },
+        handleRemove(file) {
+            this.busy = true;
+            this.$stationApi.localTrain.deleteFile(this.train.id, file.file_name)
+                .then(() => {
+                    this.load();
+                })
+                .catch((e) => {
+                    this.$emit('failed', e);
+                }).then(() => {
+                    this.busy = false;
+                });
+        },
+        viewFile(file) {
+            console.log('viewFile', file);
+            this.$emit('view-file', file);
+        },
+        handleNext() {
+            this.$emit('filesConfigured', this.entrypoint);
         },
     },
 });
@@ -61,13 +81,42 @@ export default Vue.extend({
         <file-list
             :files="files"
             @uploadFiles="uploadFiles"
-        />
+        >
+            <template v-slot:default="slotProps">
+                <b-form-checkbox
+                    id="checkbox-1"
+                    v-model="entrypoint"
+                    name="checkbox-1"
+                    :value="slotProps.file.full_path"
+                    unchecked-value=""
+                    :checked="slotProps.file.full_path === entrypoint"
+                >
+                    Entrypoint
+                </b-form-checkbox>
+                <button
+                    type="button"
+                    class="btn btn-xs btn-primary"
+                    @click.prevent="viewFile(slotProps.file)"
+                >
+                    <i class="fas fa-eye" />
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-xs btn-danger"
+                    @click.prevent="handleRemove(slotProps.file)"
+                >
+                    <i class="fas fa-trash" />
+                </button>
+            </template>
+        </file-list>
         <div class="container row justify-content-between mt-2">
             <button class="btn btn-primary">
                 Previous
             </button>
             <button
                 class="btn btn-primary"
+                :disabled="busy"
+                @click.prevent="handleNext"
             >
                 Next
             </button>

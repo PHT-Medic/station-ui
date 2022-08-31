@@ -13,8 +13,7 @@ export enum ConfigurationState {
     base = 'base',
     image = 'imageConfiguration',
     files = 'filesConfiguration',
-    data = 'datasetConfiguration',
-    finished = 'finished',
+    run = 'runConfiguration',
 }
 
 export type LocalTrainState = {
