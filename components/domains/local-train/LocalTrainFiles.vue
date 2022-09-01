@@ -94,7 +94,7 @@ export default Vue.extend({
                     unchecked-value=""
                     :checked="slotProps.file.full_path === entrypoint"
                 >
-                    Entrypoint {{ slotProps.file.full_path }}
+                    Entrypoint
                 </b-form-checkbox>
                 <button
                     type="button"

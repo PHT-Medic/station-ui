@@ -28,6 +28,12 @@ export default Vue.extend({
         handleConfigSelected(config) {
             console.log('Config selected', config);
         },
+        buildAndRun() {
+            console.log('Build and run');
+            this.$router.push({
+                path: `/local-trains/${this.train.id}`,
+            });
+        },
     },
 });
 </script>
@@ -81,21 +87,13 @@ export default Vue.extend({
             </button>
             <div class="flex-row">
                 <button
-                    class="btn btn-primary"
-                    :disabled="busy"
-                    @click.prevent="handleNext"
-                >
-                    Build
-                </button>
-                <button
                     class="btn btn-success"
                     :disabled="busy"
-                    @click.prevent="handleNext"
+                    @click.prevent="buildAndRun"
                 >
                     Build and run
                 </button>
             </div>
-
         </div>
     </div>
 </template>
