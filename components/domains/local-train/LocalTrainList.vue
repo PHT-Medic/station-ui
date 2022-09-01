@@ -75,7 +75,7 @@ export default Vue.extend({
                 <div>
                     <slot name="header-title">
                         <h6 class="mb-0">
-                            <i class="fa-solid fa-box"/> Datasets
+                            <i class="fa-solid fa-box" /> Trains
                         </h6>
                     </slot>
                 </div>
@@ -93,7 +93,7 @@ export default Vue.extend({
                                     :disabled="busy"
                                     @click.prevent="load"
                                 >
-                                    <i class="fas fa-sync"/> Refresh
+                                    <i class="fas fa-sync" /> Refresh
                                 </button>
                             </div>
                         </div>
@@ -112,39 +112,41 @@ export default Vue.extend({
                     :key="key"
                     class="c-list-item mb-2"
                 >
-                    <div class="c-list-icon">
-                        <i class="fa fa-bars"/>
+                    <div class="container">
+                        <div class="row">
+                            <div class="c-list-icon">
+                                <i class="fa fa-bars" />
+                            </div>
+                            <slot name="item-name">
+                                <span class="mb-0">
+                                    <nuxt-link :to="'/local-trains/'+item.id">
+                                        {{ item.name }}
+                                    </nuxt-link>
+                                </span>
+                            </slot>
+                        </div>
                     </div>
-                    <slot name="item-name">
-                        <span class="mb-0">
-                            <nuxt-link :to="'/local-trains/'+item.id">
-                                {{ item.name }}
-                            </nuxt-link>
-                        </span>
-                    </slot>
 
-                    <div class="ml-auto">
+                    <div class="ml-auto d-flex align-content-end justify-content-end">
                         <slot
                             name="item-actions"
                             :item="item"
                         >
-                            <div class="d-flex flex-row">
-                                <div>
-                                    <button
-                                        type="button"
-                                        class="btn btn-xs btn-danger"
-                                        @click.prevent="drop(item.id)"
-                                    >
-                                        <i class="fas fa-trash"/>
-                                    </button>
-                                </div>
-                                <slot
-                                    name="item-actions-extra"
-                                    :busy="busy"
-                                    :item-busy="itemBusy"
-                                    :item="item"
-                                />
+                            <div>
+                                <button
+                                    type="button"
+                                    class="btn btn-xs btn-danger"
+                                    @click.prevent="drop(item.id)"
+                                >
+                                    <i class="fas fa-trash" />
+                                </button>
                             </div>
+                            <slot
+                                name="item-actions-extra"
+                                :busy="busy"
+                                :item-busy="itemBusy"
+                                :item="item"
+                            />
                         </slot>
                     </div>
                 </div>
@@ -158,7 +160,6 @@ export default Vue.extend({
             No local trains available...
         </div>
     </div>
-
 </template>
 
 <style scoped>

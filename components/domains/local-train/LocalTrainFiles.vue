@@ -69,7 +69,11 @@ export default Vue.extend({
             this.$emit('view-file', file);
         },
         handleNext() {
+            console.log('handleNext file list', this.entrypoint);
             this.$emit('filesConfigured', this.entrypoint);
+        },
+        handleBack() {
+            this.$emit('back');
         },
     },
 });
@@ -82,16 +86,15 @@ export default Vue.extend({
             :files="files"
             @uploadFiles="uploadFiles"
         >
-            <template v-slot:default="slotProps">
+            <template #default="slotProps">
                 <b-form-checkbox
-                    id="checkbox-1"
+                    :id="slotProps.file.file_name"
                     v-model="entrypoint"
-                    name="checkbox-1"
                     :value="slotProps.file.full_path"
                     unchecked-value=""
                     :checked="slotProps.file.full_path === entrypoint"
                 >
-                    Entrypoint
+                    Entrypoint {{ slotProps.file.full_path }}
                 </b-form-checkbox>
                 <button
                     type="button"
@@ -110,7 +113,10 @@ export default Vue.extend({
             </template>
         </file-list>
         <div class="container row justify-content-between mt-2">
-            <button class="btn btn-primary">
+            <button
+                class="btn btn-primary"
+                @click.prevent="handleBack"
+            >
                 Previous
             </button>
             <button

@@ -144,6 +144,7 @@ export default Vue.extend({
             :train="formData"
             @uploadFiles="handleUploadFiles"
             @filesConfigured="handleFilesConfigured"
+            @back="configurationState = 'imageConfiguration'"
         />
         <local-train-run-config
             v-if="configurationState === 'runConfiguration'"

@@ -62,8 +62,6 @@ export default {
 <template>
     <div>
         <div class="form-group">
-            <label>Configurations</label>
-
             <config-list :with-header="false">
                 <template #items="{ items }">
                     <select

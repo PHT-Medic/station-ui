@@ -68,7 +68,7 @@ export default {
             @dragover.prevent
         >
             <table
-                v-if="allFiles.length > 0"
+                v-if="files.length > 0"
                 class="table table-striped table-hover"
             >
                 <thead>
@@ -81,14 +81,13 @@ export default {
                 </thead>
                 <tbody>
                     <tr
-                        v-for="file in allFiles"
+                        v-for="file in files"
                         :key="file.full_path"
                     >
                         <td>{{ file.file_name }}</td>
                         <td>{{ formatBytes(file.size) }}</td>
                         <td>
-                            <!--                            <timeago :datetime="file.updated_at" />-->
-                            {{ file.updated_at }}
+                            <timeago :datetime="file.updated_at" />
                         </td>
                         <td>
                             <slot :file="file">
