@@ -90,6 +90,28 @@ export default Vue.extend({
         },
         handleDatasetSelected(dataset) {
             console.log('Dataset selected', dataset);
+            console.log(dataset.target.value);
+            this.$emit('selected', dataset.target.value);
+            this.dataEdit = false;
+            this.$stationApi.localTrain.update(this.id, {
+                dataset_id: dataset.target.value,
+            }).then(
+                (response) => {
+                    console.log(response);
+                    this.train = response;
+                },
+                (error) => {
+                    console.log('Error', error);
+                },
+            );
+            this.$stationApi.datasets.get(dataset.target.value).then(
+                (response) => {
+                    this.dataset = response;
+                },
+                (error) => {
+                    console.log('Error', error);
+                },
+            );
         },
         buildAndRun() {
             console.log('Build and run');
@@ -162,13 +184,18 @@ export default Vue.extend({
                         </h4>
                     </div>
                     <div class="card-body">
-                        <div class="col">
+                        <div
+                            class="col"
+                            v-if="dataEdit"
+                        >
                             <h5>Select dataset</h5>
-                            <dataset-list :with-header="false">
+                            <dataset-list
+                                :with-header="false"
+                            >
                                 <template #items="{items}">
                                     <select
-                                        v-model=""
                                         class="form-control"
+                                        @change.prevent="handleDatasetSelected"
                                     >
                                         <option value="">
                                             -- Please select --
@@ -185,6 +212,10 @@ export default Vue.extend({
                             </dataset-list>
 
                         </div>
+                        <div>
+                            {{ dataset.id }}
+                        </div>
+
                     </div>
                 </div>
             </div>
