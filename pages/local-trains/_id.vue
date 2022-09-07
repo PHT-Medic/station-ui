@@ -35,7 +35,7 @@ export default Vue.extend({
                 return null;
             },
         );
-
+        console.log('data', trainData);
         return {
             id,
             train: trainData,
@@ -65,7 +65,43 @@ export default Vue.extend({
         <hr>
         <div class="row">
             <div class="col">
-                Info
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">General</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="col">
+                            <div>
+                                {{ train.state.status }}
+                            </div>
+                            <div>
+                                Status
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <timeago :datetime="train.created_at"/>
+                            </div>
+                            <div>
+                                Created
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="card-title">Configuration</h5>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="card-title">Data</h5>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
             </div>
             <div class="col">
                 <file-list

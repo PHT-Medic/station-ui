@@ -63,13 +63,13 @@ export default {
     <div class="">
         <h3>🗎 Files</h3>
         <div
-            class="file-list border border-primary rounded p-2"
+            class="file-list border rounded p-2 shadow-sm"
             @drop.prevent="addFile"
             @dragover.prevent
         >
             <table
                 v-if="files.length > 0"
-                class="table table-striped table-hover"
+                class="table table-hover"
             >
                 <thead>
                     <tr>
