@@ -2,11 +2,17 @@
 import Vue from 'vue';
 import TrainName from '../../components/domains/train/TrainName.vue';
 import FileList from '../../components/shared/files/FileList.vue';
+import LocalTrainOverviewCard from '../../components/domains/local-train/LocalTrainOverviewCard.vue';
+import TrainConfigList from '../../components/domains/train-config/TrainConfigList.vue';
+import DatasetList from '../../components/domains/data/dataset/DatasetList.vue';
 
 export default Vue.extend({
     components: {
         TrainName,
         FileList,
+        LocalTrainOverviewCard,
+        TrainConfigList,
+        DatasetList,
     },
     async asyncData(ctx) {
         const { id } = ctx.params;
@@ -35,11 +41,23 @@ export default Vue.extend({
                 return null;
             },
         );
-        console.log('data', trainData);
+        let config = null;
+        if (trainData.config_id !== null || trainData.config_id) {
+            config = ctx.$stationApi.configuration.getOne(trainData.config_id);
+        }
+
+        let dataset = null;
+        console.log('trainData.dataset_id', trainData.dataset_id);
+        if (trainData.dataset_id !== null || trainData.dataset_id) {
+            dataset = ctx.$stationApi.datasets.get(trainData.config_id);
+        }
+
         return {
             id,
             train: trainData,
             files: trainFiles,
+            config,
+            dataset,
         };
     },
     data() {
@@ -47,7 +65,38 @@ export default Vue.extend({
             id: null,
             train: null,
             files: [],
+            configEdit: false,
+            dataEdit: false,
+            config: null,
+            dataset: null,
         };
+    },
+    methods: {
+        async handleConfigSelected(config) {
+            console.log('Config selected', config);
+            this.configEdit = false;
+            this.$stationApi.localTrain.update(this.id, {
+                config_id: config,
+            }).then(
+                (response) => {
+                    console.log(response);
+                    this.train = response;
+                },
+                (error) => {
+                    console.log('Error', error);
+                },
+            );
+            this.config = await this.$stationApi.trainConfig.get(config);
+        },
+        handleDatasetSelected(dataset) {
+            console.log('Dataset selected', dataset);
+        },
+        buildAndRun() {
+            console.log('Build and run');
+            this.$router.push({
+                path: `/local-trains/${this.train.id}`,
+            });
+        },
     },
 });
 </script>
@@ -65,41 +114,77 @@ export default Vue.extend({
         <hr>
         <div class="row">
             <div class="col">
-                <div class="card">
+                <local-train-overview-card :train="train" />
+
+                <div class="card mt-4">
                     <div class="card-header">
-                        <h5 class="card-title">General</h5>
+                        <h4 class="card-title">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div>
+                                    Configuration
+                                </div>
+                                <button
+                                    class="btn btn-sm btn-outline-secondary"
+                                    @click="configEdit = !configEdit"
+                                >
+                                    <i class="fas fa-edit" />
+                                </button>
+                            </div>
+                        </h4>
                     </div>
                     <div class="card-body">
-                        <div class="col">
-                            <div>
-                                {{ train.state.status }}
-                            </div>
-                            <div>
-                                Status
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div>
-                                <timeago :datetime="train.created_at"/>
-                            </div>
-                            <div>
-                                Created
-                            </div>
+                        <div
+                            v-if="configEdit"
+                            class="col"
+                        >
+                            <h5>Select configuration</h5>
+                            <train-config-list
+                                :train-id="train.id"
+                                @selected="handleConfigSelected"
+                            />
                         </div>
                     </div>
                 </div>
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h5 class="card-title">Configuration</h5>
+                        <h4 class="card-title">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div>
+                                    Data
+                                </div>
+                                <button
+                                    class="btn btn-sm btn-outline-secondary"
+                                    @click="dataEdit = !dataEdit"
+                                >
+                                    <i class="fas fa-edit" />
+                                </button>
+                            </div>
+                        </h4>
                     </div>
                     <div class="card-body">
-                    </div>
-                </div>
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h5 class="card-title">Data</h5>
-                    </div>
-                    <div class="card-body">
+                        <div class="col">
+                            <h5>Select dataset</h5>
+                            <dataset-list :with-header="false">
+                                <template #items="{items}">
+                                    <select
+                                        v-model=""
+                                        class="form-control"
+                                    >
+                                        <option value="">
+                                            -- Please select --
+                                        </option>
+                                        <option
+                                            v-for="(item,key) in items"
+                                            :key="key + 1"
+                                            :value="item.id"
+                                        >
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+                                </template>
+                            </dataset-list>
+
+                        </div>
                     </div>
                 </div>
             </div>

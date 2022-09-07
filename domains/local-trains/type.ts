@@ -35,8 +35,14 @@ export type LocalTrain = {
     fhir_query?: string;
     master_image_id?: string;
     custom_image?: string;
+    config_id?: string;
+    dataset_id?: string;
 };
 
 export type LocalTrainCreate = Pick<LocalTrain, 'id'> & Partial<Pick<LocalTrain, 'name'>>;
 
-export type LocalTrainUpdate = Partial<Pick<LocalTrain, 'name' | 'entrypoint' | 'files' | 'fhir_query' | 'custom_image' | 'master_image_id'>>;
+export type LocalTrainUpdate = Partial<
+Pick<
+LocalTrain, 'name' | 'entrypoint' | 'files' | 'fhir_query' | 'custom_image' | 'master_image_id' | 'config_id' | 'dataset_id'
+>
+>;

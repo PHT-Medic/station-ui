@@ -30,7 +30,7 @@ export class ConfigurationAPI {
         return response.data;
     }
 
-    async getOne(id: Train['train_id']) : Promise<Configuration[]> {
+    async getOne(id: Train['train_id']) : Promise<Configuration> {
         const response = await this.client.get(`trains/docker/config/${id}`);
 
         return response.data;

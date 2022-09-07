@@ -5,7 +5,6 @@ import TrainConfigList from '../train-config/TrainConfigList.vue';
 import DatasetList from '../data/dataset/DatasetList.vue';
 
 export default Vue.extend({
-    name: 'LocalTrainFiles',
     components: {
         TrainConfigList,
         DatasetList,
