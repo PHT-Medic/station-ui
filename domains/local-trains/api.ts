@@ -57,8 +57,8 @@ export class LocalTrainAPI {
     async run(id: LocalTrain['id'], configId: string | null, datasetId: string | null): Promise<any> {
         console.log('call run api', id, configId, datasetId);
         const config = {
-            config_id: Number(configId),
-            dataset_id: datasetId,
+            config_id: configId === undefined || configId === '0' ? null : Number(configId),
+            dataset_id: datasetId !== undefined ? datasetId : null,
         };
         console.log('config', config);
         const response = await this.client.post(`/local-trains/${id}/run`, config);

@@ -217,7 +217,9 @@ export default Vue.extend({
                                 </template>
                             </dataset-list>
                         </div>
-                        <div>
+                        <div
+                            v-else
+                        >
                             {{ dataset.id }}
                         </div>
                     </div>

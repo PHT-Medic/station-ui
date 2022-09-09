@@ -37,6 +37,8 @@ export type LocalTrain = {
     custom_image?: string;
     config_id?: string;
     dataset_id?: string;
+    command?: string;
+    command_args?: string;
 };
 
 export type LocalTrainCreate = Pick<LocalTrain, 'id'> & Partial<Pick<LocalTrain, 'name'>>;

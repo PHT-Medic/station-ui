@@ -21,14 +21,26 @@ export default Vue.extend({
             files: [],
             entrypoint: '',
             datasetId: '',
+            configId: '',
+            command: '',
+            commandArgs: '',
         };
     },
     methods: {
         handleConfigSelected(config) {
             console.log('Config selected', config);
+            this.configId = config;
         },
-        buildAndRun() {
+        async buildAndRun() {
             console.log('Build and run');
+            const response = await this.$stationApi.localTrain.update(this.train.id, {
+                entrypoint: this.entrypoint,
+                command: this.command,
+                command_args: this.commandArgs,
+                dataset_id: this.datasetId,
+            });
+            console.log('response', response);
+            await this.$stationApi.localTrain.run(this.train.id, this.configId, this.datasetId);
             this.$router.push({
                 path: `/local-trains/${this.train.id}`,
             });
@@ -42,7 +54,43 @@ export default Vue.extend({
         <h2>
             Run Configuration
         </h2>
-        <div class="container-fluid row p-0 m-0">
+        <div class="container-fluid row mb-4">
+            <div class="col">
+                <label
+                    for="command"
+                    class="font-weight-bold"
+                    style="font-size: 1.4rem"
+                >
+
+                    Command
+                </label>
+                <input
+                    id="command"
+                    v-model="command"
+                    type="text"
+                    class="form-control"
+                    placeholder="Command"
+                >
+            </div>
+            <div class="col">
+                <label
+                    for="command-args"
+                    class="font-weight-bold"
+                    style="font-size: 1.4rem"
+                >
+
+                    Arguments
+                </label>
+                <input
+                    id="command-args"
+                    v-model="commandArgs"
+                    type="text"
+                    class="form-control"
+                    placeholder="Command arguments"
+                >
+            </div>
+        </div>
+        <div class="container-fluid row p-0 m-0 mt-4">
             <div class="container-fluid col">
                 <h5>
                     Select train config
@@ -77,7 +125,7 @@ export default Vue.extend({
                 </dataset-list>
             </div>
         </div>
-        <div class="container row justify-content-between pr-0">
+        <div class="container-fluid row justify-content-between pr-0">
             <button
                 class="btn btn-primary"
                 @click.prevent="$emit('back')"
@@ -94,6 +142,7 @@ export default Vue.extend({
                 </button>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
