@@ -5,6 +5,7 @@ import FileList from '../../components/shared/files/FileList.vue';
 import LocalTrainOverviewCard from '../../components/domains/local-train/LocalTrainOverviewCard.vue';
 import TrainConfigList from '../../components/domains/train-config/TrainConfigList.vue';
 import DatasetList from '../../components/domains/data/dataset/DatasetList.vue';
+import LocalTrainRun from '../../components/domains/local-train/LocalTrainRun.vue';
 
 export default Vue.extend({
     components: {
@@ -13,6 +14,7 @@ export default Vue.extend({
         LocalTrainOverviewCard,
         TrainConfigList,
         DatasetList,
+        LocalTrainRun,
     },
     async asyncData(ctx) {
         const { id } = ctx.params;
@@ -67,6 +69,8 @@ export default Vue.extend({
             files: [],
             configEdit: false,
             dataEdit: false,
+            configId: null,
+            datasetId: null,
             config: null,
             dataset: null,
         };
@@ -75,6 +79,7 @@ export default Vue.extend({
         async handleConfigSelected(config) {
             console.log('Config selected', config);
             this.configEdit = false;
+            this.configId = config;
             this.$stationApi.localTrain.update(this.id, {
                 config_id: config,
             }).then(
@@ -91,6 +96,7 @@ export default Vue.extend({
         handleDatasetSelected(dataset) {
             console.log('Dataset selected', dataset);
             console.log(dataset.target.value);
+            this.datasetId = dataset.target.value;
             this.$emit('selected', dataset.target.value);
             this.dataEdit = false;
             this.$stationApi.localTrain.update(this.id, {
@@ -185,8 +191,8 @@ export default Vue.extend({
                     </div>
                     <div class="card-body">
                         <div
-                            class="col"
                             v-if="dataEdit"
+                            class="col"
                         >
                             <h5>Select dataset</h5>
                             <dataset-list
@@ -210,16 +216,19 @@ export default Vue.extend({
                                     </select>
                                 </template>
                             </dataset-list>
-
                         </div>
                         <div>
                             {{ dataset.id }}
                         </div>
-
                     </div>
                 </div>
             </div>
             <div class="col">
+                <local-train-run
+                    :train="train"
+                    :config-id="configId"
+                    :dataset-id="datasetId"
+                />
                 <file-list
                     :files="files"
                 />

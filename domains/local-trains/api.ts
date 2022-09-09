@@ -54,6 +54,17 @@ export class LocalTrainAPI {
         return response.data;
     }
 
+    async run(id: LocalTrain['id'], configId: string | null, datasetId: string | null): Promise<any> {
+        console.log('call run api', id, configId, datasetId);
+        const config = {
+            config_id: Number(configId),
+            dataset_id: datasetId,
+        };
+        console.log('config', config);
+        const response = await this.client.post(`/local-trains/${id}/run`, config);
+        return response.data;
+    }
+
     async deleteFile(id: LocalTrain['id'], filename: string): Promise<any> {
         const response = await this.client.delete(`/local-trains/${id}/files/${filename}`);
         return response.data;

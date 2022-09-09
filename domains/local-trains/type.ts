@@ -42,7 +42,4 @@ export type LocalTrain = {
 export type LocalTrainCreate = Pick<LocalTrain, 'id'> & Partial<Pick<LocalTrain, 'name'>>;
 
 export type LocalTrainUpdate = Partial<
-Pick<
-LocalTrain, 'name' | 'entrypoint' | 'files' | 'fhir_query' | 'custom_image' | 'master_image_id' | 'config_id' | 'dataset_id'
->
->;
+Pick<LocalTrain, 'name' | 'entrypoint' | 'files' | 'fhir_query' | 'custom_image' | 'master_image_id' | 'config_id' | 'dataset_id'>>;
