@@ -23,7 +23,7 @@ export default Vue.extend({
             datasetId: '',
             configId: '',
             command: '',
-            commandArgs: '',
+            commandArgs: null,
         };
     },
     methods: {
@@ -34,7 +34,6 @@ export default Vue.extend({
         async buildAndRun() {
             console.log('Build and run');
             const response = await this.$stationApi.localTrain.update(this.train.id, {
-                entrypoint: this.entrypoint,
                 command: this.command,
                 command_args: this.commandArgs,
                 dataset_id: this.datasetId,
@@ -142,7 +141,6 @@ export default Vue.extend({
                 </button>
             </div>
         </div>
-    </div>
     </div>
 </template>
 

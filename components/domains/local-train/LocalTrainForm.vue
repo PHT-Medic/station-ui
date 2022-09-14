@@ -88,11 +88,14 @@ export default Vue.extend({
             this.trainFiles = response.files;
         },
 
-        async handleFilesConfigured(entrypoint) {
+        async handleFilesConfigured(entrypoint: string) {
             this.busy = true;
             this.configurationState = 'runConfiguration';
-            this.formData.entrypoint = entrypoint;
+            const ep = entrypoint.split('/');
+            ep.shift();
+            this.formData.entrypoint = ep.join('/');
             const response = await this.$stationApi.localTrain.update(this.formData.id, { ...this.formData });
+            console.log('handleFilesConfigured', response);
             this.formData = {
                 ...response,
                 id: response.id,
