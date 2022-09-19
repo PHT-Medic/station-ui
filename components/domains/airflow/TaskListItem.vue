@@ -50,8 +50,19 @@ export default {
     <div>
         <div class="task-item">
             <div class="d-flex flex-row justify-content-between">
-                <div class="c-list-icon">
-                    <i class="fa fa-check" />
+                <div class="c-list-icon mx-1">
+                    <i
+                        v-if="entity.state === 'success'"
+                        class="fa fa-check text-success"
+                    />
+                    <i
+                        v-else-if="entity.state === 'failed'"
+                        class="fa fa-times text-danger"
+                    />
+                    <i
+                        v-else
+                        class="fa fa-clock text-warning"
+                    />
                 </div>
                 <slot name="item-name">
                     <p class="mb-0">

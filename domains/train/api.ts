@@ -7,6 +7,7 @@
 
 import { ClientDriverInstance } from 'hapic';
 import { nullifyEmptyObjectProperties } from '@authelion/common';
+import { config } from 'rxjs';
 import { AirflowDagRun } from '../airflow';
 import {
     Train, TrainCreate, TrainExecution, TrainExecutionConfig,
@@ -34,6 +35,11 @@ export class TrainAPI {
     async getOne(id: Train['train_id']) : Promise<Train[]> {
         const response = await this.client.get(`trains/docker/${id}`);
 
+        return response.data;
+    }
+
+    async delete(id: Train['train_id']) : Promise<void> {
+        const response = await this.client.delete(`trains/docker/${id}`);
         return response.data;
     }
 
@@ -73,6 +79,17 @@ export class TrainAPI {
 
     async getTrainExecution(executionId: TrainExecution['airflow_dag_run']) : Promise<AirflowDagRun> {
         const response = await this.client.get(`airflow/logs/run_pht_train/${executionId}`);
+        return response.data;
+    }
+
+    async getAllExecutions(skip = 0, limit = 100) : Promise<TrainExecution[]> {
+        const response = await this.client.get('trains/docker/executions/all', {
+            params: {
+                skip,
+                limit,
+            },
+        });
+
         return response.data;
     }
 }

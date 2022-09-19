@@ -17,6 +17,12 @@ export default {
             itemBusy: false,
         };
     },
+    methods: {
+        drop(trainId) {
+            console.log('drop', trainId);
+            this.$emit('dropTrain', trainId);
+        },
+    },
 };
 </script>
 

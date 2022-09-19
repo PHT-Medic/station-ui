@@ -8,16 +8,136 @@
 <script lang="ts">
 import Vue from 'vue';
 import { LayoutKey, LayoutNavigationID } from '../config/layout/contants';
+import TrainList from '../components/domains/train/TrainList.vue';
+import LocalTrainList from '../components/domains/local-train/LocalTrainList.vue';
+import ExecutionList from '../components/domains/train-executions/ExecutionList.vue';
 
 export default Vue.extend({
     meta: {
         [LayoutKey.REQUIRED_LOGGED_IN]: true,
         [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.DEFAULT,
     },
+    components: {
+        TrainList,
+        LocalTrainList,
+        ExecutionList,
+    },
+    async asyncData(context) {
+        try {
+            const trains = await context.$stationApi.train.getMany();
+            const localTrains = await context.$stationApi.localTrain.getMany();
+            const datasets = await context.$stationApi.datasets.getMany();
+            const executions = await context.$stationApi.train.getAllExecutions(0, 5);
+
+            return {
+                trains,
+                localTrains,
+                datasets,
+                executions,
+            };
+        } catch (e) {
+            console.log(e);
+            await context.redirect('/');
+            return {
+                trains: [],
+                localTrains: [],
+                datasets: [],
+            };
+        }
+    },
+    data: () => ({
+        busy: false,
+        trains: [],
+        executions: [],
+        localTrains: [],
+        datasets: [],
+        notifications: [],
+    }),
+
 });
 </script>
 <template>
-    <div>
-        <h5>Placeholder 🔥</h5>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            Recent 🚊 activity
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <execution-list
+                            :executions="executions"
+                        >
+                        </execution-list>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            🔔 Notifications
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        Recent train executions
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            🚊 Trains
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <train-list :with-header="false" :max-items="5"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            🚊 Local Trains
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <local-train-list />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            🖹 Proposals
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        Available trains
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>
+                            📂 Datasets
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        Available Datasets
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>

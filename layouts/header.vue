@@ -62,6 +62,13 @@ export default {
                         class="navbar-nav nav-items navbar-gadgets"
                     >
                         <li class="nav-item">
+                            <div
+                                class="nav-link"
+                            >
+                                <i class="fa fa-bell" style="font-size: 16px" />
+                            </div>
+                        </li>
+                        <li class="nav-item">
                             <nuxt-link
                                 class="nav-link user-link"
                                 :to="'/users/'+user.id"

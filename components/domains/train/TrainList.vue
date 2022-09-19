@@ -16,6 +16,10 @@ export default Vue.extend({
             type: Boolean,
             default: true,
         },
+        maxItems: {
+            type: Number,
+            default: null,
+        },
     },
     data() {
         return {
@@ -24,6 +28,16 @@ export default Vue.extend({
 
             itemBusy: false,
         };
+    },
+
+    computed: {
+        itemsToDisplay() {
+            if (this.maxItems === null) {
+                return this.items;
+            }
+
+            return this.items.slice(0, this.maxItems);
+        },
     },
     created() {
         Promise.resolve()
@@ -72,12 +86,18 @@ export default Vue.extend({
 
                 this.handleDeleted({ id });
             } catch (e) {
+                console.log(e);
                 if (e instanceof Error) {
                     this.$emit('failed', e);
                 }
             }
 
             this.itemBusy = false;
+        },
+
+        async handleDrop(id) {
+            console.log('handleDrop', id);
+            await this.drop(id);
         },
 
         handleDeleted(item) {
@@ -158,11 +178,14 @@ export default Vue.extend({
         >
             <div class="c-list">
                 <div
-                    v-for="(item,key) in items"
+                    v-for="(item,key) in itemsToDisplay"
                     :key="key"
                     class="c-list-item mb-2 flex-column"
                 >
-                    <TrainListItem :train="item" />
+                    <TrainListItem
+                        :train="item"
+                        @dropTrain="handleDrop"
+                    />
                 </div>
             </div>
         </slot>

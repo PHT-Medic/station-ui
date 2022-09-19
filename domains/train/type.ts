@@ -22,6 +22,7 @@ export type TrainExecution = {
     airflow_dag_run: string,
     config: number,
     dataset?: string,
+    train_id: string,
 };
 
 export type TrainExecutionConfig = {

@@ -6,13 +6,17 @@
   -->
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
 import { TrainExecution } from '../../../domains/train';
 
 export default Vue.extend({
     props: {
         trainId: {
             type: String,
+            default: undefined,
+        },
+        executions: {
+            type: Array as PropType<TrainExecution[]>,
             default: undefined,
         },
     },
@@ -24,8 +28,12 @@ export default Vue.extend({
         };
     },
     created() {
-        Promise.resolve()
-            .then(this.load);
+        if (this.executions) {
+            this.items = this.executions;
+        } else {
+            Promise.resolve()
+                .then(this.load);
+        }
     },
     methods: {
         async load() {
@@ -45,7 +53,7 @@ export default Vue.extend({
             this.busy = false;
         },
         handleClicked(key) {
-            this.$emit('selected', this.items[key]['airflow_dag_run']);
+            this.$emit('selected', this.items[key].airflow_dag_run);
             this.selected = key;
         },
     },
@@ -60,11 +68,19 @@ export default Vue.extend({
                 v-for="(item,key) in items"
                 :key="key"
                 class="c-list-item mb-2"
+                :class="{ 'selected': selected === key }"
                 @click="handleClicked(key)"
-                v-bind:class="{ 'selected': selected === key }"
             >
                 <div>
-                    <i class="fa fa-train" /> <span class="text-success">{{ item.airflow_dag_run }}</span>
+                    <i class="fa fa-train" />
+                    <span
+                        :class="{
+                            'text-success': item.end !== null,
+                            'text-danger': item.end === null
+                        }"
+                    >
+                        {{ item.train_id }}
+                    </span>
                 </div>
                 <div class="ml-auto">
                     <div class="d-flex flex-column">
