@@ -7,6 +7,7 @@
 
 import { Client, Config } from 'hapic';
 import { AirflowApi } from '../../../domains/airflow';
+import { NotificationAPI } from '../../../domains/notifications/api';
 import { TrainAPI } from '../../../domains/train';
 import { ConfigurationAPI } from '../../../domains/config';
 import { TrainConfigAPI } from '../../../domains/train-config';
@@ -29,6 +30,8 @@ export class HTTPClient extends Client {
 
     public localTrain: LocalTrainAPI;
 
+    public notification: NotificationAPI;
+
     constructor(config: Config) {
         super(config);
 
@@ -45,5 +48,7 @@ export class HTTPClient extends Client {
         this.airflow = new AirflowApi(this.driver);
 
         this.localTrain = new LocalTrainAPI(this.driver);
+
+        this.notification = new NotificationAPI(this.driver);
     }
 }
