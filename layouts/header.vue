@@ -5,7 +5,12 @@
   view the LICENSE file that was distributed with this source code.
   -->
 <script lang="ts">
+import NotificationList from "../components/domains/notifications/NotificationList.vue";
+
 export default {
+    components: {
+        NotificationList,
+    },
     async asyncData(ctx) {
         const notifications = await ctx.$stationApi.notification.getNotifications();
         return {
@@ -46,6 +51,10 @@ export default {
         this.timer = setInterval(this.getNotifications, 10000);
     },
     destroyed() {
+        clearInterval(this.timer);
+    },
+
+    beforeDestroy() {
         clearInterval(this.timer);
     },
     methods: {
@@ -106,8 +115,7 @@ export default {
                         <li class="nav-item">
                             <div class="dropdown">
                                 <div
-                                    class="nav-link dropdown-toggle"
-                                    data-toggle="dropdown"
+                                    class="nav-link"
                                 >
                                     <div
                                         class="notification-wrapper"
@@ -124,8 +132,8 @@ export default {
                                         </span>
                                     </div>
                                 </div>
-                                <div class="dropdown-menu">
-                                    Dropdown
+                                <div class="dropdown-content">
+                                    <notification-list :items="notifications" />
                                 </div>
                             </div>
                         </li>
@@ -170,5 +178,19 @@ export default {
     font-weight: bold;
     margin: -10px 10px 0;
 }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 30rem;
+    max-height: 20rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: -25rem;
+    overflow-y: scroll;
+}
+
+.dropdown:hover .dropdown-content {display: flex;}
 
 </style>
