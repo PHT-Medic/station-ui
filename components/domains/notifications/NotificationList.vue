@@ -25,11 +25,11 @@ export default {
     },
     methods: {
         async handleDelete(id: number) {
-            await this.$stationApi.notification.markAsRead(id);
+            await this.$stationApi.notification.delete(id);
             this.notifications = this.notifications.filter((n) => n.id !== id);
         },
         async handleRead(id: number) {
-            await this.$stationApi.notification.delete(id);
+            await this.$stationApi.notification.markAsRead(id);
             this.notifications = this.notifications.filter((n) => n.id !== id);
         },
     },
