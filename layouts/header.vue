@@ -106,8 +106,7 @@ export default {
                         <li class="nav-item">
                             <div class="dropdown">
                                 <div
-                                    class="nav-link dropdown-toggle"
-                                    data-toggle="dropdown"
+                                    class="nav-link"
                                 >
                                     <div
                                         class="notification-wrapper"
