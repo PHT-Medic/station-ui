@@ -50,7 +50,11 @@ export default {
     <div class="container">
         <div class="row">
             <div class="col">
-                General Info
+                <div class="d-flex flex-column">
+                    <span>
+                        <b>Dataset ID:</b> {{ entity.id }}
+                    </span>
+                </div>
             </div>
             <div class="col">
                 <dataset-file-list

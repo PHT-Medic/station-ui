@@ -112,46 +112,71 @@ export default Vue.extend({
             :items="items"
             :busy="busy"
         >
-            <div class="c-list">
+            <div class="d-flex flex-row flex-grow-1">
                 <div
-                    v-for="(item,key) in items"
-                    :key="key"
-                    class="c-list-item mb-2"
+                    v-if="busy"
+                    class="d-flex flex-row flex-grow-1 align-items-center justify-content-center"
                 >
-                    <div class="c-list-icon">
-                        <i class="fa fa-bars" />
+                    <div
+                        class="spinner-border"
+                        role="status"
+                    >
+                        <span class="sr-only">Loading...</span>
                     </div>
-                    <slot name="item-name">
-                        <span class="mb-0">
-                            <nuxt-link :to="'/data/datasets/'+item.id">
-                                {{ item.name }}
-                            </nuxt-link>
-                        </span>
-                    </slot>
-
-                    <div class="ml-auto">
-                        <slot
-                            name="item-actions"
-                            :item="item"
+                </div>
+                <div
+                    v-else
+                    class="d-flex flex-column flex-grow-1 c-list"
+                >
+                    <div
+                        v-for="item in items"
+                        :key="item.id"
+                        class="d-flex flex-column mb-2 c-list-item"
+                    >
+                        <div
+                            class="d-flex flex-row flex-grow-1 justify-content-between"
                         >
-                            <div class="d-flex flex-row">
-                                <div>
+                            <slot name="item-name">
+                                <span class="font-weight-bold">
+                                    <nuxt-link :to="'/data/datasets/'+item.id">
+                                        {{ item.name }}
+                                    </nuxt-link>
+                                </span>
+                            </slot>
+                        </div>
+
+                        <div
+                            class="d-flex flex-row flex-grow-1 justify-content-between"
+                        >
+                            <slot name="item-info">
+                                <span class="text-muted">
+                                    <i class="fas fa-clock" />
+                                    <timeago :datetime="item.created_at" />
+                                </span>
+                            </slot>
+                            <slot name="item-actions">
+                                <div
+                                    class="d-flex flex-row justify-content-end"
+                                >
                                     <button
                                         type="button"
-                                        class="btn btn-xs btn-danger"
+                                        class="btn btn-xs btn-danger mr-2"
+                                        :disabled="itemBusy"
                                         @click.prevent="drop(item.id)"
                                     >
                                         <i class="fas fa-trash" />
                                     </button>
+                                    <nuxt-link :to="'/data/datasets/'+item.id">
+                                        <button
+                                            type="button"
+                                            class="btn btn-xs btn-info"
+                                        >
+                                            <i class="fas fa-eye" />
+                                        </button>
+                                    </nuxt-link>
                                 </div>
-                                <slot
-                                    name="item-actions-extra"
-                                    :busy="busy"
-                                    :item-busy="itemBusy"
-                                    :item="item"
-                                />
-                            </div>
-                        </slot>
+                            </slot>
+                        </div>
                     </div>
                 </div>
             </div>
