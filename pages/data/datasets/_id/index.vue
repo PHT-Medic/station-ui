@@ -1,7 +1,7 @@
 <script lang="ts">
 import { PropType } from 'vue';
 import DatasetFileList from '../../../../components/shared/files/FileList.vue';
-import { Dataset } from '../../../../domains/datasets/type';
+import { Dataset, formatBytes } from '../../../../domains/datasets';
 import { MinioFile } from '../../../../domains/files/type';
 
 export default {
@@ -23,6 +23,12 @@ export default {
         return {
             busy: false,
         };
+    },
+    computed: {
+        totalSize() {
+            const size = this.files.reduce((acc, file) => acc + file.size, 0);
+            return formatBytes(size);
+        },
     },
     methods: {
         async submit() {
@@ -47,12 +53,21 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="d-flex flex-column">
-                    <span>
+                    <span class="p-2">
                         <b>Dataset ID:</b> {{ entity.id }}
+                    </span>
+                    <span class="p-2">
+                        <b>Dataset Name:</b> {{ entity.name }}
+                    </span>
+                    <span class="p-2">
+                        <b>Dataset Type:</b> {{ entity.data_type }}
+                    </span>
+                    <span class="p-2">
+                        <b>Dataset Size:</b> {{ totalSize }}
                     </span>
                 </div>
             </div>

@@ -149,23 +149,35 @@ export default Vue.extend({
                             class="d-flex flex-row flex-grow-1 justify-content-between"
                         >
                             <slot name="item-info">
-                                <span class="text-muted">
-                                    <i class="fas fa-clock" />
-                                    <timeago :datetime="item.created_at" />
-                                </span>
+                                <div
+                                    class="d-flex flex-row mt-2"
+                                >
+                                    <span class="text-muted ml-2">
+                                        <i class="fas fa-clock mr-1" />
+                                        <timeago :datetime="item.created_at" />
+                                    </span>
+                                    <span class="text-muted ml-2">
+                                        <i class="fa fa-database mr-1" />
+                                        {{ item.data_type }}
+                                    </span>
+                                </div>
                             </slot>
                             <slot name="item-actions">
                                 <div
-                                    class="d-flex flex-row justify-content-end"
+                                    class="d-flex flex-row justify-content-end h-50"
                                 >
-                                    <button
-                                        type="button"
-                                        class="btn btn-xs btn-danger mr-2"
-                                        :disabled="itemBusy"
-                                        @click.prevent="drop(item.id)"
+                                    <div
+                                        class="mr-1"
                                     >
-                                        <i class="fas fa-trash" />
-                                    </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-xs btn-danger"
+                                            :disabled="itemBusy"
+                                            @click.prevent="drop(item.id)"
+                                        >
+                                            <i class="fas fa-trash" />
+                                        </button>
+                                    </div>
                                     <nuxt-link :to="'/data/datasets/'+item.id">
                                         <button
                                             type="button"

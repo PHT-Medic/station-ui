@@ -2,9 +2,11 @@
 import Vue, { PropType } from 'vue';
 import { required } from 'vuelidate/lib/validators';
 import { DataType, Dataset } from '../../../../domains/datasets/type';
+import ServerSelect from '../fhir/ServerSelect.vue';
 
 export default Vue.extend({
     name: 'DatasetAddForm',
+    components: { ServerSelect },
     props: {
         entity: {
             type: Object as PropType<Dataset>,
@@ -23,6 +25,7 @@ export default Vue.extend({
                 fhir_server: null,
             },
             files: [],
+            fhirServerAdd: false,
         };
     },
     computed: {
@@ -108,6 +111,10 @@ export default Vue.extend({
             const response = this.$stationApi.datasets.uploadFiles(id, formData);
             console.log(response);
         },
+        handleServerSelected(serverId) {
+            console.log('handleServerSelected', serverId);
+            this.form.fhir_server = serverId;
+        },
     },
     validations() {
         return {
@@ -189,38 +196,53 @@ export default Vue.extend({
                 </div>
             </div>
             <div class="col">
-                <h5>Files</h5>
                 <div
                     v-if="form.data_type !== 'fhir'"
-                    v-cloak
-                    id="drop-zone"
-                    class="d-flex flex-column h-50"
-                    @drop.prevent="addFile"
-                    @dragover.prevent
+                    class="d-flex flex-column h-100"
                 >
-                    <ul>
-                        <li
-                            v-for="file in files"
-                            :key="file.name"
-                            class="mr-auto"
-                        >
-                            {{ file.name }} ({{ formatBytes(file.size) }})
-                            <button
-                                type="button"
-                                title="Remove"
-                                class="btn btn-danger btn-xs mr-auto"
-                                @click="removeFile(file)"
-                            >
-                                X
-                            </button>
-                        </li>
-                    </ul>
-                    <h5
-                        v-if="!files.length"
-                        class="align-self-center"
+                    <h5>Files</h5>
+                    <div
+                        v-cloak
+                        id="drop-zone"
+                        class="d-flex flex-column h-100"
+                        @drop.prevent="addFile"
+                        @dragover.prevent
                     >
-                        Drag and drop files to upload
-                    </h5>
+                        <ul>
+                            <li
+                                v-for="file in files"
+                                :key="file.name"
+                                class="mr-auto"
+                            >
+                                {{ file.name }} ({{ formatBytes(file.size) }})
+                                <button
+                                    type="button"
+                                    title="Remove"
+                                    class="btn btn-danger btn-xs mr-auto"
+                                    @click="removeFile(file)"
+                                >
+                                    X
+                                </button>
+                            </li>
+                        </ul>
+                        <h5
+                            v-if="!files.length"
+                            class="align-self-center"
+                        >
+                            Drag and drop files to upload
+                        </h5>
+                    </div>
+                </div>
+                <div
+                    v-else
+                    class="d-flex flex-column h-100"
+                >
+                    <h5>Configure FHIR server</h5>
+                    <div>
+                        <server-select
+                            @serverSelected="handleServerSelected"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
