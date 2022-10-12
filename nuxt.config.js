@@ -83,6 +83,7 @@ const config = {
         '@/plugins/vue',
         '@/plugins/vuelidate',
         '@/plugins/vueTimeAgo',
+        { src: '@/plugins/plotly', mode: 'client' },
     ],
     /*
     ** Nuxt.js dev-modules

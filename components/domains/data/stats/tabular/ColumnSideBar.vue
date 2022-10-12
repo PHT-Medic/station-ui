@@ -10,26 +10,40 @@ export default Vue.extend({
             required: true,
         },
     },
+    data() {
+        return {
+            busy: false,
+            selectedColumn: null,
+        };
+    },
+    methods: {
+        onColumnSelect(column: string) {
+            this.selectedColumn = column;
+            this.$emit('columnSelect', column);
+        },
+    },
 });
 </script>
 
 <template>
     <div
         id="side-bar-container"
-        class="d-flex flex-column px-2"
+        class="d-flex flex-column px-2 pb-2"
     >
         <button
             v-for="col in stats.column_information"
             :key="col.title"
             type="button"
-            class="btn btn-outline-dark"
+            class="btn btn-outline-dark align-content-center text-center mt-2"
+            :class="{ 'active': col.title === selectedColumn }"
+            @click="onColumnSelect(col.title)"
         >
             <div
                 class="d-flex flex-row align-content-center justify-content-start"
             >
                 <i
                     v-if="col.type === 'categorical'"
-                    class="fa fa-ballot-check"
+                    class="fa fa-ballot-check text-center"
                 />
                 <i
                     v-else-if="col.type === 'numeric'"
