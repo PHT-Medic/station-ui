@@ -1,5 +1,5 @@
 import { ClientDriverInstance } from 'hapic';
-import { Dataset } from './type';
+import {Dataset, TabularDatasetStatistics} from './type';
 import { MinioFile } from '../files/type';
 
 export class DatasetAPI {
@@ -53,6 +53,17 @@ export class DatasetAPI {
                 },
             },
         );
+        return response.data;
+    }
+
+    async getFileSummary(id: string, fileName?: string): Promise<TabularDatasetStatistics> {
+        if (fileName) {
+            const response = await this.client.get(`/datasets/${id}/stats`, {
+                params: { file_name: fileName },
+            });
+            return response.data;
+        }
+        const response = await this.client.get(`/datasets/${id}/stats`);
         return response.data;
     }
 }

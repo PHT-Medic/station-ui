@@ -5,7 +5,7 @@
   view the LICENSE file that was distributed with this source code.
   -->
 <script lang="ts">
-import NotificationList from "../components/domains/notifications/NotificationList.vue";
+import NotificationList from '../components/domains/notifications/NotificationList.vue';
 
 export default {
     components: {
@@ -22,6 +22,7 @@ export default {
             busy: false,
             notifications: [],
             timer: '',
+            hover: false,
         };
     },
     computed: {
@@ -51,10 +52,12 @@ export default {
         this.timer = setInterval(this.getNotifications, 10000);
     },
     destroyed() {
+        console.log('beforeDestroy', this.timer);
         clearInterval(this.timer);
     },
 
     beforeDestroy() {
+        console.log('beforeDestroy', this.timer);
         clearInterval(this.timer);
     },
     methods: {
@@ -111,6 +114,7 @@ export default {
                     <ul
                         v-if="loggedIn && user"
                         class="navbar-nav nav-items navbar-gadgets"
+                        @mouseleave="hover = false"
                     >
                         <li class="nav-item">
                             <div class="dropdown">
@@ -119,6 +123,8 @@ export default {
                                 >
                                     <div
                                         class="notification-wrapper"
+                                        @mouseover="hover = true"
+
                                     >
                                         <i
                                             class="fa fa-bell"
@@ -132,7 +138,12 @@ export default {
                                         </span>
                                     </div>
                                 </div>
-                                <div class="dropdown-content">
+                                <div
+                                    v-if="hover"
+                                    class="dropdown-content"
+                                    @mouseover="hover = true"
+                                    @mouseleave="hover = false"
+                                >
                                     <notification-list :items="notifications" />
                                 </div>
                             </div>
@@ -180,7 +191,7 @@ export default {
 }
 
 .dropdown-content {
-    display: none;
+    display: flex;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 30rem;
@@ -190,7 +201,5 @@ export default {
     left: -25rem;
     overflow-y: scroll;
 }
-
-.dropdown:hover .dropdown-content {display: flex;}
 
 </style>
