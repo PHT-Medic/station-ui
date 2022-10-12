@@ -43,7 +43,7 @@ export default Vue.extend({
             >
                 <i
                     v-if="col.type === 'categorical'"
-                    class="fa fa-ballot-check text-center"
+                    class="fa fa-check text-center"
                 />
                 <i
                     v-else-if="col.type === 'numeric'"
@@ -51,7 +51,7 @@ export default Vue.extend({
                 />
                 <i
                     v-else
-                    class="fa fa-question"
+                    class="fa fa-question text-center align-content-center"
                 />
                 <span
                     class="ml-2"
@@ -68,6 +68,8 @@ export default Vue.extend({
 #side-bar-container {
     overflow-y: scroll;
     background-color: #ede8ef;
+    max-height: 60%;
+    box-shadow: #7F828B 0 0 10px 0;
 }
 
 </style>

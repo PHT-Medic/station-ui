@@ -1,7 +1,6 @@
 <script lang="ts">
-import Vue, { PropType } from 'vue';
-import Plotly from 'plotly.js/dist/plotly';
-import { TabularDatasetStatistics } from '../../../../../domains/datasets';
+import Vue, {PropType} from 'vue';
+import {TabularDatasetStatistics} from '../../../../../domains/datasets';
 
 export default Vue.extend({
     name: 'ColumnSummary',
@@ -23,16 +22,28 @@ export default Vue.extend({
     computed: {
         plotData() {
             if (!this.selectedColumn) {
-                return [];
+                return null;
             }
             const columnInfo = this.stats.column_information.filter((col) => col.title === this.selectedColumn)[0];
-            console.log('plotData', columnInfo);
-            console.log('plotData', this.stats);
             return columnInfo.figure;
+        },
+        columnData() {
+            if (!this.selectedColumn) {
+                return null;
+            }
+            return this.stats.column_information.filter((col) => col.title === this.selectedColumn)[0];
+        },
+    },
+    watch: {
+        selectedColumn() {
+            this.displayPlot();
         },
     },
 
     mounted() {
+        if (this.selectedColumn) {
+            this.$plotly.newPlot('summary-plot-container', this.plotData.fig_data.data, this.plotData.fig_data.layout);
+        }
         // this.$plotly.newPlot('plot-container', this.plotData.fig_data.data, this.plotData.fig_data.layout);
     },
     methods: {
@@ -44,18 +55,90 @@ export default Vue.extend({
 </script>
 <template>
     <div class="d-flex flex-column">
-        <div class="flex-row">
-            Column summary {{ selectedColumn }}
-        </div>
-        <button
-            class="btn btn-primary"
-            @click="displayPlot"
-        >
-            plot
-        </button>
         <div
-            id="summary-plot-container"
-        />
+            v-if="selectedColumn"
+        >
+            <h4
+                class="text-center"
+            >
+                {{ selectedColumn }}
+            </h4>
+            <div
+                v-if="columnData.type === 'numeric'"
+                class="d-flex flex-row justify-content-center"
+            >
+                <div>
+                    Type:
+                    <span class="font-weight-bold"> {{ columnData.type }} </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    Mean:
+                    <span class="font-weight-bold"> {{ columnData.mean }} </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    Std:
+                    <span class="font-weight-bold"> {{ columnData.std }} </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    Min:
+                    <span class="font-weight-bold"> {{ columnData.min }} </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    Max:
+                    <span class="font-weight-bold"> {{ columnData.max }} </span>
+                </div>
+            </div>
+            <div
+                v-else-if="columnData.type === 'categorical'"
+                class="d-flex flex-row justify-content-center"
+            >
+                <div>
+                    Type:
+                    <span class="font-weight-bold"> {{ columnData.type }} </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    Num categories:
+                    <span class="font-weight-bold"> {{ columnData.number_categories }} </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    Most frequent:
+                    <span class="font-weight-bold"> {{ columnData.most_frequent_element }} </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    Frequency:
+                    <span class="font-weight-bold"> {{ columnData.frequency }} </span>
+                </div>
+            </div>
+            <div
+                v-else
+            >
+                <div>
+                    Hello:
+                    <span class="font-weight-bold"> {{ columnData.type }} </span>
+                </div>
+            </div>
+        </div>
+        <div
+            class="p-2"
+        >
+            <div
+                id="summary-plot-container"
+            />
+        </div>
     </div>
 </template>
 
