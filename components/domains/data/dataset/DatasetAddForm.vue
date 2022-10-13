@@ -74,17 +74,15 @@ export default Vue.extend({
                 let response;
 
                 const data = { ...this.form };
-                console.log(data);
                 if (this.isEditing) {
                     response = await this.$stationApi.datasets.update(this.entity.id, data);
                     this.upload(response.id);
-                    this.$emit('updated', response);
+                    this.$emit('updated', response.id);
                 } else {
                     delete data.id;
                     response = await this.$stationApi.datasets.create(data);
-                    console.log(response);
                     this.upload(response.id);
-                    this.$emit('created', response);
+                    this.$emit('created', response.id);
                 }
             } catch (e) {
                 // ...

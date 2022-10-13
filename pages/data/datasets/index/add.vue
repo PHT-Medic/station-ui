@@ -5,8 +5,9 @@ export default {
     name: 'Add',
     components: { DatasetAddForm },
     methods: {
-        handleCreated() {
-            this.$router.push('/data/datasets');
+        handleCreated(id) {
+            console.log('handleCreated', id);
+            this.$router.push(`/data/datasets/${id}`);
         },
     },
 };
@@ -14,7 +15,10 @@ export default {
 
 <template>
     <div>
-        <DatasetAddForm />
+        <DatasetAddForm
+            @created="handleCreated"
+            @updated="handleCreated"
+        />
     </div>
 </template>
 
