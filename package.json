@@ -46,7 +46,7 @@
         "np": "^3.0.4",
         "nuxt": "^2.12.2",
         "typescript": "^4.7.4",
-        "vue": "^2.7.11",
+        "vue": "^2.7.13",
         "vue-gravatar": "^1.4.1",
         "vue-timeago": "^5.1.2",
         "vuelidate": "^0.7.7",
