@@ -47,7 +47,7 @@ export default {
             return this.notifications.filter((notification) => !notification.is_read);
         },
     },
-    created() {
+    mounted() {
         // eslint-disable-next-line @typescript-eslint/no-implied-eval
         this.timer = setInterval(this.getNotifications, 10000);
     },
