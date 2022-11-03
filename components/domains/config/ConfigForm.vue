@@ -177,7 +177,7 @@ export default Vue.extend({
                         v-if="!$v.form.name.required"
                         class="form-group-hint group-required"
                     >
-                        Please enter a proposal id.
+                        Please enter a name for your config.
                     </div>
                 </div>
 
