@@ -27,16 +27,23 @@ export default Vue.extend({
             items: [],
 
             itemBusy: false,
+            filters: {
+                active: false,
+                available: false,
+                finished: false,
+            },
+
         };
     },
 
     computed: {
         itemsToDisplay() {
+            const items = this.filterItems();
             if (this.maxItems === null) {
-                return this.items;
+                return items;
             }
 
-            return this.items.slice(0, this.maxItems);
+            return items.slice(0, this.maxItems);
         },
     },
     created() {
@@ -106,6 +113,23 @@ export default Vue.extend({
                 this.items.splice(index, 1);
             }
         },
+        filterItems() {
+            return this.items.filter((item) => {
+                let include = true;
+                if (this.filters.active && item.status !== 'active') {
+                    include = false;
+                }
+
+                if (this.filters.available && item.status !== 'available') {
+                    include = false;
+                }
+                if (this.filters.finished && item.status !== 'finished') {
+                    include = false;
+                }
+
+                return include;
+            });
+        },
     },
 });
 </script>
@@ -128,6 +152,8 @@ export default Vue.extend({
                         <button
                             type="button"
                             class="btn btn-xs btn-link"
+                            :class="{ 'btn-primary': filters.active }"
+                            @click="filters.active = !filters.active"
                         >
                             Active
                         </button>
@@ -136,6 +162,8 @@ export default Vue.extend({
                         <button
                             type="button"
                             class="btn btn-xs btn-link"
+                            :class="{ 'btn-primary': filters.available }"
+                            @click="filters.available = !filters.available"
                         >
                             Available
                         </button>
@@ -144,6 +172,8 @@ export default Vue.extend({
                         <button
                             type="button"
                             class="btn btn-xs btn-link"
+                            :class="{ 'btn-primary': filters.finished }"
+                            @click="filters.finished = !filters.finished"
                         >
                             Finished
                         </button>
