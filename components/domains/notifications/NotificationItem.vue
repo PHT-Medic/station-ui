@@ -44,18 +44,20 @@ export default {
                     />
                 </div>
                 <div class="col">
-                    <button
-                        class="btn btn-info btn-sm"
-                        @click="handleRead"
-                    >
-                        <i class="fas fa-check"></i>
-                    </button>
-                    <button
-                        class="btn btn-danger btn-sm"
-                        @click="handleDelete"
-                    >
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button
+                            class="btn btn-info btn-xs"
+                            @click="handleRead"
+                        >
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button
+                            class="btn btn-danger btn-xs ml-1"
+                            @click="handleDelete"
+                        >
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

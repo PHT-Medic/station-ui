@@ -11,6 +11,7 @@ import { LayoutKey, LayoutNavigationID } from '../config/layout/contants';
 import TrainList from '../components/domains/train/TrainList.vue';
 import LocalTrainList from '../components/domains/local-train/LocalTrainList.vue';
 import ExecutionList from '../components/domains/train-executions/ExecutionList.vue';
+import NotificationList from '../components/domains/notifications/NotificationList.vue';
 
 export default Vue.extend({
     meta: {
@@ -18,6 +19,7 @@ export default Vue.extend({
         [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.DEFAULT,
     },
     components: {
+        NotificationList,
         TrainList,
         LocalTrainList,
         ExecutionList,
@@ -28,12 +30,14 @@ export default Vue.extend({
             const localTrains = await context.$stationApi.localTrain.getMany();
             const datasets = await context.$stationApi.datasets.getMany();
             const executions = await context.$stationApi.train.getAllExecutions(0, 5);
+            const notifications = await context.$stationApi.notification.getMany(0, 5);
 
             return {
                 trains,
                 localTrains,
                 datasets,
                 executions,
+                notifications,
             };
         } catch (e) {
             console.log(e);
@@ -69,8 +73,7 @@ export default Vue.extend({
                     <div class="card-body">
                         <execution-list
                             :executions="executions"
-                        >
-                        </execution-list>
+                        />
                     </div>
                 </div>
             </div>
@@ -82,7 +85,9 @@ export default Vue.extend({
                         </h4>
                     </div>
                     <div class="card-body">
-                        Recent train executions
+                        <NotificationList
+                            :items="notifications"
+                        />
                     </div>
                 </div>
             </div>
@@ -96,7 +101,10 @@ export default Vue.extend({
                         </h4>
                     </div>
                     <div class="card-body">
-                        <train-list :with-header="false" :max-items="5"/>
+                        <train-list
+                            :with-header="false"
+                            :max-items="5"
+                        />
                     </div>
                 </div>
             </div>
@@ -109,32 +117,6 @@ export default Vue.extend({
                     </div>
                     <div class="card-body">
                         <local-train-list />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>
-                            🖹 Proposals
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        Available trains
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>
-                            📂 Datasets
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        Available Datasets
                     </div>
                 </div>
             </div>

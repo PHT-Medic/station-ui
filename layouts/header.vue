@@ -12,7 +12,7 @@ export default {
         NotificationList,
     },
     async asyncData(ctx) {
-        const notifications = await ctx.$stationApi.notification.getNotifications();
+        const notifications = await ctx.$stationApi.notification.getMany();
         return {
             notifications,
         };
