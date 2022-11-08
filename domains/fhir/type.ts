@@ -6,7 +6,7 @@ export enum AuthMethods {
 }
 
 export type FHIRServer = {
-    id?: number;
+    id?: string;
     api_address: string;
     name?: string;
     password?: string;
