@@ -1,7 +1,10 @@
 <template>
     <div>
         <h2>Add FHIR server</h2>
-        <ServerAddForm />
+        <ServerAddForm
+            @created="handleCreated"
+            @updated="handleCreated"
+        />
     </div>
 </template>
 
@@ -15,8 +18,8 @@ export default {
         ServerAddForm,
     },
     methods: {
-        handleCreated() {
-            this.$router.push('/data/fhir');
+        handleCreated(server) {
+            this.$router.push(`/data/fhir/${server.id}`);
         },
     },
 };

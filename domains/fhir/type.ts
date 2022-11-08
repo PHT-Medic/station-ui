@@ -30,3 +30,9 @@ export type ServerSummary = {
     name: string;
     resources: ResourceSummary[];
 };
+
+export type ServerStatistics = {
+    created_at: Date;
+    summary: ServerSummary;
+    figure: Record<string, unknown>;
+};
