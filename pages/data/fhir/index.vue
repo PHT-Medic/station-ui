@@ -27,7 +27,7 @@ export default {
 <template>
     <div>
         <h1 class="title no-border mb-3">
-            🔥 FHIR <span class="sub-title">Manage connected FHIR servers</span>
+            🔥 FHIR <span class="sub-title">Manage PHT FHIR servers</span>
         </h1>
         <div class="content-wrapper">
             <div class="content-sidebar flex-column">

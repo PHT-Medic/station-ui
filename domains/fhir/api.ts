@@ -1,5 +1,5 @@
 import { ClientDriverInstance } from 'hapic';
-import { FHIRServer } from './type';
+import { FHIRServer, ServerSummary } from './type';
 
 export class FhirAPI {
     protected client: ClientDriverInstance;
@@ -30,6 +30,11 @@ export class FhirAPI {
 
     async delete(id: any): Promise<FHIRServer> {
         const response = await this.client.delete(`/fhir/server/${id}`);
+        return response.data;
+    }
+
+    async stats(id: any): Promise<ServerSummary> {
+        const response = await this.client.get(`/fhir/server/${id}/summary`);
         return response.data;
     }
 }

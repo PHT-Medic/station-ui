@@ -20,3 +20,13 @@ export type FHIRServer = {
     created_at?: Date;
     updated_at?: Date;
 };
+
+export type ResourceSummary = {
+    resource: string;
+    count: number;
+};
+
+export type ServerSummary = {
+    name: string;
+    resources: ResourceSummary[];
+};
