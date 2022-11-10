@@ -116,7 +116,7 @@ export default Vue.extend({
                         </h4>
                     </div>
                     <div class="card-body">
-                        <local-train-list />
+                        <local-train-list :with-header="false"/>
                     </div>
                 </div>
             </div>
