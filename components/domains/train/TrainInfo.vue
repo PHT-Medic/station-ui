@@ -12,6 +12,9 @@ export default Vue.extend({
     },
     computed: {
         proposalID() {
+            if (!this.entity.proposal) {
+                return undefined;
+            }
             return this.entity.proposal.substring(
                 this.entity.proposal.lastIndexOf('/') + 1,
             );

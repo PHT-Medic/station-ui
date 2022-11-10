@@ -1,13 +1,15 @@
-<script>
+<script lang="ts">
+import { PropType } from 'vue';
 import TrainName from './TrainName.vue';
 import TrainRunAction from './TrainRunAction.vue';
+import { Train } from '../../../domains/train';
 
 export default {
     name: 'TrainListItem',
     components: { TrainRunAction, TrainName },
     props: {
         train: {
-            type: Object,
+            type: Object as PropType<Train>,
             required: true,
         },
     },
@@ -29,7 +31,7 @@ export default {
 <template>
     <div>
         <div class="d-flex flex-row">
-            <div class="c-list-icon">
+            <div class="c-list-icon ml-1">
                 <i class="fa fa-train" />
             </div>
             <slot name="item-name">
@@ -72,19 +74,67 @@ export default {
                 </slot>
             </div>
         </div>
-        <div>
-            <div class="d-flex flex-row">
-                <div class="container">
-                    <div class="row">
-                        <div class="mr-1">
-                            {{ train.is_active }}
-                        </div>
-                        <div class="mr-1">
-                            {{ train.proposal_id }}
-                        </div>
-                    </div>
+        <div class="mt-2">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="ml-2">
+                    <b class="text-monospace">
+                        <i class="fa-solid fa-magnifying-glass" />
+                        Status:
+                    </b>
+                    <span v-if="train.state.status === 'active'">
+                        <i class="fas fa-play text-success" />
+                        Running
+                    </span>
+                    <span v-else-if="train.state.status === 'failed'">
+                        <i class="fas fa-stop text-danger" />
+                        Stopped
+                    </span>
+                    <span v-else-if="train.state.status === 'inactive'">
+                        <i class="fas fa-pause text-warning" />
+                        Paused
+                    </span>
+                </div>
+                <div class="ml-4">
+                    <b class="text-monospace">
+                        <i class="fa fa-globe" />
+                        Central:
+                    </b>
+                    <span
+                        v-if="train.state.central_status"
+                        :class="{
+                            'text-success': train.state.central_status === 'departed',
+                            'text-warning': train.state.central_status === 'arrived',
+                        }"
+                    >
+                        {{ train.state.central_status }}
+                    </span>
+                    <span
+                        v-else
+                        class="text-dark"
+                    >
+                        ---
+                    </span>
+                </div>
+                <div class="ml-4">
+                    <b class="text-monospace">
+                        <i class="fa-solid fa-play" />
+                        Last run:
+                    </b>
+                    <timeago
+                        v-if="train.state.last_execution"
+                        :datetime="train.state.last_execution"
+                    />
+                    <span
+                        v-else
+                        class="text-dark"
+                    >
+                        ---
+                    </span>
                 </div>
                 <div class="ml-auto">
+                    <b class="text-monospace">
+                        <i class="fa-solid fa-screwdriver-wrench" />
+                    </b>
                     <timeago :datetime="train.created_at" />
                 </div>
             </div>
