@@ -7,7 +7,8 @@
 <template>
     <div>
         <button
-            class="btn btn-xs btn-primary"
+            type="button"
+            class="btn btn-xs btn-success"
             @click.prevent="show"
         >
             <slot name="text">

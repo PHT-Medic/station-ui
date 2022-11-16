@@ -148,6 +148,9 @@ export default Vue.extend({
                     </slot>
                 </div>
                 <div class="d-flex flex-row flex-fill justify-content-center">
+                    <i
+                        class="fa fa-filter text-info"
+                    />
                     <div class="mb-auto">
                         <button
                             type="button"

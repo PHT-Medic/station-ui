@@ -53,9 +53,6 @@ export default {
                 >
                     <div class="d-flex flex-row">
                         <div class="mr-1">
-                            <train-run-action :train-id="train.train_id" />
-                        </div>
-                        <div>
                             <button
                                 type="button"
                                 class="btn btn-xs btn-danger"
@@ -63,6 +60,18 @@ export default {
                             >
                                 <i class="fas fa-trash" />
                             </button>
+                        </div>
+                        <div class="mr-1">
+                            <nuxt-link :to="'/trains/'+train.train_id">
+                                <button
+                                    class="btn btn-xs btn-primary"
+                                >
+                                    <i class="fas fa-eye" />
+                                </button>
+                            </nuxt-link>
+                        </div>
+                        <div class="mr-1">
+                            <train-run-action :train-id="train.train_id" />
                         </div>
                         <slot
                             name="item-actions-extra"
