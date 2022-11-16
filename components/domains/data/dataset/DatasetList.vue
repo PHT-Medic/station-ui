@@ -138,6 +138,7 @@ export default Vue.extend({
                         >
                             <slot name="item-name">
                                 <span class="font-weight-bold">
+                                    📂
                                     <nuxt-link :to="'/data/datasets/'+item.id">
                                         {{ item.name }}
                                     </nuxt-link>
