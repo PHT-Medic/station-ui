@@ -226,5 +226,11 @@ export default Vue.extend({
         >
             No trains available...
         </div>
+        <div
+            v-if="!busy && itemsToDisplay.length === 0 && (filters.active || filters.available || filters.finished)"
+            class="alert alert-sm alert-warning mt-2"
+        >
+            No trains found matching the filters...
+        </div>
     </div>
 </template>

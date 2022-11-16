@@ -17,11 +17,11 @@ export default {
             sidebar: {
                 hide: false,
                 items: [
-                    {
-                        name: 'Create',
-                        urlSuffix: '/add',
-                        icon: 'fa fa-plus',
-                    },
+                    // {
+                    //     name: 'Create',
+                    //     urlSuffix: '/add',
+                    //     icon: 'fa fa-plus',
+                    // },
                     {
                         name: 'Overview',
                         urlSuffix: '',
