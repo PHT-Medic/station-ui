@@ -19,8 +19,8 @@ export default {
         },
     },
     methods: {
-        handleUpdated(train) {
-            this.$emit('updated', train);
+        handleUpdated(config) {
+            this.$emit('updated', config);
         },
         handleFailed(e) {
             this.$emit('failed', e);

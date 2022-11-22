@@ -90,6 +90,7 @@ export default Vue.extend({
             }
         },
         async submit() {
+            console.log("submit");
             if (this.busy) return;
 
             this.busy = true;
@@ -115,16 +116,16 @@ export default Vue.extend({
                     response = await this.$stationApi.configuration.update(this.entity.id, {
                         ...config,
                     });
-
+                    console.log(response);
                     this.$emit('updated', response);
                 } else {
                     delete config.config_id;
                     response = await this.$stationApi.configuration.create({ ...config });
-
                     this.$emit('created', response);
                 }
             } catch (e) {
                 // ...
+                console.log(e);
             }
 
             this.busy = false;

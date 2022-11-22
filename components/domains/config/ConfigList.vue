@@ -81,7 +81,7 @@ export default Vue.extend({
                 <div>
                     <slot name="header-title">
                         <h6 class="mb-0">
-                            <i class="fa-solid fa-box" /> Configurations
+                            <i class="fa-solid fa-tools" /> Configurations
                         </h6>
                     </slot>
                 </div>
@@ -116,42 +116,91 @@ export default Vue.extend({
                 <div
                     v-for="(item,key) in items"
                     :key="key"
-                    class="c-list-item mb-2"
+                    class="c-list-item mb-2 flex-column"
                 >
-                    <div class="c-list-icon">
-                        <i class="fa fa-bars" />
-                    </div>
-                    <slot name="item-name">
-                        <span class="mb-0">
-                            <nuxt-link :to="'/configurations/'+item.id">
-                                {{ item.name }}
-                            </nuxt-link>
-                        </span>
-                    </slot>
-
-                    <div class="ml-auto">
-                        <slot
-                            name="item-actions"
-                            :item="item"
-                        >
-                            <div class="d-flex flex-row">
-                                <div>
-                                    <button
-                                        type="button"
-                                        class="btn btn-xs btn-danger"
-                                        @click.prevent="drop(item.id)"
-                                    >
-                                        <i class="fas fa-trash" />
-                                    </button>
-                                </div>
-                                <slot
-                                    name="item-actions-extra"
-                                    :busy="busy"
-                                    :item-busy="itemBusy"
-                                    :item="item"
-                                />
-                            </div>
+                    <div class="d-flex flex-row">
+                        <div class="c-list-icon">
+                            <i class="fa fa-bars" />
+                        </div>
+                        <slot name="item-name">
+                            <span class="mb-0">
+                                <nuxt-link :to="'/configurations/'+item.id">
+                                    {{ item.name }}
+                                </nuxt-link>
+                            </span>
                         </slot>
+                        <div class="ml-auto">
+                            <slot
+                                name="item-actions"
+                                :item="item"
+                            >
+                                <div class="d-flex flex-row">
+                                    <div>
+                                        <button
+                                            type="button"
+                                            class="btn btn-xs btn-danger"
+                                            @click.prevent="drop(item.id)"
+                                        >
+                                            <i class="fas fa-trash" />
+                                        </button>
+                                    </div>
+                                    <slot
+                                        name="item-actions-extra"
+                                        :busy="busy"
+                                        :item-busy="itemBusy"
+                                        :item="item"
+                                    />
+                                </div>
+                            </slot>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between">
+                        <div class="d-flex flex-row">
+                            <div class="ml-1">
+                                <b class="text-monospace">
+                                    <i class="fa-solid fa-circle-info" />
+                                    Env vars:
+                                </b>
+                                <span
+                                    v-if="item.airflow_config.env !== null && item.airflow_config.env.length > 0"
+                                    class="text-monospace text-success"
+                                >
+                                    {{ item.airflow_config.env.length }}
+                                </span>
+                                <span
+                                    v-else
+                                    class="text-dark"
+                                >
+                                    ---
+                                </span>
+                            </div>
+                            <div class="ml-4">
+                                <b class="text-monospace">
+                                    <i class="fa-solid fa-hard-drive" />
+                                    Volumes:
+                                </b>
+                                <span
+                                    v-if="item.airflow_config.volumes !== null && item.airflow_config.volumes.length > 0"
+                                    class="text-monospace text-success"
+                                >
+                                    {{ item.airflow_config.env.length }}
+                                </span>
+                                <span
+                                    v-else
+                                    class="text-dark"
+                                >
+                                    ---
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ml-auto">
+                                <b class="text-monospace">
+                                    <i class="fa-solid fa-screwdriver-wrench" />
+                                </b>
+                                <timeago :datetime="item.created_at" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

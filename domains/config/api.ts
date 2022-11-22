@@ -41,4 +41,10 @@ export class ConfigurationAPI {
 
         return response.data;
     }
+
+    async update(id: Train['train_id'], data: ConfigurationCreate) : Promise<Configuration> {
+        const response = await this.client.put(`trains/docker/config/${id}`, nullifyEmptyObjectProperties(data));
+
+        return response.data;
+    }
 }
