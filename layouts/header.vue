@@ -99,7 +99,7 @@ export default {
                 </div>
                 <div class="logo">
                     <span>S</span>T<span>A</span>T<span>I</span>O<span>N</span> U<span>I</span>
-                    <span class="info-text">{{ infoText }}</span>
+                    <!--<span class="info-text">{{ infoText }}</span>-->
                 </div>
             </div>
             <nav class="page-navbar navbar-expand-md">
@@ -124,7 +124,6 @@ export default {
                                     <div
                                         class="notification-wrapper"
                                         @mouseover="hover = true"
-
                                     >
                                         <i
                                             class="fa fa-bell"
