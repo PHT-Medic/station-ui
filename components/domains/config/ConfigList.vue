@@ -162,7 +162,7 @@ export default Vue.extend({
                                     Env vars:
                                 </b>
                                 <span
-                                    v-if="item.airflow_config.env !== null && item.airflow_config.env.length > 0"
+                                    v-if="item.airflow_config !== null && item.airflow_config.env.length > 0"
                                     class="text-monospace text-success"
                                 >
                                     {{ item.airflow_config.env.length }}
@@ -180,7 +180,7 @@ export default Vue.extend({
                                     Volumes:
                                 </b>
                                 <span
-                                    v-if="item.airflow_config.volumes !== null && item.airflow_config.volumes.length > 0"
+                                    v-if="item.airflow_config !== null && item.airflow_config.volumes.length > 0"
                                     class="text-monospace text-success"
                                 >
                                     {{ item.airflow_config.env.length }}
