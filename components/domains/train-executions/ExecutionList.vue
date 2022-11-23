@@ -67,33 +67,49 @@ export default Vue.extend({
             <div
                 v-for="(item,key) in items"
                 :key="key"
-                class="mb-2 border rounded p-2"
+                class="mb-2 border rounded p-2 d-flex flex-row"
                 :class="{ 'execution-selected': selected === key }"
                 @click="handleClicked(key)"
             >
                 <div>
-                    <i class="fa fa-train" />
                     <span
                         :class="{
                             'text-success': item.end !== null,
                             'text-danger': item.end === null
                         }"
                     >
-                        Id: {{ item.id }} {{ key }}
+                        <i class="fa fa-circle" />
+                        {{ items.length - key }}
                     </span>
                 </div>
-                <div class="ml-auto">
-                    <div class="d-flex flex-column">
-                        <div>
-                            <timeago :datetime="item.start" />
-                        </div>
-                        <div v-if="item.end !== null">
-                            <timeago :datetime="item.end" />
-                        </div>
-                        <div v-else>
+                <div
+                    class="ml-4"
+                >
+                    <span>
+                        <i class="fas fa-clock" />
+                        <timeago
+                            class="ml-1"
+                            :datetime="item.start"
+                        />
+                    </span>
+                </div>
+                <div
+                    class="ml-4"
+                >
+                    <span>
+                        <i class="fa fa-flag-checkered" />
+                        <timeago
+                            v-if="item.end !== null"
+                            class="ml-1"
+                            :datetime="item.end"
+                        />
+                        <span
+                            v-else
+                            class="ml-1"
+                        >
                             ---
-                        </div>
-                    </div>
+                        </span>
+                    </span>
                 </div>
             </div>
         </div>
