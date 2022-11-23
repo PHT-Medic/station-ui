@@ -19,6 +19,14 @@ export default Vue.extend({
             type: Array as PropType<TrainExecution[]>,
             default: undefined,
         },
+        displayTrainId: {
+            type: Boolean,
+            default: false,
+        },
+        highlight: {
+            type: Boolean,
+            default: true,
+        },
     },
     data() {
         return {
@@ -67,8 +75,8 @@ export default Vue.extend({
             <div
                 v-for="(item,key) in items"
                 :key="key"
-                class="mb-2 border rounded p-2 d-flex flex-row"
-                :class="{ 'execution-selected': selected === key }"
+                class="mb-2 border rounded p-2 d-flex flex-row execution-item"
+                :class="{ 'execution-selected': selected === key && highlight }"
                 @click="handleClicked(key)"
             >
                 <div>
@@ -80,6 +88,14 @@ export default Vue.extend({
                     >
                         <i class="fa fa-circle" />
                         {{ items.length - key }}
+                    </span>
+                </div>
+                <div
+                    v-if="displayTrainId"
+                    class="ml-4"
+                >
+                    <span>
+                        🚊 {{ item.train_id }}
                     </span>
                 </div>
                 <div

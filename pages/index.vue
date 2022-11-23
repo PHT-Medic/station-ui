@@ -73,6 +73,8 @@ export default Vue.extend({
                     <div class="card-body">
                         <execution-list
                             :executions="executions"
+                            :display-train-id="true"
+                            :highlight="false"
                         />
                     </div>
                 </div>
