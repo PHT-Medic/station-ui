@@ -98,7 +98,7 @@ export default {
             </div>
         </div>
         <div
-            v-if="open"
+            v-if="open && logs !== null"
             class="task-item-body"
         >
             <p
@@ -108,6 +108,14 @@ export default {
             >
                 {{ line }}
             </p>
+        </div>
+        <div
+            v-if="open && logs === null"
+            class="task-item-body"
+        >
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
     </div>
 </template>

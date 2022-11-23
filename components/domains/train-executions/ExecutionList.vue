@@ -67,8 +67,8 @@ export default Vue.extend({
             <div
                 v-for="(item,key) in items"
                 :key="key"
-                class="c-list-item mb-2"
-                :class="{ 'selected': selected === key }"
+                class="mb-2 border rounded p-2"
+                :class="{ 'execution-selected': selected === key }"
                 @click="handleClicked(key)"
             >
                 <div>
@@ -79,7 +79,7 @@ export default Vue.extend({
                             'text-danger': item.end === null
                         }"
                     >
-                        {{ item.train_id }}
+                        Id: {{ item.id }} {{ key }}
                     </span>
                 </div>
                 <div class="ml-auto">
@@ -108,9 +108,14 @@ export default Vue.extend({
 </template>
 
 <style>
-.selected {
+.execution-selected {
+    background-color: #f8f9fa;
     box-shadow: 0px 0px 5px 3px rgba(207,236,240,0.86);
     -webkit-box-shadow: 0px 0px 5px 3px rgba(207,236,240,0.86);
     -moz-box-shadow: 0px 0px 5px 3px rgba(207,236,240,0.86);
+}
+
+.execution-item {
+    background-color: #ECECEC;
 }
 </style>
