@@ -54,7 +54,7 @@ export default {
 <template>
     <div>
         <h1 class="title no-border mb-3">
-            <i class="fa-solid fa-box" /> Config
+            <i class="fa-solid fa-tools" /> Config
         </h1>
 
         <div class="m-b-20 m-t-10">

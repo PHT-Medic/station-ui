@@ -36,7 +36,7 @@ export default {
 <template>
     <div>
         <h1 class="title no-border mb-3">
-            <i class="fa-solid fa-seal" /> Configurations
+            <i class="fa-solid fa-tools" /> Train Configurations
         </h1>
 
         <div class="content-wrapper">

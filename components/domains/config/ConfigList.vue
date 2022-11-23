@@ -196,7 +196,7 @@ export default Vue.extend({
                         <div>
                             <div class="ml-auto">
                                 <b class="text-monospace">
-                                    <i class="fa-solid fa-screwdriver-wrench" />
+                                    <i class="fa-solid fa-clock" />
                                 </b>
                                 <timeago :datetime="item.created_at" />
                             </div>

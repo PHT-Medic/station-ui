@@ -88,9 +88,12 @@ export default Vue.extend({
                     this.form[keys[i]] = this.entity[keys[i]] || '';
                 }
             }
+            if (this.entity.airflow_config !== null){
+                this.form.environmentVariables = this.entity.airflow_config.env;
+                this.form.volumes = this.entity.airflow_config.volumes;
+            }
         },
         async submit() {
-            console.log("submit");
             if (this.busy) return;
 
             this.busy = true;
@@ -132,6 +135,7 @@ export default Vue.extend({
         },
 
         addEnvironment() {
+            console.log(this.envForm);
             this.form.environmentVariables.push({
                 ...this.envForm,
             });
@@ -190,7 +194,7 @@ export default Vue.extend({
                         <b-form-checkbox
                             v-model="$v.form.auto_execute.$model"
                         >
-                            Auto start the train when received?
+                            Automatically start the train when received?
                         </b-form-checkbox>
                     </div>
                 </div>
