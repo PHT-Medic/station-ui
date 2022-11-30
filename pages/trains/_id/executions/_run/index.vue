@@ -1,13 +1,20 @@
 <script lang="ts">
-export default {
-    name: "index"
-}
-</script>
+import { PropType } from 'vue';
+import { Train } from '../../../../../domains/train';
 
+export default {
+    props: {
+        entity: {
+            type: Object as PropType<Train>,
+            default: undefined,
+        },
+    },
+};
+</script>
 
 <template>
     <div>
-        Execution id
+        Execution id {{ entity.train_id }}
     </div>
 </template>
 

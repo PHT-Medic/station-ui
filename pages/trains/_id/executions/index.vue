@@ -95,16 +95,17 @@ export default {
                 v-if="selectedExecution !== null && dagRun !== null"
                 class="col-9 execution-info"
             >
-                <div>
-                    <summary-cards
-                        :execution="selectedExecution"
-                        :status="status"
-                    />
-                </div>
-                <hr>
-                <airflow-d-a-g-run
-                    :entity="dagRun"
-                />
+                <nuxt-child :entity="entity" />
+                <!--                <div>-->
+                <!--                    <summary-cards-->
+                <!--                        :execution="selectedExecution"-->
+                <!--                        :status="status"-->
+                <!--                    />-->
+                <!--                </div>-->
+                <!--                <hr>-->
+                <!--                <airflow-d-a-g-run-->
+                <!--                    :entity="dagRun"-->
+                <!--                />-->
             </div>
             <div
                 v-else

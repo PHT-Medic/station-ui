@@ -83,7 +83,7 @@ export default {
                                     :key="key"
                                     :disabled="tab.active"
                                     :to="'/trains/' + item.train_id + tab.urlSuffix"
-                                    :active="$route.path.startsWith('/trains/'+item.id + tab.urlSuffix) && tab.urlSuffix.length !== 0"
+                                    :active="$route.path.startsWith('/trains/'+ item.id + tab.urlSuffix) && tab.urlSuffix.length !== 0"
                                     exact-active-class="active"
                                     exact
                                 >
