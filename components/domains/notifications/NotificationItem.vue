@@ -22,7 +22,7 @@ export default {
 </script>
 
 <template>
-    <div class="container-fluid border border-bottom-0">
+    <div class="container-fluid">
         <div class="col container-fluid">
             <div class="row">
                 <nuxt-link

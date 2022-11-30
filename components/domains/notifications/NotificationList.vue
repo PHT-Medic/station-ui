@@ -46,7 +46,7 @@ export default {
         </div>
         <div
             v-else
-            class="d-flex flex-column flex-grow-1"
+            class="d-flex flex-column flex-grow-1 c-list"
         >
             <div
                 v-for="(item,key) in notifications"
