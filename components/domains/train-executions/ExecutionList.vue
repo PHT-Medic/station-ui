@@ -79,6 +79,12 @@ export default Vue.extend({
                 :class="{ 'execution-selected': selected === key && highlight }"
                 @click="handleClicked(key)"
             >
+                <NuxtLink
+                    :to="'/trains/' + trainId + '/executions/' + item.airflow_dag_run"
+                    class="mr-2"
+                >
+                    {{ item.airflow_dag_run }}
+                </NuxtLink>
                 <div>
                     <span
                         :class="{

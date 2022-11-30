@@ -1,9 +1,9 @@
 <script lang="ts">
 import { PropType } from 'vue';
-import AirflowDAGRun from '../../../components/domains/airflow/AirflowDAGRun.vue';
-import TrainExecutions from '../../../components/domains/train-executions/ExecutionList.vue';
-import SummaryCards from '../../../components/domains/train-executions/SummaryCards.vue';
-import { Train } from '../../../domains/train';
+import AirflowDAGRun from '../../../../components/domains/airflow/AirflowDAGRun.vue';
+import TrainExecutions from '../../../../components/domains/train-executions/ExecutionList.vue';
+import SummaryCards from '../../../../components/domains/train-executions/SummaryCards.vue';
+import { Train } from '../../../../domains/train';
 
 export default {
     components: {
@@ -14,6 +14,10 @@ export default {
     props: {
         entity: {
             type: Object as PropType<Train>,
+            default: undefined,
+        },
+        selectedId: {
+            type: String,
             default: undefined,
         },
     },
@@ -36,7 +40,21 @@ export default {
             return 'success';
         },
     },
+    mounted() {
+        this.initFromProps();
+    },
     methods: {
+        initFromProps() {
+            this.busy = true;
+            if (this.entity === undefined) return;
+            if (this.selectedId === undefined) {
+                [this.selectedExecution] = this.entity.executions;
+            } else {
+                this.executionId = this.selectedId;
+                this.load_execution();
+            }
+            this.busy = false;
+        },
         async load_execution() {
             if (this.busy) return;
 
@@ -45,7 +63,7 @@ export default {
             try {
                 this.dagRun = await this.$stationApi.train.getTrainExecution(this.executionId);
                 const executions = await this.$stationApi.train.getExecutions(this.entity.train_id);
-                this.selectedExecution = executions.filter((e) => e.airflow_dag_run === this.executionId)[0];
+                [this.selectedExecution] = executions.filter((e) => e.airflow_dag_run === this.executionId);
             } catch (e) {
                 if (e instanceof Error) {
                     this.$emit('failed', e);
@@ -74,7 +92,7 @@ export default {
                 />
             </div>
             <div
-                v-if="selectedExecution !== null"
+                v-if="selectedExecution !== null && dagRun !== null"
                 class="col-9 execution-info"
             >
                 <div>
@@ -84,7 +102,9 @@ export default {
                     />
                 </div>
                 <hr>
-                <airflow-d-a-g-run :entity="dagRun" />
+                <airflow-d-a-g-run
+                    :entity="dagRun"
+                />
             </div>
             <div
                 v-else
