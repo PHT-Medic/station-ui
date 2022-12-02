@@ -71,16 +71,16 @@ export default Vue.extend({
 <template>
     <div>
         <h6><i class="fas fa-tasks" /> Executions</h6>
-        <div class="c-list">
+        <div class="c-list d-flex">
             <div
                 v-for="(item,key) in items"
                 :key="key"
-                class="mb-2 border rounded p-2 d-flex flex-row execution-item"
+                class="mb-2 border rounded p-2 d-flex flex-row execution-item flex-wrap"
                 :class="{ 'execution-selected': selected === key && highlight }"
                 @click="handleClicked(key)"
             >
                 <NuxtLink
-                    :to="'/trains/' + trainId + '/executions/' + item.airflow_dag_run"
+                    :to="'/trains/' + item.train_id + '/executions/' + item.airflow_dag_run"
                     class="mr-2"
                 >
                     {{ item.airflow_dag_run }}

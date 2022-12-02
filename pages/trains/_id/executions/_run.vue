@@ -1,9 +1,10 @@
 <script lang="ts">
 
 import { PropType } from 'vue';
+import AirflowDAGRun from '../../../../components/domains/airflow/AirflowDAGRun.vue';
 import { LayoutKey, LayoutNavigationID } from '../../../../config/layout';
 import { Train } from '../../../../domains/train';
-import TrainExecutions from "../../../../components/domains/train-executions/ExecutionList.vue";
+import TrainExecutions from '../../../../components/domains/train-executions/ExecutionList.vue';
 
 export default {
     meta: {
@@ -11,6 +12,7 @@ export default {
         [LayoutKey.NAVIGATION_ID]: LayoutNavigationID.DEFAULT,
     },
     components: {
+        AirflowDAGRun,
         TrainExecutions,
     },
     props: {
@@ -60,7 +62,10 @@ export default {
             <div
                 class="col-9 execution-info"
             >
-                <nuxt-child :entity="entity" />
+<!--                <nuxt-child-->
+<!--                    :train="entity"-->
+<!--                />-->
+                <airflow-d-a-g-run :entity="item" />
             </div>
         </div>
     </div>
