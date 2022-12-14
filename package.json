@@ -56,6 +56,6 @@
         "access": "public"
     },
     "dependencies": {
-        "plotly.js": "^2.15.1"
+        "plotly.js": "^2.16.5"
     }
 }
