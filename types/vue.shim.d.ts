@@ -6,7 +6,7 @@
  */
 
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
-import { HTTPClient as AuthHTTPClient } from '@authelion/common';
+import { HTTPClient as AuthHTTPClient } from '@authup/common';
 import { Ilingo } from 'ilingo';
 import { Adapter } from 'browser-storage-adapter';
 import { HTTPClient as StationHTTPClient } from '../config/http/client';

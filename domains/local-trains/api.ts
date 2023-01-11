@@ -1,6 +1,5 @@
 import { ClientDriverInstance } from 'hapic';
-import { nullifyEmptyObjectProperties } from '@authelion/common';
-import { Configuration } from '../config';
+import { nullifyEmptyObjectProperties } from '@authup/common';
 import { MinioFile } from '../files/type';
 
 import {

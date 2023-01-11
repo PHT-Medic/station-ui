@@ -10,9 +10,9 @@ import {
 } from 'hapic';
 import { Context } from '@nuxt/types';
 import { Inject } from '@nuxt/types/app';
-import { HTTPClient as AuthHTTPClient } from '@authelion/common';
+import { HTTPClient as AuthHTTPClient } from '@authup/common';
 import { HTTPClient as CentralHTTPClient } from '@personalhealthtrain/central-common';
-import { setHTTPClient } from '@authelion/vue';
+import { setHTTPClient } from '@authup/vue2';
 import { HTTPClient } from '../config/http/client';
 
 export default (ctx: Context, inject : Inject) => {

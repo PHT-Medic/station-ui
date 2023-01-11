@@ -6,8 +6,7 @@
  */
 
 import { ClientDriverInstance } from 'hapic';
-import { nullifyEmptyObjectProperties } from '@authelion/common';
-import { config } from 'rxjs';
+import { nullifyEmptyObjectProperties } from '@authup/common';
 import { AirflowDagRun } from '../airflow';
 import {
     Train, TrainCreate, TrainExecution, TrainExecutionConfig,

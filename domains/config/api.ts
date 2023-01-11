@@ -6,7 +6,7 @@
  */
 
 import { ClientDriverInstance } from 'hapic';
-import { nullifyEmptyObjectProperties } from '@authelion/common';
+import { nullifyEmptyObjectProperties } from '@authup/common';
 import { Train } from '../train';
 import { Configuration, ConfigurationCreate } from './type';
 
