@@ -35,7 +35,7 @@ jobs:
             - name: Build
               uses: ./.github/actions/build
 
-            - name: Semantic Release
+            - name: Release
               id: semantic
               uses: cycjimmy/semantic-release-action@v3
               env:
@@ -50,4 +50,4 @@ jobs:
               with:
                    registryPassword: ${{ secrets.GITHUB_TOKEN }}
                    registryRepository: station-ui
-                   registryTag: latest
+                   registryTag: ${{ steps.semantic.outputs.new_release_version }}
