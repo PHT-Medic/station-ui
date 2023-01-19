@@ -15,7 +15,6 @@ permissions:
     issues: write
     pull-requests: write
 
-
 jobs:
     default:
 
@@ -36,7 +35,19 @@ jobs:
             - name: Build
               uses: ./.github/actions/build
 
-            - name: Release
+            - name: Semantic Release
+              id: semantic
+              uses: cycjimmy/semantic-release-action@v3
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: npx semantic-release
+              with:
+                  extra_plugins: |
+                      @semantic-release/changelog
+                      @semantic-release/git
+
+            - uses: tada5hi/action-docker-image-publish@master
+              if: steps.semantic.outputs.new_release_published == 'true'
+              with:
+                   registryPassword: ${{ secrets.GITHUB_TOKEN }}
+                   registryRepository: station-ui
+                   registryTag: latest
