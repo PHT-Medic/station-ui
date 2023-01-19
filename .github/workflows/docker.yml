@@ -2,8 +2,6 @@ name: docker
 
 on:
     push:
-        branches:
-            - master
         tags:
             - v*
 
@@ -23,10 +21,3 @@ jobs:
                   registryPassword: ${{ secrets.GITHUB_TOKEN }}
                   registryRepository: station-ui
                   registryTag: latest
-
-            - uses: tada5hi/action-docker-image-publish@master
-              if: github.ref_type == 'branch'
-              with:
-                  registryPassword: ${{ secrets.GITHUB_TOKEN }}
-                  registryRepository: station-ui
-                  registryTag: next
