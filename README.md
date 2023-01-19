@@ -1,7 +1,9 @@
 # Station UI 🍭
 
 [![main](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/main.yml)
-[![Build image](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml/badge.svg)](https://github.com/PHT-Medic/station-ui/actions/workflows/build.yml)
+[![Known Vulnerabilities](https://snyk.io/test/github/PHT-Medic/station-ui/badge.svg?targetFile=package.json)](https://snyk.io/test/github/PHT-Medic/station-ui?targetFile=package.json)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
 
 This repository contains the station ui application of the Personal Health Train.
 It communicates with some APIs of the PHT and need therefore to be configured properly, like described
