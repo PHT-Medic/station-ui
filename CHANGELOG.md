@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/PHT-Medic/station-ui/compare/v1.1.0...v1.1.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* merge docker and ci action ([a81ea42](https://github.com/PHT-Medic/station-ui/commit/a81ea420777ffd7105461b2adc3507c08f398a2c))
+
 # [1.1.0](https://github.com/PHT-Medic/station-ui/compare/v1.0.2...v1.1.0) (2023-01-19)
 
 
