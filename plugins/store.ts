@@ -12,6 +12,10 @@ import { Adapter } from 'browser-storage-adapter';
 
 export default (ctx : Context, inject : Inject) => {
     const setServerCookie = (value: string) => {
+        if (ctx.res.headersSent) {
+            return;
+        }
+
         let cookies = ctx.res.getHeader('Set-Cookie') || [];
         if (typeof cookies === 'number' || typeof cookies === 'string') {
             if (typeof cookies === 'number') {
