@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/PHT-Medic/station-ui/compare/v1.1.1...v1.1.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* check if headers already sent before setting cookie ([a8a4d8d](https://github.com/PHT-Medic/station-ui/commit/a8a4d8d8ad3d13f0625cd91f43165fe4435e37b5))
+
 ## [1.1.1](https://github.com/PHT-Medic/station-ui/compare/v1.1.0...v1.1.1) (2023-01-19)
 
 
