@@ -36,7 +36,7 @@
         "@commitlint/config-conventional": "^17.4.2",
         "@commitlint/cz-commitlint": "^17.4.2",
         "@tada5hi/eslint-config-vue-typescript": "^1.1.1",
-        "@tada5hi/tsconfig": "^0.3.0",
+        "@tada5hi/tsconfig": "^0.4.0",
         "@types/moment": "^2.13.0",
         "@types/vuelidate": "^0.7.13",
         "@typescript-error/core": "^1.1.3",
